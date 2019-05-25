@@ -1,6 +1,6 @@
 class DevelopmentsController < ApplicationController
   def index
-    @developments = Developments.all
+    @developments = Development.all
   end
 
   def show

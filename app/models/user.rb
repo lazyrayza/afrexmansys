@@ -4,7 +4,7 @@ class User < ApplicationRecord
   has_many :leases, dependent: :destroy
   has_many :complaints
   has_many :reports
-  belongs_to :department
+  # belongs_to :department
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 end
