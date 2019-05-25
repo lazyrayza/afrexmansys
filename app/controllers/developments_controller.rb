@@ -1,0 +1,2 @@
+class DevelopmentsController < ApplicationController
+end
