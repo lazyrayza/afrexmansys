@@ -1,6 +1,6 @@
 <h2>Sign up</h2>
 
-<%= simple_form_for ([@unit, @development])  do |f| %>
+<%= simple_form_for ([@development, @unit])  do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
@@ -19,15 +19,15 @@
     <%= f.input :bedrooms,
                 required: true,
                 autofocus: true,
-                input_html: { autocomplete: "size" } %>
+                input_html: { autocomplete: "bedrooms" } %>
     <%= f.input :bathrooms,
                 required: true,
                 autofocus: true,
-                input_html: { autocomplete: "size" } %>
+                input_html: { autocomplete: "bathrooms" } %>
     <%= f.input :price,
                 required: true,
                 autofocus: true,
-                input_html: { autocomplete: "size" } %>
+                input_html: { autocomplete: "price" } %>
     <%= f.input :apartment,
                 required: true,
                 autofocus: true,
@@ -40,9 +40,8 @@
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, "Sign up" %>
+    <%= f.button :submit, "Create Unit" %>
     <%# raise %>
   </div>
 <% end %>
 
-<%= render "devise/shared/links" %>

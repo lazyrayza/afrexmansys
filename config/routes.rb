@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   resources :developments, only: [:index]
   resources :developments, only: [:show] do
-    resources :units, only: [:index, :show]
+    resources :units, only: [:index, :show, :new, :create]
   end
 
   # resources :units

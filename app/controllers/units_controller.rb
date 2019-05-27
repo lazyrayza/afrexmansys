@@ -11,7 +11,7 @@ class UnitsController < ApplicationController
 
   def new
     @unit = Unit.new
-    @development = Development.find(params[:id])
+    @development = Development.find(params[:development_id])
   end
 
   def update
@@ -38,6 +38,6 @@ private
   end
 
   def units_params
-    params.require(:units).permit(:unit_number, :floor, :size, :bedrooms, :bathrooms, :price,:apartment)
+    params.require(:unit).permit(:unit_number)
   end
 end
