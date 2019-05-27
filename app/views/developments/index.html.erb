@@ -1,4 +1,12 @@
-<% @developments.each do |development| %>
-  <h1><%= development.name %></h1>
-  <h2><%= development.address %></h2>
-<% end %>
+<div class="main-container">
+  <div class="project-box">
+    <% @developments.each do |development| %>
+      <div class="project-card">
+        <h1><%= link_to development.name, development_path(development) %></h1>
+        <h2> <%= development.address %></h2>
+      </div>
+    <% end %>
+
+  </div>
+</div>
+

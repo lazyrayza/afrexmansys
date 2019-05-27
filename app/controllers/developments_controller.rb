@@ -1,9 +1,12 @@
 class DevelopmentsController < ApplicationController
+  before_action :find_development, only: [:show, :update, :destroy]
+
   def index
     @developments = Development.all
   end
 
   def show
+    @units = Unit.where(development_id: @development.id)
   end
 
   def new
