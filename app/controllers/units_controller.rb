@@ -23,9 +23,10 @@ class UnitsController < ApplicationController
   end
 
   def create
+    @development = Development.find(params[:development_id])
     @unit = Unit.new(units_params)
-    if @unit.save && @unit.lease.count < 1
-      redirect_to "/", notice: 'Unit has been created!'
+    if @unit.save
+      redirect_to development_units_path(@development), notice: 'Unit has been created!'
     else
       render :new
     end
@@ -38,6 +39,6 @@ private
   end
 
   def units_params
-    params.require(:unit).permit(:unit_number)
+    params.require(:unit).permit(:unit_number, :floor, :size, :bedrooms, :bathrooms, :price, :apartment, :description, :development_id)
   end
 end
