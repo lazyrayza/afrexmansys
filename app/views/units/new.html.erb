@@ -4,39 +4,17 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :unit_number,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "number" }%>
-    <%= f.input :floor,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "floor" } %>
-    <%= f.input :size,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "size" } %>
-    <%= f.input :bedrooms,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "bedrooms" } %>
-    <%= f.input :bathrooms,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "bathrooms" } %>
-    <%= f.input :price,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "size" } %>
+    <%= f.input :unit_number %>
+    <%= f.input :floor %>
+    <%= f.input :size %>
+    <%= f.input :bedrooms%>
+    <%= f.input :bathrooms  %>
+    <%= f.input :price %>
     <%= f.input :apartment,
-                required: true,
-                autofocus: true,
-                collection: [["Apartment", true],["House", false]],
-                input_html: { multiple: false, class: "multiple-select" } %>
-    <%= f.input :description,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "Description" } %>
+                collection: [["Apartment", true],["House", false]] %>
+    <%= f.input :available,
+                collection: [["Available", true],["Not Available", false]] %>
+    <%= f.input :description %>
   </div>
 
   <div class="form-actions">

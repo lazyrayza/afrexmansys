@@ -1,0 +1,9 @@
+<% @leases.each do |lease| %>
+  <%= lease.start_date %>
+  <%= lease.end_date %>
+  <%= lease.rent %>
+  <%= lease.deposit %>
+  <%= lease.notes %>
+  <%= lease.unit.number %>
+  <%= lease.tenant.full_name %>
+<% end %>

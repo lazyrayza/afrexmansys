@@ -39,6 +39,6 @@ private
   end
 
   def units_params
-    params.require(:unit).permit(:unit_number, :floor, :size, :bedrooms, :bathrooms, :price, :apartment, :description, :development_id)
+    params.require(:unit).permit(:unit_number, :floor, :size, :bedrooms, :bathrooms, :price, :apartment, :description, :development_id, :available)
   end
 end

@@ -4,11 +4,12 @@ Rails.application.routes.draw do
 
   resources :developments, only: [:index]
   resources :developments, only: [:show] do
-    resources :units, only: [:index, :show, :new, :create]
+    resources :units, only: [:index, :show, :new, :create] do
+      resources :leases, only: [:show, :new, :create]
+    end
   end
 
   # resources :units
-  resources :leases
   resources :users
   resources :departments
   resources :reports

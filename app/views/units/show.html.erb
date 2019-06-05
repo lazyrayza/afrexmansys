@@ -5,3 +5,5 @@
   <h2>Bathrooms: <%= @unit.bathrooms %></h2>
   <h2>Price: <%= @unit.price %></h2>
   <h2>description: <%= @unit.description %></h2>
+
+<% link_to "New Lease", new_development_unit_lease_path(@unit)  %>
