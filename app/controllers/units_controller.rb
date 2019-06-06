@@ -7,6 +7,8 @@ class UnitsController < ApplicationController
 
   def show
     @unit = Unit.find(params[:id])
+    @development = @unit.development
+
   end
 
   def new
