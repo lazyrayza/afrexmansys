@@ -6,4 +6,14 @@
   <h2>Price: <%= @unit.price %></h2>
   <h2>description: <%= @unit.description %></h2>
 
-<% link_to "NEW FUCKING LEASE", new_development_unit_lease_path(@development, @unit)  %>
+
+<% if @lease.exists? %>
+  <%= @lease.start_date %>
+  <%= @lease.end_date %>
+  <%= @lease.duration %>
+  <%= @lease.rent %>
+  <%= @lease.deposit %>
+  <%= @lease.notes %>
+<% else %>
+  <%= link_to "NEW LEASE", new_development_unit_lease_path(@development, @unit)  %>
+<% end %>
