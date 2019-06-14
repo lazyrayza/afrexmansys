@@ -1,0 +1,10 @@
+<%= simple_form_for ([@development, @unit, @lease]) do |f| %>
+<%= f.input :start_date %>
+<%= f.input :end_date %>
+<%= f.input :duration %>
+<%= f.input :rent %>
+<%= f.input :deposit %>
+<%= f.input :notes %>
+<%= f.button :submit %>
+    <% end %>
+<%# raise %>

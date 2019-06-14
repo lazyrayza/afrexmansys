@@ -8,6 +8,7 @@ class LeasesController < ApplicationController
   end
 
   def new
+    @development = Development.find(params[:development_id])
     @unit = Unit.find(params[:unit_id])
     @lease = Lease.new
   end
@@ -22,12 +23,18 @@ class LeasesController < ApplicationController
 
   def create
     @unit = Unit.find(params[:unit_id])
-    @department = Department.find([:department_id])
+    @development = Development.find(params[:development_id])
     @lease = Lease.new(lease_params)
     if @lease.save
-      redirect_to leases_path, notice: 'Lease has been Created'
+      respond_to do |format|
+        format.html { redirect_to development_unit_path(@development, @unit), notice: 'Lease has been Created' }
+        format.js
+      end
     else
-      render :new
+      respond_to do |format|
+        format.html { render :new }
+        format.js
+      end
     end
   end
 
