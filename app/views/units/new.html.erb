@@ -14,7 +14,7 @@
                 collection: [["Apartment", true],["House", false]] %>
     <%= f.input :available,
                 collection: [["Available", true],["Not Available", false]] %>
-    <%= f.input :description %>
+    <%= f.input :description, :input_html => {:minlength => 10 , maxlength: 300} %>
   </div>
 
   <div class="form-actions">

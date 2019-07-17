@@ -17,7 +17,7 @@ class UnitsController < ApplicationController
   end
 
   def update
-    if Unit.save
+    if @unit.save
       redirect_to unit_path(@unit), notice: 'Unit has been updated'
     else
       render :new
