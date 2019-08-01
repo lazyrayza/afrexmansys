@@ -9,7 +9,7 @@ class UnitsController < ApplicationController
   def show
     # @unit = Unit.find(params[:id])
     @development = @unit.development
-    @lease = Lease.where(:unit_id == @unit.id)
+    @lease = Lease.where(:unit_id == @unit.id).first
   end
 
   def new
