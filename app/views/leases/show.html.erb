@@ -1,7 +1,11 @@
-  <%= @lease.start_date %>
-  <%= @lease.end_date %>
-  <%= @lease.rent %>
-  <%= @lease.deposit %>
-  <%= @lease.notes %>
-  <%= @lease.unit.number %>
-  <%= @lease.tenant.full_name %>
+<p>Lease info:</p>
+  <ul>Start date: <%= @lease.start_date %></ul>
+  <ul>End date: <%= @lease.end_date %></ul>
+  <ul>Duration: <%= @lease.duration %></ul>
+  <ul>Rent: <%= @lease.rent %></ul>
+  <ul>Depsoit: <%= @lease.deposit %></ul>
+  <ul>Notes: <%= @lease.notes%></ul>
+  <ul>Unit: <%= @lease.unit_id %></ul>
+  <%= link_to do %>
+    <ul>Tenant: <%= @lease.tenant_id %></ul>
+  <% end %>
