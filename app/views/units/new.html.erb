@@ -1,6 +1,6 @@
 <h2>Sign up</h2>
 
-<%= simple_form_for ([@development, @unit])  do |f| %>
+<%= simple_form_for [@development, @unit]  do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
@@ -14,7 +14,7 @@
                 collection: [["Apartment", true],["House", false]] %>
     <%= f.input :available,
                 collection: [["Available", true],["Not Available", false]] %>
-    <%= f.input :description, :input_html => {:minlength => 10 , maxlength: 300} %>
+    <%= f.input :description, :input_html => {:minlength => 1 , maxlength: 300} %>
   </div>
 
   <div class="form-actions">

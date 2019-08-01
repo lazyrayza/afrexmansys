@@ -25,6 +25,8 @@ class LeasesController < ApplicationController
     @unit = Unit.find(params[:unit_id])
     @development = Development.find(params[:development_id])
     @lease = Lease.new(lease_params)
+    # @lease.development_id = @development.id
+    @lease.development.unit_id = @unit.id
     if @lease.save
       respond_to do |format|
         format.html { redirect_to development_unit_path(@development, @unit), notice: 'Lease has been Created' }

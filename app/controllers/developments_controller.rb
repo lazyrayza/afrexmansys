@@ -27,6 +27,8 @@ class DevelopmentsController < ApplicationController
 private
 
   def find_development
-    @development = Development.find(params[:id])
+    @development ||= Development.find(params[:id])
   end
+
+
 end

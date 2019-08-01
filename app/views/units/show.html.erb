@@ -7,13 +7,22 @@
   <h2>description: <%= @unit.description %></h2>
 
 
-<% if @lease.exists? %>
-  <%= @lease.start_date %>
-  <%= @lease.end_date %>
-  <%= @lease.duration %>
-  <%= @lease.rent %>
-  <%= @lease.deposit %>
-  <%= @lease.notes %>
+<% if @lease.present? %>
+  <% @lease.to_a.each do |l| %>
+  <p>Lease info:</p>
+    <ul>Start date: <%= l.start_date %></ul>
+    <ul>End date: <%= l.end_date %></ul>
+    <ul>Duration: <%= l.duration %></ul>
+    <ul>Rent: <%= l.rent %></ul>
+    <ul>Depsoit: <%= l.deposit %></ul>
+    <ul>Notes: <%= l.notes %></ul>
+    <ul>Unit: <%= l.unit_id %></ul>
+    <%= link_to do %>
+      <ul>Tenant: <%= l.tenant_id %></ul>
+    <% end %>
+  <% end %>
 <% else %>
   <%= link_to "NEW LEASE", new_development_unit_lease_path(@development, @unit)  %>
 <% end %>
+
+<%# raise %>
