@@ -1,0 +1,9 @@
+<% if @post.errors.any? %>
+<% else %>
+  postsContainer = document.querySelector('.posts');
+  postsContainer.insertAdjacentHTML('beforeend', '<%= j render "post", post: @post, user_is_posts_author: true %>');
+  input = document.querySelector('#post_content');
+  input.value = '';
+  // input.blur();
+      scrollLastPostIntoView();
+<% end %>

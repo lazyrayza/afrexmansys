@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_05_101922) do
+ActiveRecord::Schema.define(version: 2019_08_05_133947) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,12 +62,12 @@ ActiveRecord::Schema.define(version: 2019_08_05_101922) do
     t.index ["unit_id"], name: "index_leases_on_unit_id"
   end
 
-  create_table "noticeboards", force: :cascade do |t|
+  create_table "notice_boards", force: :cascade do |t|
     t.string "name"
     t.bigint "development_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["development_id"], name: "index_noticeboards_on_development_id"
+    t.index ["development_id"], name: "index_notice_boards_on_development_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -75,8 +75,8 @@ ActiveRecord::Schema.define(version: 2019_08_05_101922) do
     t.bigint "tenant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "noticeboards_id"
-    t.index ["noticeboards_id"], name: "index_posts_on_noticeboards_id"
+    t.bigint "noticeboard_id"
+    t.index ["noticeboard_id"], name: "index_posts_on_noticeboard_id"
     t.index ["tenant_id"], name: "index_posts_on_tenant_id"
   end
 
@@ -136,8 +136,8 @@ ActiveRecord::Schema.define(version: 2019_08_05_101922) do
   add_foreign_key "complaints", "users", column: "tenant_id"
   add_foreign_key "leases", "units"
   add_foreign_key "leases", "users", column: "tenant_id"
-  add_foreign_key "noticeboards", "developments"
-  add_foreign_key "posts", "noticeboards", column: "noticeboards_id"
+  add_foreign_key "notice_boards", "developments"
+  add_foreign_key "posts", "notice_boards", column: "noticeboard_id"
   add_foreign_key "posts", "users", column: "tenant_id"
   add_foreign_key "reports", "complaints"
   add_foreign_key "reports", "users", column: "employee_id"

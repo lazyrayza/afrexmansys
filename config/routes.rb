@@ -14,9 +14,11 @@ Rails.application.routes.draw do
   resources :departments
   resources :reports
   resources :complaints
-  resources :posts
+  # resources :posts
   resources :developments, only: [:show] do
-    resources :notice_boards, only: [:show]
+    resources :notice_boards, only: [:show] do
+      resources :posts, only: [:create]
+    end
   end
   resources :notice_boards, except: [:show]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

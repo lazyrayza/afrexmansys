@@ -1,33 +1,39 @@
 class NoticeBoardsController < ApplicationController
-    before_action :find_noticeboard, only: [:show, :create, :update]
+  # before_action :find_noticeboard, only: [:show]
 
   def index
-    @noticeboards = Noticeboard.all
+    @noticeboards = NoticeBoard.all
   end
 
   def show
-    @development = Development.find(params[:id])
+    @noticeboard = NoticeBoard.find(params[:id])
+    @development = Development.find(params[:development_id])
+    @notice_boards = NoticeBoard.includes(posts: :user).find(params[:id])
+    # if current_user == @development.employee || current_user == @development.admin
+    #   redirect_to root_path
+    #   flash[:alert] = "You are not a tenant & therefore can't post on this Noticeboard"
+    # end
   end
 
   def new
-    @noticeboard = Noticeboard.new
+    @notice_board = NoticeBoard.new
   end
 
   def create
-  end
+    @development = Development.find(params[:id])
+    @notice_board = NoticeBoard.new
+    @notice_board.development = @development
 
-  def update
     if @noticeboard.save
-      redirect_to noticeboards_path
+      redirect_to development_notice_board(@development)
     else
-      render :new
+      redirect_to development_path(@development)
     end
   end
 
 private
 
-  def find_noticeboard
-    @noticeboard ||= Noticeboard.find(params[:id])
-  end
-
+  # def find_noticeboard
+  #   @noticeboard ||= NoticeBoard.find(params[:id])
+  # end
 end
