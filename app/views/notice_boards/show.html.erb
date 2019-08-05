@@ -1,0 +1,20 @@
+<h1>Notice Board</h1>
+
+<%= @noticeboard.name %>
+<%= @noticeboard.development_id %>
+
+<div class="chat-container">
+  <div class="chat-shadow">
+    <div class="chat-header"><h4>Notice Board</h4></div>
+    <div class="posts">
+      <% @noticeboard.posts.each do |post| %>
+        <%= render "posts/post", post: post, user_is_posts_author: post.user == current_user %>
+      <% end %>
+    </div>
+    <div id="create-posts" >
+      <%= simple_form_for [ @noticeboards, Post.new ], remote: true do |f| %>
+        <%= f.input :content, label: false, placeholder: "Type your message" %>
+      <% end %>
+    </div>
+  </div>
+</div>

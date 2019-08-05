@@ -1,0 +1,4 @@
+<div class="post <%= user_is_messages_author ? 'right' : '' %>">
+              <%= cl_image_tag(post.user.photo.url, class: 'avatar')%>
+  <div class="post-content"><%= post.description %></div>
+</div>

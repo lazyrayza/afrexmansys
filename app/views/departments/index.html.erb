@@ -1,0 +1,11 @@
+<h1>Departments</h1>
+<div class="big-dep">
+  <% @departments.each do |department| %>
+    <div class="dep-box-container">
+      <ul><%= department.name %></ul>
+      <ul><%= department.address %></ul>
+      <ul><%= department.phone_number %></ul>
+      <ul><%= department.number_of_employees %></ul>
+    </div>
+  <% end %>
+</div>

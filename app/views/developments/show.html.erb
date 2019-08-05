@@ -1,18 +1,23 @@
 <h1><%= @development.name %></h1>
-
 <h1><%= @development.address %></h1>
 
-<% @units.each do |unit| %>
-  <%= link_to development_unit_path(unit) do %>
-    <h2>Number: <%= unit.unit_number %></h2>
+<div class="dev-page">
+  <% @units.each do |unit| %>
+    <div class="dev-box">
+      <%= link_to development_unit_path(unit) do %>
+        <p>Number:</p> <%= unit.unit_number %></h2>
+      <% end %>
+      <h4>Floor:</h4> <p><%= unit.floor %></p>
+      <h4>Size:</h4> <p><%= unit.size %>m2</p>
+      <h4>Bedrooms:</h4> <p><%= unit.bedrooms %></p>
+      <h4>Bathrooms:</h4> <p><%= unit.bathrooms %></p>
+      <h4>Price:</h4> <p><%= unit.price %></p>
+      <h4>description:</h4> <p><%= unit.description %></p>
+    </div>
   <% end %>
-  <h2>Floor: <%= unit.floor %></h2>
-  <h2>Size: <%= unit.size %>m2</h2>
-  <h2>Bedrooms: <%= unit.bedrooms %></h2>
-  <h2>Bathrooms: <%= unit.bathrooms %></h2>
-  <h2>Price: <%= unit.price %></h2>
-  <h2>description: <%= unit.description %></h2>
-<% end %>
-
+</div>
 <%= link_to "new unit", new_development_unit_path(@development) %>
 
+
+
+<%= link_to "Notice Board", development_notice_board_path(@development) %>

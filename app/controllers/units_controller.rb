@@ -1,5 +1,5 @@
 class UnitsController < ApplicationController
-  before_action :find_units, only: [:show, :update, :destroy]
+  before_action :find_units, only: [:show, :update]
   before_action :find_development, only: [:show]
 
   def index
