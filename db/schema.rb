@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_05_133947) do
+ActiveRecord::Schema.define(version: 2019_08_06_053838) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,8 +75,8 @@ ActiveRecord::Schema.define(version: 2019_08_05_133947) do
     t.bigint "tenant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "noticeboard_id"
-    t.index ["noticeboard_id"], name: "index_posts_on_noticeboard_id"
+    t.bigint "notice_board_id"
+    t.index ["notice_board_id"], name: "index_posts_on_notice_board_id"
     t.index ["tenant_id"], name: "index_posts_on_tenant_id"
   end
 
@@ -137,7 +137,7 @@ ActiveRecord::Schema.define(version: 2019_08_05_133947) do
   add_foreign_key "leases", "units"
   add_foreign_key "leases", "users", column: "tenant_id"
   add_foreign_key "notice_boards", "developments"
-  add_foreign_key "posts", "notice_boards", column: "noticeboard_id"
+  add_foreign_key "posts", "notice_boards"
   add_foreign_key "posts", "users", column: "tenant_id"
   add_foreign_key "reports", "complaints"
   add_foreign_key "reports", "users", column: "employee_id"

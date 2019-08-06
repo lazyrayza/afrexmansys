@@ -1,22 +1,30 @@
 <h1>Notice Board</h1>
 
-<%= @noticeboard.name %>
-<%= @noticeboard.development_id %>
-
 <div class="container">
   <div class="row">
     <div class="col-sm-6 col-sm-offset-3">
-      <div class="chat-header"><h4>#<%= @noticeboard.name %></h4></div>
+      <div class="chat-header"><h4>#<%= @notice_board.name %></h4></div>
       <div class="posts">
-        <% @noticeboard.posts.each do |post| %>
+        <% @notice_board.posts.each do |post| %>
           <%= render "posts/post", post: post, user_is_posts_author: post.user == current_user %>
         <% end %>
       </div>
       <div id="create-post">
         <%= simple_form_for [@development, @notice_boards, Post.new ], remote: true, html: {autocomplete: "off" } do |f| %>
-          <%= f.input :content, label: false %>
+          <%= f.input :description, label: false, placeholder: "Type your message" %>
+          <%# raise %>
         <% end %>
       </div>
     </div>
   </div>
 </div>
+<% content_for :after_js do %>
+  <script>
+  App['notice_board_<%= @notice_board.id %>'] = App.cable.subscriptions.create({ channel: 'NoticeBoardsChannel', notice_board_id: <%= @notice_board.id %>}, {
+    received: (data) => {
+      console.log(data);
+    }
+  })
+  </script>
+<% end %>
+<%# raise %>

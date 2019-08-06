@@ -4,6 +4,6 @@
   postsContainer.insertAdjacentHTML('beforeend', '<%= j render "post", post: @post, user_is_posts_author: true %>');
   input = document.querySelector('#post_content');
   input.value = '';
-  // input.blur();
+  input.blur();
       scrollLastPostIntoView();
 <% end %>

@@ -6,7 +6,7 @@ class NoticeBoardsController < ApplicationController
   end
 
   def show
-    @noticeboard = NoticeBoard.find(params[:id])
+    @notice_board = NoticeBoard.find(params[:id])
     @development = Development.find(params[:development_id])
     @notice_boards = NoticeBoard.includes(posts: :user).find(params[:id])
     # if current_user == @development.employee || current_user == @development.admin
