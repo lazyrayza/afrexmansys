@@ -8,10 +8,10 @@ class NoticeBoardsController < ApplicationController
   def show
     @notice_board = NoticeBoard.find(params[:id])
     @development = Development.find(params[:development_id])
-    @notice_boards = NoticeBoard.includes(posts: :user).find(params[:id])
-    # if current_user == @development.employee || current_user == @development.admin
+    @notice_boards = NoticeBoard.includes(posts: :tenant).find(params[:id])
+    # unless current_user == admin || current_user == @development.employee || current_user == @development.tenant
     #   redirect_to root_path
-    #   flash[:alert] = "You are not a tenant & therefore can't post on this Noticeboard"
+    #   flash[:alert] = "fuck off"
     # end
   end
 

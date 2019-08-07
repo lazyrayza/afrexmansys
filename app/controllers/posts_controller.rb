@@ -1,13 +1,10 @@
 class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
-    @notice_board = NoticeBoard.find(params[:notice_board_id])
+    @notice_board = NoticeBoard.find(params[:id])
     @post.notice_board = @notice_board
-    @post.tenant = current_user
+    @post.user = current_user
     if post.save
-      ApplicationCable.server.broadcast("notice_board_#{@notice_board.id}", {
-        post: @post.to_json
-      })
       respond_to do |format|
         format.html { redirect_to development_notice_board_path(@development, @notice_board) }
         format.js
