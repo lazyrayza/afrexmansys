@@ -1,0 +1,6 @@
+<% @complaints.each do |complaint| %>
+  <%= complaint.tenant %>
+  <%= complaint.tenant.unit %>
+  <%= complaint.description  %>
+  <%= complaint.photo  %>
+<% end %>

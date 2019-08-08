@@ -1,5 +1,5 @@
 class ComplaintsController < ApplicationController
-  before_action :find_complaint, only: [:show, :create, :update]
+  before_action :find_complaint, only: [:show, :update]
 
   def index
     @complaints = Complaint.all
@@ -14,19 +14,38 @@ class ComplaintsController < ApplicationController
 
   def create
     @tenant = current_user
-    @unit = @user.unit
-    @lease = Lease.new(lease_params)
+    @unit = @tenant.unit
+    @complaint = Complaint.new(lease_params)
+    @complaint.tenant_id = @tenant.id
+
+    if @complaint.save
+      respond_to do |format|
+        format.html { redirect_to complaint_path(@complaint) }
+        format.js
+      end
+    else
+      respond_to do |format|
+        format.html { render :new }
+        format.js
+      end
+    end
   end
 
   def update
     if @complaint.save
-      redirect_to complaints_path
+      respond_to do |format|
+        format.html { redirect_to complaints_path(@complaint) }
+        format.js
+      end
     else
-      render :new
+      respond_to do |format|
+        format.html { render :new }
+        format.js
+      end
     end
   end
 
-private
+  private
 
   def find_complaint
     @complaint ||= Complaint.find(params[:id])
@@ -35,6 +54,4 @@ private
   def complaint_params
     params.require(:complaint).permit(:description, :photo)
   end
-
 end
-
