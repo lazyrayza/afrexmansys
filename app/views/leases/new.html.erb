@@ -1,10 +1,16 @@
 <%= simple_form_for ([@development, @unit, @lease]) do |f| %>
-<%= f.input :start_date %>
-<%= f.input :end_date %>
-<%= f.input :duration %>
-<%= f.input :rent %>
-<%= f.input :deposit %>
-<%= f.input :notes %>
-<%= f.button :submit %>
-    <% end %>
+  <%= f.error_notification %>
+  <%= f.input :start_date %>
+  <%= f.input :end_date %>
+  <%= f.input :duration %>
+  <%= f.input :rent %>
+  <%= f.input :deposit %>
+  <%= f.input :notes %>
+  <%= f.input :tenant_id,
+              collection: User.ids,
+              as: :radio_buttons %>
+  <%# f.collection_check_boxes(:tenant_id, User.where(tenant: true), :id, :first_name) %>
+  <%= f.button :submit %>
+<% end %>
 <%# raise %>
+ // tenant Id not being given to the Lease //

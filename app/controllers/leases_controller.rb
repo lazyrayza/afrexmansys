@@ -26,6 +26,7 @@ class LeasesController < ApplicationController
     @development = Development.find(params[:development_id])
     @lease = Lease.new(lease_params)
     @lease.unit_id = @unit.id
+    @tenant = @lease.tenant_id
     if @lease.save
       respond_to do |format|
         format.html { redirect_to development_unit_path(@development, @unit), notice: 'Lease has been Created' }
@@ -55,6 +56,6 @@ private
   end
 
   def lease_params
-    params.require(:lease).permit(:start_date, :end_date, :duration, :rent, :deposit)
+    params.require(:lease).permit(:start_date, :end_date, :duration, :rent, :deposit, :tenant_id, :notes)
   end
 end

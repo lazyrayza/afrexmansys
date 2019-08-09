@@ -12,4 +12,12 @@ class User < ApplicationRecord
   def full_name
     first_name + " " + last_name
   end
+
+  def not_admin
+    User.where(:admin == false)
+  end
+
+  def not_employee
+    User.where(:employee == false)
+  end
 end

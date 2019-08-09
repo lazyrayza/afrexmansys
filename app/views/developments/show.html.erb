@@ -1,5 +1,12 @@
 <h1><%= @development.name %></h1>
 <h1><%= @development.address %></h1>
+<ul>GYM: <%= @development.gym %></ul>
+<ul>Pool: <%= @development.swimming_pool %></ul>
+<ul>S&S: <%= @development.sauna_and_steam %></ul>
+<ul>Generator: <%= @development.generator %></ul>
+<ul>Parkings: <%= @development.parking_space %></ul>
+<ul>Units: <%= @development.units.count %></ul> // need to either chnage or get ride of coloum no of units //
+
 
 <div class="dev-page">
   <% @units.each do |unit| %>

@@ -1,0 +1,14 @@
+<%= simple_form_for [@complaint] do |f| %>
+    <%= f.error_notification %>
+    <div class="form-inputs">
+      <%= f.input :description %>
+      <%= f.input :photo %>
+    </div>
+
+ <div class="form-actions">
+    <%= f.button :submit, "Send Complaint" %>
+    <%# raise %>
+  </div>
+<% end %>
+
+<!-- Issue with finding unit from tenant as tenant hasnt been given unit -->
