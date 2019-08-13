@@ -14,8 +14,8 @@ class ComplaintsController < ApplicationController
 
   def create
     @tenant = current_user
-    @unit = @tenant.unit
-    @complaint = Complaint.new(lease_params)
+    # @unit = @tenant.unit
+    @complaint = Complaint.new(complaint_params)
     @complaint.tenant_id = @tenant.id
 
     if @complaint.save

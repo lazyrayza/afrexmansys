@@ -1,4 +1,7 @@
-<%= @complaint.tenant %>
-<%= @complaint.tenant.unit %>
-<%= @complaint.description  %>
-<%= @complaint.photo  %>
+<ul> <u>Made by:</u> <%= @complaint.tenant.full_name %></ul>
+<ul> <u>Unit:</u> <%= Lease.find_by(tenant_id: @complaint.tenant.id).unit_id %></ul>
+<!-- Issue with getting tenants lease & unit -->
+<%# raise %>
+<ul> <u>Description:</u> <%= @complaint.description  %></ul>
+<ul><u>Photo:</u> <%= @complaint.photo  %></ul>
+
