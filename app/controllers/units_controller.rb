@@ -1,15 +1,14 @@
 class UnitsController < ApplicationController
   before_action :find_units, only: [:show, :update]
-  before_action :find_development, only: [:show]
+  # before_action :find_development, only: [:show]
 
   def index
     @units = Unit.all
   end
 
   def show
-    # @unit = Unit.find(params[:id])
     @development = @unit.development
-    @lease = Lease.where(:unit_id == @unit.id).first
+    @lease = Lease.where(:unit_id == @unit.id).to_a
   end
 
   def new
@@ -39,9 +38,9 @@ class UnitsController < ApplicationController
 
 private
 
-  def find_development
-    @development ||= Development.find(params[:id])
-  end
+  # def find_development
+  #   @development ||= Development.find(params[:id])
+  # end
 
   def find_units
     @unit ||= Unit.find(params[:development_id])

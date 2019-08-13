@@ -8,20 +8,28 @@
   <h2>description: <%= @unit.description %></h2>
 
 
-<% if @lease.present? && @lease.unit_id == @unit.id %>
-  <p>Lease info:</p>
-    <ul>Start date: <%= @lease.start_date %></ul>
-    <ul>End date: <%= @lease.end_date %></ul>
-    <ul>Duration: <%= @lease.duration %></ul>
-    <ul>Rent: <%= @lease.rent %></ul>
-    <ul>Depsoit: <%= @lease.deposit %></ul>
-    <ul>Notes: <%= @lease.notes%></ul>
-    <ul>Unit: <%= @lease.unit_id %></ul>
-    <%= link_to do %>
-      <ul>Tenant: <%= @lease.tenant_id %></ul>
+
+  <% @lease.each do |lease| %>
+    <% if lease.unit_id == @unit.id %>
+      <p>Lease info:</p>
+        <ul>Start date: <%= lease.start_date %></ul>
+        <ul>End date: <%= lease.end_date %></ul>
+        <ul>Duration: <%= lease.duration %></ul>
+        <ul>Rent: <%= lease.rent %></ul>
+        <ul>Depsoit: <%= lease.deposit %></ul>
+        <ul>Notes: <%= lease.notes%></ul>
+        <ul>Unit: <%= lease.unit_id %></ul>
+        <%= link_to do %>
+          <ul>Tenant: <%= lease.tenant_id %></ul>
+        <% end %>
+    <% else %>
+      <%= link_to "NEW LEASE", new_development_unit_lease_path(@development, @unit)  %>
     <% end %>
-<% else %>
-  <%= link_to "NEW LEASE", new_development_unit_lease_path(@development, @unit)  %>
-<% end %>
+  <% end %>
+
 
 <%# raise %>
+<!-- // Now displaying correct lease, but not showing new lease link for units without lease! Need to rethink logic for lease display // -->
+
+
+<%# @lease.to_ary %>
