@@ -1,0 +1,16 @@
+<h2>Welcome back <%= @user.full_name %></h2>
+<div class="profile-main">
+  <div class="profile-left">
+    <h3>Profile</h3>
+  </div>
+  <div class="profile-complaints">
+    <% @tenantcomplaints.to_a.each do |complaint| %>
+    <div class="profile-complaint-card">
+      <p><u>Made:</u> <%= complaint.tenant.first_name %></p>
+      <p><u>Resolved:</u><%= complaint.resolved %></p>
+    </div>
+    <% end %>
+  </div>
+</div>
+
+

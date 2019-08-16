@@ -16,8 +16,11 @@ class ComplaintsController < ApplicationController
     @tenant = current_user
     @complaint = Complaint.new(complaint_params)
     @complaint.tenant_id = @tenant.id
+
     if @complaint.description.include? "light" || "tubelight" || "bulb" || "switch" || "wire"
       @complaint.employee_id = User.where({ departments_id: "1",employee: "true" }).to_a.sample.id
+    elsif @complaint.description.include? "toilet" || "bathroom" || "sink" || "shower" || "water"
+      @complaint.employee_id = User.where({ departments_id: "2", employee: true }).to_a.sample.id
     end
 
     if @complaint.save

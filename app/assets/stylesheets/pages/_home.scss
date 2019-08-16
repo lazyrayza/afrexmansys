@@ -1,1 +1,5 @@
-// Specific CSS for your home-page
+.home-banner {
+  background-image: asset-url("banner.png");
+  background-size: cover;
+  height: calc(100vh - 66px);
+}
