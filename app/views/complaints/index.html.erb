@@ -1,6 +1,15 @@
+<div class="complaints-page"></div>
 <% @complaints.each do |complaint| %>
-  <%= complaint.tenant %>
-  <%= complaint.tenant.unit %>
-  <%= complaint.description  %>
-  <%= complaint.photo  %>
+  <%= link_to complaint_path(complaint) do  %>
+    <div class="complaints-box">
+      <ul><u>Complaint ID:</u> <%= complaint.id %> </ul>
+      <ul><u>Made by:</u> <%= complaint.tenant.full_name %></ul>
+      <ul><u>Tenant:</u> <%= Lease.find_by(tenant_id: complaint.tenant.id).unit_id %></ul>
+      <ul><u>Description:</u> <%= complaint.description  %></ul>
+    </div>
+  <% end %>
 <% end %>
+<%# raise %>
+<!-- wording in the clickable div also becomes link and changes to blue link. Need to change that! -->
+
+<%= link_to "New Complaint", new_complaint_path %>

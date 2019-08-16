@@ -14,9 +14,11 @@ class ComplaintsController < ApplicationController
 
   def create
     @tenant = current_user
-    # @unit = @tenant.unit
     @complaint = Complaint.new(complaint_params)
     @complaint.tenant_id = @tenant.id
+    if @complaint.description.include? "light" || "tubelight" || "bulb" || "switch" || "wire"
+      @complaint.employee_id = User.where({ departments_id: "1",employee: "true" }).to_a.sample.id
+    end
 
     if @complaint.save
       respond_to do |format|

@@ -1,0 +1,15 @@
+<div class="dep-box-container">
+  <ul><u>Department:</u> <%= @department.name %></ul>
+  <ul><u>Address:</u> <%= @department.address %></ul>
+  <ul><u>Phone Number: </u> <%= @department.phone_number %></ul>
+  <ul><u>Number of Employees</u> <%= @department.number_of_employees %></ul>
+</div>
+
+<div class="department-employees">
+  <h2><u>Admin:</u></h2>
+    <ul><%= User.where({departments_id: @department.id, admin: "true"}).to_a[0].full_name %></ul>
+  <h3><u>Employees:</u></h3>
+    <% User.where({departments_id: @department.id, employee: "true"}).to_a.each do |employee| %>
+      <ul><%= employee.full_name %></ul>
+    <% end %>
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_06_053838) do
+ActiveRecord::Schema.define(version: 2019_08_16_063750) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 2019_08_06_053838) do
     t.bigint "tenant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "employee_id"
+    t.index ["employee_id"], name: "index_complaints_on_employee_id"
     t.index ["tenant_id"], name: "index_complaints_on_tenant_id"
   end
 
@@ -133,6 +135,7 @@ ActiveRecord::Schema.define(version: 2019_08_06_053838) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "complaints", "users", column: "employee_id"
   add_foreign_key "complaints", "users", column: "tenant_id"
   add_foreign_key "leases", "units"
   add_foreign_key "leases", "users", column: "tenant_id"
