@@ -1,7 +1,16 @@
 <div class="home-banner"></div>
 <div class="temp-btnz">
-  <%= link_to "Developments", developments_path %>
-  <%= link_to "Complaints", complaints_path %>
-  <%= link_to "Departments", departments_path %>
-  <%= link_to "Login", new_user_session_path %>
+  <%= link_to developments_path do %>
+    <button type="submit" class="primary-button">Developments</button>
+  <% end %>
+  <%= link_to complaints_path do %>
+    <button type="submit" class="primary-button">Complaints</button>
+  <% end %>
+  <%= link_to departments_path do %>
+    <button type="submit" class="primary-button">Departments</button>
+  <% end %>
 </div>
+
+
+<%# cl_image_tag("san_francisco.jpg",
+      width: 400, height: 300, crop: :fill) %>

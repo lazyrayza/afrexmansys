@@ -1,3 +1,7 @@
+<%= link_to new_complaint_path do %>
+  <button type="submit" class="primary-button">New Complaint</button>
+<% end %>
+
 <div class="complaints-page"></div>
 <% @complaints.each do |complaint| %>
   <%= link_to complaint_path(complaint) do  %>
@@ -12,4 +16,3 @@
 <%# raise %>
 <!-- wording in the clickable div also becomes link and changes to blue link. Need to change that! -->
 
-<%= link_to "New Complaint", new_complaint_path %>

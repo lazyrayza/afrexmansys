@@ -1,7 +1,6 @@
 <ul> <u>Made by:</u> <%= @complaint.tenant.full_name %></ul>
 <ul> <u>Unit:</u> <%= Lease.find_by(tenant_id: @complaint.tenant.id).unit_id %></ul> <!-- Need to make this link to unit -->
 <ul> <u>Description:</u> <%= @complaint.description  %></ul>
-<ul><u>Photo:</u> <%= @complaint.photo  %></ul>
+<ul><u>Photo:</u> <%= cl_image_tag @complaint.photo, height: 300, width: 400, crop: :fill %></ul>
 <ul><u>Resolved:</u> <%= @complaint.resolved  %></ul>
-
 <%# raise %>

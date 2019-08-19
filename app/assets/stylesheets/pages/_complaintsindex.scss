@@ -1,10 +1,13 @@
 .complaints-page{
-  display: flex
+  display: flex;
+  flex-wrap: wrap;
+  width: 100vw;
+  justify-content: space-around
 }
 
 .complaints-box{
   height: 30%;
-  width: 40%;
+  width: 35%;
   padding: 4%;
   margin: 4%;
   border-radius: 3%;
