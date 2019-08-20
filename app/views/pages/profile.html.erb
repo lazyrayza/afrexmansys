@@ -2,13 +2,27 @@
 <div class="profile-main">
   <div class="profile-left">
     <h3>Profile</h3>
+    <u>Name:</u> <p><%= @user.full_name %></p>
+    <u>Email:</u> <p><%= @user.email %></p>
+    <% if current_user.employee %>
+      <u>Open complaints: <%= @employeecomplaints.to_a.count %></u>
+    <% end %>
   </div>
   <div class="profile-complaints">
-    <% @tenantcomplaints.to_a.each do |complaint| %>
-    <div class="profile-complaint-card">
-      <p><u>Made:</u> <%= complaint.tenant.first_name %></p>
-      <p><u>Resolved:</u><%= complaint.resolved %></p>
-    </div>
+    <% if current_user.tenant  %>
+      <% @tenantcomplaints.to_a.each do |complaint| %>
+        <div class="profile-complaint-card">
+          <p><u>Made:</u> <%= complaint.tenant.first_name %></p>
+          <p><u>Resolved:</u><%= complaint.resolved %></p>
+        </div>
+      <% end %>
+    <% else %>
+      <% @employeecomplaints.to_a.each do |complaint| %>
+        <div class="profile-complaint-card">
+          <p><u>Made:</u> <%= complaint.tenant.first_name %></p>
+          <p><u>Resolved:</u><%= complaint.resolved %></p>
+        </div>
+      <% end %>
     <% end %>
   </div>
 </div>

@@ -4,6 +4,7 @@ class PagesController < ApplicationController
   def profile
     @user = current_user
     @tenantcomplaints = Complaint.where({tenant_id: @user.id})
+    @employeecomplaints = Complaint.where({employee_id: @user.id})
   end
 
   def home

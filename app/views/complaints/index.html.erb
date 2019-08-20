@@ -2,17 +2,20 @@
   <button type="submit" class="primary-button">New Complaint</button>
 <% end %>
 
-<div class="complaints-page"></div>
-<% @complaints.each do |complaint| %>
-  <%= link_to complaint_path(complaint) do  %>
-    <div class="complaints-box">
-      <ul><u>Complaint ID:</u> <%= complaint.id %> </ul>
-      <ul><u>Made by:</u> <%= complaint.tenant.full_name %></ul>
-      <ul><u>Tenant:</u> <%= Lease.find_by(tenant_id: complaint.tenant.id).unit_id %></ul>
-      <ul><u>Description:</u> <%= complaint.description  %></ul>
-    </div>
+<div class="complaints-page">
+
+  <% @complaints.each do |complaint| %>
+    <%= link_to complaint_path(complaint) do  %>
+      <div class="complaints-box">
+        <ul><u>Complaint ID:</u> <%= complaint.id %> </ul>
+        <ul><u>Made by:</u> <%= complaint.tenant.full_name %></ul>
+        <ul><u>Tenant:</u> <%= Lease.find_by(tenant_id: complaint.tenant.id).unit_id %></ul>
+        <ul><u>Description:</u> <%= complaint.description  %></ul>
+      </div>
+    <% end %>
   <% end %>
-<% end %>
+
+</div>
 <%# raise %>
 <!-- wording in the clickable div also becomes link and changes to blue link. Need to change that! -->
 

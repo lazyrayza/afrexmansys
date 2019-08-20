@@ -1,17 +1,18 @@
 .complaints-page{
-  display: flex;
-  flex-wrap: wrap;
+  // display: flex;
+  // flex-wrap: wrap;
   width: 100vw;
   justify-content: space-around
 }
 
 .complaints-box{
-  height: 30%;
-  width: 35%;
+  height: 50%;
+  width: 50%;
   padding: 4%;
   margin: 4%;
   border-radius: 3%;
   box-shadow: 0 10px 30px rgba(0,0,0,.1);
+  margin: 10%;
 }
 
 .complaints-box:hover{
