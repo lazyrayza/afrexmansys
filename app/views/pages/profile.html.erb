@@ -1,12 +1,27 @@
 <h2>Welcome back <%= @user.full_name %></h2>
 <div class="profile-main">
   <div class="profile-left">
+    <div class="profile-box-info">
     <h3>Profile</h3>
     <u>Name:</u> <p><%= @user.full_name %></p>
     <u>Email:</u> <p><%= @user.email %></p>
     <% if current_user.employee %>
-      <u>Open complaints: <%= @employeecomplaints.to_a.count %></u>
+      <u>Open complaints:</u> <p><%= @employeecomplaints.to_a.count { |complaint| complaint.resolved == false}%></p>
+      <u>Resolved complaints:</u> <p><%= @employeecomplaints.to_a.count { |complaint| complaint.resolved == true}%></p>
+      <% complaintsarray = [] %>
+      <% @employeecomplaints.to_a.each { |complaint| complaintsarray << (complaint.created_at - complaint.updated_at) }%>
+        <ul><u>Fastest Time: <%= complaintsarray.max %></u></ul>
+        <ul><u>Slowest Time: <%= complaintsarray.min %></u></ul>
+        <% total = complaintsarray.inject(:+) %>
+        <% len = complaintsarray.length %>
+        <ul><u>Average Time: <%= total.to_f / len %></u></ul>
+    <% else %>
+      <u>Open complaints:</u> <p><%= @tenantcomplaints.to_a.count { |complaint| complaint.resolved == false}%></p>
     <% end %>
+    </div>
+    <div class="profile-box-pic">
+
+    </div>
   </div>
   <div class="profile-complaints">
     <% if current_user.tenant  %>
@@ -28,3 +43,4 @@
 </div>
 
 
+<%# raise %>
