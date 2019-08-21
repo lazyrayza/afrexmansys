@@ -1,0 +1,11 @@
+<div class="container">
+  <h1>Report</h1>
+  <ul><u>Description:</u> <%= @report.description %></ul>
+  <ul><u>Resolved:</u> <%= @complaint.resolved %></ul>
+  <ul><u>Resolved Photo:</u> <%= @report.resolved_photo %></ul>
+  <ul><u>Resolved by:</u> <%= User.where(id: @report.employee_id).to_a[0].full_name %></ul>
+  <ul><u>Time taken to resolve:</u> <%= Time.at(@complaint.updated_at - @complaint.created_at).utc.strftime("%H:%M:%S") %> </ul>
+</div>
+
+
+

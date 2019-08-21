@@ -2,22 +2,26 @@
 <div class="profile-main">
   <div class="profile-left">
     <div class="profile-box-info">
-    <h3>Profile</h3>
-    <u>Name:</u> <p><%= @user.full_name %></p>
-    <u>Email:</u> <p><%= @user.email %></p>
-    <% if current_user.employee %>
-      <u>Open complaints:</u> <p><%= @employeecomplaints.to_a.count { |complaint| complaint.resolved == false}%></p>
-      <u>Resolved complaints:</u> <p><%= @employeecomplaints.to_a.count { |complaint| complaint.resolved == true}%></p>
-      <% complaintsarray = [] %>
-      <% @employeecomplaints.to_a.each { |complaint| complaintsarray << (complaint.created_at - complaint.updated_at) }%>
-        <ul><u>Fastest Time: <%= complaintsarray.max %></u></ul>
-        <ul><u>Slowest Time: <%= complaintsarray.min %></u></ul>
-        <% total = complaintsarray.inject(:+) %>
-        <% len = complaintsarray.length %>
-        <ul><u>Average Time: <%= total.to_f / len %></u></ul>
-    <% else %>
-      <u>Open complaints:</u> <p><%= @tenantcomplaints.to_a.count { |complaint| complaint.resolved == false}%></p>
-    <% end %>
+      <h3>Profile</h3>
+      <u>Name:</u> <p><%= @user.full_name %></p>
+      <u>Email:</u> <p><%= @user.email %></p>
+      <% if current_user.employee %>
+        <u>Open complaints:</u> <p><%= @employeecomplaints.to_a.count { |complaint| complaint.resolved == false}%></p>
+        <u>Resolved complaints:</u> <p><%= @employeecomplaints.to_a.count { |complaint| complaint.resolved == true}%></p>
+        <% complaintsarray = [] %>
+        <% @employeecomplaints.to_a.each { |complaint| complaintsarray << (complaint.created_at - complaint.updated_at) }%>
+        <%= complaintsarray %>
+          <ul><u>Fastest Time:</u> <%= Time.at(complaintsarray.max).utc.strftime("%H:%M:%S")  %></ul>
+          <ul><u>Slowest Time:</u> <%= Time.at(complaintsarray.min).utc.strftime("%H:%M:%S")  %></ul>
+          <% total = complaintsarray.inject(:+) %>
+          <% len = complaintsarray.length %>
+          <ul><u>Average Time:</u> <%= Time.at(total.to_f / len).utc.strftime("%H:%M:%S")  %></ul>
+      <% else %>
+        <u>Open complaints:</u> <p><%= @tenantcomplaints.to_a.count { |complaint| complaint.resolved == false}%></p>
+      <% end %>
+      <%= link_to insights_path do %>
+        <button type="submit" class="primary-button">Insights</button>
+      <% end %>
     </div>
     <div class="profile-box-pic">
 
@@ -34,8 +38,17 @@
     <% else %>
       <% @employeecomplaints.to_a.each do |complaint| %>
         <div class="profile-complaint-card">
-          <p><u>Made:</u> <%= complaint.tenant.first_name %></p>
-          <p><u>Resolved:</u><%= complaint.resolved %></p>
+          <div class="profile-complaint-card-infor">
+            <p><u>Made:</u> <%= complaint.tenant.first_name %></p>
+            <p><u>Resolved:</u><%= complaint.resolved %></p>
+          </div>
+          <% if complaint.resolved == false %>
+            <div class="profile-complaint-card-btn">
+              <%= link_to new_complaint_report_path(complaint) do %>
+                <button type="submit" class="primary-button">Resolve Complaint</button>
+              <% end %>
+            </div>
+          <% end %>
         </div>
       <% end %>
     <% end %>

@@ -9,7 +9,7 @@
       <div class="complaints-box">
         <ul><u>Complaint ID:</u> <%= complaint.id %> </ul>
         <ul><u>Made by:</u> <%= complaint.tenant.full_name %></ul>
-        <ul><u>Tenant:</u> <%= Lease.find_by(tenant_id: complaint.tenant.id).unit_id %></ul>
+        <ul><u>Tenant:</u> <%# Lease.find_by(tenant_id: complaint.tenant.id).unit_id %></ul>
         <ul><u>Description:</u> <%= complaint.description  %></ul>
       </div>
     <% end %>

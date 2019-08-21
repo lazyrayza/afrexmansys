@@ -1,0 +1,24 @@
+<div class="container">
+  <h1>Edit Complaint</h1>
+
+  <%= simple_form_for [@complaint] do |f| %>
+    <%= f.error_notification %>
+    <div class="form-inputs">
+      <%= f.input :description,
+                  :input_html => {:minlength => 10 , maxlength: 40}, placeholder: "Briefly describe your problem",
+                  hint: "leave it blank if you don't want to change it",
+                  required: false,
+                  input_html: { autocomplete: "New description"   %>
+      <%= f.input :resolved,
+                  collection: [["Resolved", true],["Not Resolved", false]],
+                  required: true  %>
+      <%= f.input :photo,
+                  required: false,
+                  input_html: { autocomplete: "new-photo" } %>
+    </div>
+
+    <div class="form-actions">
+      <%= f.button :submit, "Send Complaint" %>
+    </div>
+  <% end %>
+</div>

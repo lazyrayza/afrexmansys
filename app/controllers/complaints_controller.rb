@@ -1,5 +1,5 @@
 class ComplaintsController < ApplicationController
-  before_action :find_complaint, only: [:show, :update]
+  before_action :find_complaint, only: [:show, :update, :edit]
 
   def index
     @complaints = Complaint.all
@@ -38,10 +38,14 @@ class ComplaintsController < ApplicationController
     end
   end
 
+  def edit
+
+  end
+
   def update
     if @complaint.save
       respond_to do |format|
-        format.html { redirect_to complaints_path(@complaint) }
+        format.html { redirect_to new_complaint_report_path(@complaint) }
         format.js
       end
     else
@@ -59,6 +63,6 @@ class ComplaintsController < ApplicationController
   end
 
   def complaint_params
-    params.require(:complaint).permit(:description, :photo)
+    params.require(:complaint).permit(:description, :photo, :resolved)
   end
 end

@@ -1,4 +1,7 @@
-<%= simple_form_for [@complaint] do |f| %>
+<div class="container">
+  <h1>New Complaints</h1>
+
+  <%= simple_form_for [@complaint] do |f| %>
     <%= f.error_notification %>
     <div class="form-inputs">
       <%= f.input :description, :input_html => {:minlength => 10 , maxlength: 40}, placeholder: "Briefly describe your problem"  %>
@@ -6,10 +9,11 @@
       <%= f.input :photo_cache, as: :hidden %>
     </div>
 
- <div class="form-actions">
-    <%= f.button :submit, "Send Complaint" %>
-  </div>
-<% end %>
-<%# raise %>
+    <div class="form-actions">
+      <%= f.button :submit, "Send Complaint" %>
+    </div>
+  <% end %>
+</div>
 
-<!-- Problem with assigning employee to complaint -->
+
+<%# raise %>
