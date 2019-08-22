@@ -21,7 +21,7 @@ class ComplaintsController < ApplicationController
       @complaint.employee_id = User.where({ departments_id: "1",employee: "true" }).to_a.sample.id
     elsif @complaint.description.split(" ").any? { |word| ["toilet", "bathroom", "sink", "shower", "water"].include?(word) }
       @complaint.employee_id = User.where({ departments_id: "2", employee: true }).to_a.sample.id
-    elsif @complaint.description.split(" ").any? { |word| ["tv" || "washing machine" || "appliance" || "fridge" || "oven" || "toaster" || "kettle"].include?(word) }
+    elsif @complaint.description.split(" ").any? { |word| ["tv" || "washing-machine" || "appliance" || "fridge" || "oven" || "toaster" || "kettle"].include?(word) }
       @complaint.employee_id = User.where({ departments_id: "4", employee: true }).to_a.sample.id
     end
 

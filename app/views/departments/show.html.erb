@@ -7,7 +7,11 @@
 
 <div class="department-employees">
   <h2><u>Admin:</u></h2>
-    <ul><%= User.where({departments_id: @department.id, admin: "true"}).to_a[0].full_name %></ul>
+    <% if Department.where(departments_id: @department.id, admin: "false") %>
+      <ul><i>No Admin</i></ul>
+    <% else %>
+      <ul><%= User.where({departments_id: @department.id, admin: "true"}).to_a[0].full_name %></ul>
+    <% end %>
   <h3><u>Employees:</u></h3>
     <% User.where({departments_id: @department.id, employee: "true"}).to_a.each do |employee| %>
       <ul><%= employee.full_name %></ul>

@@ -1,59 +1,79 @@
 <h2>Welcome back <%= @user.full_name %></h2>
 <div class="profile-main">
-  <div class="profile-left">
-    <div class="profile-box-info">
-      <h3>Profile</h3>
-      <u>Name:</u> <p><%= @user.full_name %></p>
-      <u>Email:</u> <p><%= @user.email %></p>
-      <% if current_user.employee %>
-        <u>Open complaints:</u> <p><%= @employeecomplaints.to_a.count { |complaint| complaint.resolved == false}%></p>
-        <u>Resolved complaints:</u> <p><%= @employeecomplaints.to_a.count { |complaint| complaint.resolved == true}%></p>
-        <% complaintsarray = [] %>
-        <% @employeecomplaints.to_a.each { |complaint| complaintsarray << (complaint.created_at - complaint.updated_at) }%>
-        <%= complaintsarray %>
-          <ul><u>Fastest Time:</u> <%= Time.at(complaintsarray.max).utc.strftime("%H:%M:%S")  %></ul>
-          <ul><u>Slowest Time:</u> <%= Time.at(complaintsarray.min).utc.strftime("%H:%M:%S")  %></ul>
-          <% total = complaintsarray.inject(:+) %>
-          <% len = complaintsarray.length %>
-          <ul><u>Average Time:</u> <%= Time.at(total.to_f / len).utc.strftime("%H:%M:%S")  %></ul>
-      <% else %>
-        <u>Open complaints:</u> <p><%= @tenantcomplaints.to_a.count { |complaint| complaint.resolved == false}%></p>
-      <% end %>
-      <%= link_to insights_path do %>
-        <button type="submit" class="primary-button">Insights</button>
-      <% end %>
+  <div class="profile-top">
+    <div class="profile-left">
+      <div class="profile-title">
+        <h1>Profile</h1>
+      </div>
+      <div class="profile-box-info">
+        <u>Name:</u> <p><%= @user.full_name %></p>
+        <u>Email:</u> <p><%= @user.email %></p>
+        <% if current_user.employee %>
+          <u>Open complaints:</u> <p><%= @employeecomplaints.to_a.count { |complaint| complaint.resolved == false}%></p>
+          <u>Resolved complaints:</u> <p><%= @employeecomplaints.to_a.count { |complaint| complaint.resolved == true}%></p>
+          <% complaintsarray = [] %>
+          <% @employeecomplaints.to_a.each { |complaint| complaintsarray << (complaint.updated_at - complaint.created_at) }%>
+            <ul><u>Fastest Time:</u> <%= Time.at(complaintsarray.min).utc.strftime("%H:%M:%S")  %></ul> <!-- Need to pick that that isnt 0 -->
+            <ul><u>Slowest Time:</u> <%= Time.at(complaintsarray.max).utc.strftime("%H:%M:%S")  %></ul>
+            <% total = complaintsarray.inject(:+) %>
+            <% len = complaintsarray.length %>
+            <ul><u>Average Time:</u> <%= Time.at(total.to_f / len).utc.strftime("%H:%M:%S")  %></ul>
+        <% else %>
+          <u>Open complaints:</u> <p><%= @tenantcomplaints.to_a.count { |complaint| complaint.resolved == false}%></p>
+        <% end %>
+      </div>
+      <div class="profile-box-pic">
+      </div>
     </div>
-    <div class="profile-box-pic">
-
-    </div>
-  </div>
-  <div class="profile-complaints">
-    <% if current_user.tenant  %>
-      <% @tenantcomplaints.to_a.each do |complaint| %>
-        <div class="profile-complaint-card">
-          <p><u>Made:</u> <%= complaint.tenant.first_name %></p>
-          <p><u>Resolved:</u><%= complaint.resolved %></p>
-        </div>
-      <% end %>
-    <% else %>
-      <% @employeecomplaints.to_a.each do |complaint| %>
-        <div class="profile-complaint-card">
-          <div class="profile-complaint-card-infor">
+    <div class="profile-complaints">
+      <div class="complaints-title">
+        <h1>Complaints</h1>
+      </div>
+      <% if current_user.tenant  %>
+        <% @tenantcomplaints.to_a.each do |complaint| %>
+          <div class="profile-complaint-card">
             <p><u>Made:</u> <%= complaint.tenant.first_name %></p>
             <p><u>Resolved:</u><%= complaint.resolved %></p>
           </div>
-          <% if complaint.resolved == false %>
-            <div class="profile-complaint-card-btn">
-              <%= link_to new_complaint_report_path(complaint) do %>
-                <button type="submit" class="primary-button">Resolve Complaint</button>
-              <% end %>
+        <% end %>
+      <% else %>
+        <% @employeecomplaints.to_a.each do |complaint| %>
+          <div class="profile-complaint-card">
+            <div class="profile-complaint-card-infor">
+              <p><u>Made:</u> <%= complaint.tenant.first_name %></p>
+              <p><u>Resolved:</u><%= complaint.resolved %></p>
             </div>
-          <% end %>
-        </div>
+            <% if complaint.resolved == false %>
+              <div class="profile-complaint-card-btn">
+                <%= link_to new_complaint_report_path(complaint) do %>
+                  <button type="submit" class="primary-button">Resolve Complaint</button>
+                <% end %>
+              </div>
+            <% else %>
+            <i class="far fa-check-circle fa-3x" data-toggle="tooltip" title="Resolved"></i>
+            <% end %>
+          </div>
+        <% end %>
       <% end %>
-    <% end %>
+    </div>
+  </div>
+  <div class="profile-insights">
+    <div class="insight-title">
+      <h1>INSIGHTS</h1>
+    </div>
+    <div class="bar-chart">
+      <h2>Complaints Recieved</h2>
+      <%= column_chart @employeecomplaints.group_by_day_of_week(:created_at, format: "%a").count, xtitle: "Day", ytitle: "Complaints" %>
+    </div>
+    <div class="bar-chart">
+      <h2>Resolved</h2>
+      <%= area_chart @employeecomplaints.group_by_day_of_week(:updated_at, format: "%a").count, xtitle: "Day", ytitle: "No. of resolved complaints" %>
+    </div>
+    <div class="line-chart">
+      <h2></h2>
+      <%# line_chart Time.at(complaintsarray).utc.strftime("%H:%M:%S").group_by_day_of_week(:created_at).count %> <!-- Time.at(complaintsarray.max).utc.strftime("%H:%M:%S") -->
+    </div>
   </div>
 </div>
-
 
 <%# raise %>
