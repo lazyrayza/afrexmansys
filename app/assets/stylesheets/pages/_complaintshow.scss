@@ -1,0 +1,18 @@
+.complaints-main{
+  display: flex;
+  justify-content: space-around;
+  .complaint-info{
+    padding: 4%;
+    margin: 4%;
+    border-radius: 3%;
+    box-shadow: 0 10px 30px rgba(0,0,0,.1);
+    margin: 10%;
+  }
+  .complaint-report{
+    padding: 4%;
+    margin: 4%;
+    border-radius: 3%;
+    box-shadow: 0 10px 30px rgba(0,0,0,.1);
+    margin: 10%;
+  }
+}

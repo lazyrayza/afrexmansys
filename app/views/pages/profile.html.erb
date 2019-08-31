@@ -13,11 +13,11 @@
           <u>Resolved complaints:</u> <p><%= @employeecomplaints.to_a.count { |complaint| complaint.resolved == true}%></p>
           <% complaintsarray = [] %>
           <% @employeecomplaints.to_a.each { |complaint| complaintsarray << (complaint.updated_at - complaint.created_at) }%>
-            <ul><u>Fastest Time:</u> <%= Time.at(complaintsarray.min).utc.strftime("%H:%M:%S")  %></ul> <!-- Need to pick that that isnt 0 -->
-            <ul><u>Slowest Time:</u> <%= Time.at(complaintsarray.max).utc.strftime("%H:%M:%S")  %></ul>
+            <ul><u>Fastest Time:</u> <%= fsttime = Time.at(complaintsarray.min).utc.strftime("%H:%M:%S")  %></ul> <!-- Need to pick that that isnt 0 -->
+            <ul><u>Slowest Time:</u> <%= slowsttime = Time.at(complaintsarray.max).utc.strftime("%H:%M:%S")  %></ul>
             <% total = complaintsarray.inject(:+) %>
             <% len = complaintsarray.length %>
-            <ul><u>Average Time:</u> <%= Time.at(total.to_f / len).utc.strftime("%H:%M:%S")  %></ul>
+            <ul><u>Average Time:</u> <%= avtime = Time.at(total.to_f / len).utc.strftime("%H:%M:%S")  %></ul>
         <% else %>
           <u>Open complaints:</u> <p><%= @tenantcomplaints.to_a.count { |complaint| complaint.resolved == false}%></p>
         <% end %>
@@ -33,7 +33,11 @@
         <% @tenantcomplaints.to_a.each do |complaint| %>
           <div class="profile-complaint-card">
             <p><u>Made:</u> <%= complaint.tenant.first_name %></p>
-            <p><u>Resolved:</u><%= complaint.resolved %></p>
+            <% if complaint.resolved == false %>
+              <p><u>Resolved:</u> <i class="fas fa-times-circle fa-3x" data-toggle="tooltip" title="Not Resolved"></i></p>
+            <% else %>
+              <p><u>Resolved:</u> <i class="far fa-check-circle fa-3x" data-toggle="tooltip" title="Resolved"></i></p>
+            <% end %>
           </div>
         <% end %>
       <% else %>
@@ -41,7 +45,6 @@
           <div class="profile-complaint-card">
             <div class="profile-complaint-card-infor">
               <p><u>Made:</u> <%= complaint.tenant.first_name %></p>
-              <p><u>Resolved:</u><%= complaint.resolved %></p>
             </div>
             <% if complaint.resolved == false %>
               <div class="profile-complaint-card-btn">
@@ -50,7 +53,9 @@
                 <% end %>
               </div>
             <% else %>
-            <i class="far fa-check-circle fa-3x" data-toggle="tooltip" title="Resolved"></i>
+              <%= link_to complaint_path(complaint) do %>
+                <i class="far fa-check-circle fa-3x" data-toggle="tooltip" title="Resolved"></i>
+              <% end %>
             <% end %>
           </div>
         <% end %>
@@ -63,17 +68,25 @@
     </div>
     <div class="bar-chart">
       <h2>Complaints Recieved</h2>
-      <%= column_chart @employeecomplaints.group_by_day_of_week(:created_at, format: "%a").count, xtitle: "Day", ytitle: "Complaints" %>
+      <%= column_chart @employeecomplaints.group_by_day_of_week(:created_at, format: "%a").count, xtitle: "Day", ytitle: "Complaints", colors: ["#489099"]  %>
     </div>
     <div class="bar-chart">
       <h2>Resolved</h2>
-      <%= area_chart @employeecomplaints.group_by_day_of_week(:updated_at, format: "%a").count, xtitle: "Day", ytitle: "No. of resolved complaints" %>
+      <%= line_chart @employeecomplaints.group_by_day_of_week(:updated_at, format: "%a").count, xtitle: "Day", ytitle: "No. of resolved complaints", colors: ["#489099"] %>
     </div>
     <div class="line-chart">
       <h2></h2>
-      <%# line_chart Time.at(complaintsarray).utc.strftime("%H:%M:%S").group_by_day_of_week(:created_at).count %> <!-- Time.at(complaintsarray.max).utc.strftime("%H:%M:%S") -->
+      <%= column_chart({"Fastest Time" => "#{fsttime}", "Slowest Time" => "#{slowsttime}", "Average Time" => "#{avtime}"}, colors: ["#489099"])  %>
+    </div>
+    <div class="area-chart">
+      <%= area_chart Complaint.where(employee_id: current_user).group_by_day(:created_at).minimum(:updated_at) %>
     </div>
   </div>
 </div>
 
 <%# raise %>
+
+<%# line_chart @goals.map { |goal|
+    {name: goal.name, data: goal.feats.group_by_week(:created_at).count}
+} %>
+

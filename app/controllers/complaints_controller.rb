@@ -6,6 +6,7 @@ class ComplaintsController < ApplicationController
   end
 
   def show
+    @report = Report.find_by(complaint_id: @complaint.id)
   end
 
   def new

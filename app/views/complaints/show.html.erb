@@ -1,6 +1,20 @@
-<ul> <u>Made by:</u> <%= @complaint.tenant.full_name %></ul>
-<ul> <u>Unit:</u> <%= Lease.find_by(tenant_id: @complaint.tenant.id).unit_id %></ul> <!-- Need to make this link to unit -->
-<ul> <u>Description:</u> <%= @complaint.description  %></ul>
-<ul><u>Photo:</u> <%= cl_image_tag @complaint.photo, height: 300, width: 400, crop: :fill %></ul>
-<ul><u>Resolved:</u> <%= @complaint.resolved  %></ul>
+<div class="complaints-main">
+  <div class="complaint-info">
+    <ul> <u>Made by:</u>  <%= link_to @complaint.tenant.full_name, user_path(@complaint.tenant) %></ul>
+    <ul> <u>Unit:</u> <%= @unit = Lease.find_by(tenant_id: @complaint.tenant.id).unit_id %></ul>
+    <ul><u>Development:</u> <%# Unit.find_by(unit_id: @unit) %></ul>
+    <ul> <u>Description:</u> <%= @complaint.description  %></ul>
+    <ul><u>Photo:</u> <%= cl_image_tag @complaint.photo, height: 300, width: 400, crop: :fill %></ul>
+    <ul><u>Resolved:</u> <%= @complaint.resolved  %></ul>
+  </div>
+
+  <% if current_user.employee? %>
+    <div class="complaint-report">
+      <%= render "reports/show" %>
+    </div>
+  <% end %>
+</div>
+
+
+
 <%# raise %>

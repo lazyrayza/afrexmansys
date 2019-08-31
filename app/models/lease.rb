@@ -5,7 +5,7 @@ class Lease < ApplicationRecord
 
   private
 
-  def remove_vacany
+  def remove_vacancy
     unit.available = false
     unit.save
   end
