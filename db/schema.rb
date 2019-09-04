@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_20_125523) do
+ActiveRecord::Schema.define(version: 2019_09_04_070129) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,6 +99,20 @@ ActiveRecord::Schema.define(version: 2019_08_20_125523) do
     t.index ["tenant_id"], name: "index_posts_on_tenant_id"
   end
 
+  create_table "products", force: :cascade do |t|
+    t.string "category"
+    t.string "make"
+    t.string "model"
+    t.integer "barcode"
+    t.string "origin"
+    t.string "upc"
+    t.string "image_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "store_id"
+    t.index ["store_id"], name: "index_products_on_store_id"
+  end
+
   create_table "reports", force: :cascade do |t|
     t.text "description"
     t.boolean "resolved", default: false
@@ -109,6 +123,13 @@ ActiveRecord::Schema.define(version: 2019_08_20_125523) do
     t.datetime "updated_at", null: false
     t.index ["complaint_id"], name: "index_reports_on_complaint_id"
     t.index ["employee_id"], name: "index_reports_on_employee_id"
+  end
+
+  create_table "stores", force: :cascade do |t|
+    t.string "location"
+    t.integer "size"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "units", force: :cascade do |t|
@@ -159,6 +180,7 @@ ActiveRecord::Schema.define(version: 2019_08_20_125523) do
   add_foreign_key "notice_boards", "developments"
   add_foreign_key "posts", "notice_boards"
   add_foreign_key "posts", "users", column: "tenant_id"
+  add_foreign_key "products", "stores"
   add_foreign_key "reports", "complaints"
   add_foreign_key "reports", "users", column: "employee_id"
   add_foreign_key "units", "developments"

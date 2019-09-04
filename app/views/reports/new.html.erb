@@ -1,14 +1,17 @@
-<%= simple_form_for [@complaint, @report] do |f| %>
-  <%= f.error_notification %>
-  <div class="form-inputs">
-    <%= f.input :description, :input_html => {:minlength => 50 , maxlength: 150}, placeholder: "Briefly describe what problem was and how you solved it"  %>
-    <%= f.input :resolved, inline_label: 'Yes, remember me' %>
-    <%= f.input :resolved_photo %>
-    <%# f.input :photo_cache, as: :hidden %>
-    <%# f.collection :product %>
-  </div>
-  <div class="form-actions">
-    <%= f.button :submit, "Send Complaint" %>
-  </div>
-<% end %>
-<%# raise %>
+<div class="container">
+  <h2>Report on complaint from <%= User.find( @complaint.tenant_id ).full_name %></h2>
+  <%= simple_form_for [@complaint, @report] do |f| %>
+    <%= f.error_notification %>
+    <div class="form-inputs">
+      <%= f.input :description, :input_html => {:minlength => 50 , maxlength: 150}, placeholder: "Briefly describe what problem was and how you solved it"  %>
+      <%= f.input :resolved, inline_label: 'Yes, remember me' %>
+      <%= f.input :resolved_photo %>
+      <%# f.input :photo_cache, as: :hidden %>
+    </div>
+    <div class="form-actions">
+      <%= f.button :submit, "Send Complaint" %>
+    </div>
+  <% end %>
+  <%# raise %>
+</div>
+

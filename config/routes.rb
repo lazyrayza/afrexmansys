@@ -10,10 +10,10 @@ Rails.application.routes.draw do
     end
   end
 
+
   # resources :units
   resources :users, only: [:index, :show]
   resources :departments
-  resources :complaints
   resources :complaints, only: [:show] do
     resources :reports
   end
