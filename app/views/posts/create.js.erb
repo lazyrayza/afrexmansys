@@ -2,7 +2,7 @@
 
 <% else %>
   const postsContainer = document.querySelector('.posts');
-  postsContainer.insertAdjacentHTML('beforeend', '<%= j render "post", post: @post%>');
+  postsContainer.insertAdjacentHTML('beforeend', '<%= j render "post", post: @post, tenant_is_posts_author: true %>');
   const input = document.querySelector('#post_description');
   input.value = '';
   input.blur();
