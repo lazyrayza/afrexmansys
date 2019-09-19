@@ -10,10 +10,13 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :stores, only: [:index, :show]
+
 
   # resources :units
   resources :users, only: [:index, :show]
   resources :departments
+  resources :complaints
   resources :complaints, only: [:show] do
     resources :reports
   end

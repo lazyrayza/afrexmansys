@@ -1,4 +1,4 @@
 <div class="post <%= post.from?(current_user) ? "right" : "" %>">
-              <%= image_tag post.user.photo.url, class: 'avatar'%>
-  <div class="post-description"><%= post.description %></div>
+              <%# image_tag post.tenant.photo.url, class: 'avatar'%>
+  <div class="post-description"><%= post.description %> sent by <%= User.find(post.tenant_id).full_name %></div>
 </div>

@@ -1,11 +1,9 @@
-<%# if @post.errors.any? %>
-<%# else %>
-  postsContainer = document.querySelector('.posts');
-  postsContainer.insertAdjacentHTML('beforeend', '<%= j render "post", post: @post %>');
-  input = document.querySelector('#post_description');
-  input.value = ' ';
-  input.blur();
-  scrollLastPostIntoView();
-<%# end %>
+<% if @post.errors.any?%>
 
-<%# raise %>
+<% else %>
+  const postsContainer = document.querySelector('.posts');
+  postsContainer.insertAdjacentHTML('beforeend', '<%= j render "post", post: @post%>');
+  const input = document.querySelector('#post_description');
+  input.value = '';
+  input.blur();
+<% end %>

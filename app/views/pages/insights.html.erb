@@ -37,7 +37,7 @@
     <h1>Employee performance</h1>
     <h2></h2>
     <%= line_chart @employees.map { |employee|
-        {name: employee.first_name, data: Report.where(employee_id: employee.id).group_by_day_of_week(:updated_at).count}
+        {name: employee.first_name, data: Report.where(employee_id: employee.id).group_by_day_of_week(:updated_at, format: "%a").count}
     } %>
   </div>
 </div>
