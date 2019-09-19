@@ -1,8 +1,8 @@
 class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
-    @notice_board = NoticeBoard.find(params[:development_id])
-    @development = Development.find(params[:id])
+    @notice_board = NoticeBoard.find(params[:id])
+    @development = Development.find(params[:development_id])
     @post.notice_board = @notice_board
     @post.tenant = current_user
 
