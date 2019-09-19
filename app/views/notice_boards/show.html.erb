@@ -6,15 +6,29 @@
       <div class="chat-header"><h4>#<%= @notice_board.name %></h4></div>
       <div class="posts">
         <% @notice_board.posts.each do |post| %>
-          <%= render "posts/post", post: post %>
+          <%= render "posts/post", post: post, tenant_is_posts_author:
+          post.tenant == current_user %>
         <% end %>
       </div>
       <div id="create-post">
         <%= simple_form_for [@development, @notice_board, Post.new], remote: true do |f| %>
           <%= f.input :description, label: false %>
+          <%= f.submit "SEND" %>
 <%# raise %>
         <% end %>
       </div>
     </div>
   </div>
 </div>
+
+<% content_for :after_js do%>
+  <script>
+    App['development_<%= @development.id%>_notice_board_<%= @notice_board.id %>'] = App.cable.subscriptions.create({ channel: 'NoticeBoardsChannel', notice_board: <%= @notice_board.id %>, development: <%= @development.id %> }, {
+      received: (data) => {
+        const postsContainer = document.querySelector('.posts');
+        postsContainer.insertAdjacentHTML('beforeend', data.post_partial);
+
+      }
+    })
+  </script>
+<% end %>

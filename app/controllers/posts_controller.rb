@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
-    @notice_board = NoticeBoard.find(params[:id])
+    @notice_board = NoticeBoard.find(params[:notice_board_id])
     @development = Development.find(params[:development_id])
     @post.notice_board = @notice_board
     @post.tenant = current_user
@@ -25,6 +25,8 @@ class PostsController < ApplicationController
     params.require(:post).permit(:description)
   end
 end
+
+
   # def create
   #   @post = Post.new(post_params)
   #   @notice_board = NoticeBoard.find(params[:id])

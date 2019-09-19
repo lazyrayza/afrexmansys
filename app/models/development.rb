@@ -1,5 +1,6 @@
 class Development < ApplicationRecord
   has_one :notice_board
+  has_many :posts, through: :notice_board
   has_many :units
   has_many :tenant, class_name: :User, foreign_key: 'tenant_id', through: :units
   has_many :leases, through: :units
