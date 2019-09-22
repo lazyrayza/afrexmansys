@@ -8,6 +8,10 @@ Rails.application.routes.draw do
     resources :units, only: [:show, :new, :create] do
       resources :leases, only: [:show, :new, :create]
     end
+    resources :notice_boards, only: [:new, :create]
+  end
+  resources :notice_boards, only: [:show] do
+    resources :posts, only: [:create]
   end
 
   resources :stores, only: [:index, :show]
@@ -16,17 +20,13 @@ Rails.application.routes.draw do
   # resources :units
   resources :users, only: [:index, :show]
   resources :departments
-  resources :complaints
+  resources :complaints, except: [:show]
   resources :complaints, only: [:show] do
     resources :reports
   end
   # resources :posts
-  resources :developments, only: [:show] do
-    resources :notice_boards, only: [:show] do
-      resources :posts, only: [:create]
-    end
-  end
-  resources :notice_boards, except: [:show]
+
+  # resources :notice_boards, except: [:show]
   get "/profile", to: "pages#profile"
   get "/insights", to: "pages#insights"
 

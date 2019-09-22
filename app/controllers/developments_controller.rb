@@ -7,6 +7,7 @@ class DevelopmentsController < ApplicationController
 
   def show
     @units = Unit.where(development_id: @development.id)
+    # @notice_board = NoticeBoard.where(development_id: @development.id)
   end
 
   def new

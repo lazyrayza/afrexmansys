@@ -11,7 +11,7 @@
         <% end %>
       </div>
       <div id="create-post">
-        <%= simple_form_for [@development, @notice_board, Post.new], remote: true do |f| %>
+        <%= simple_form_for [@notice_board, Post.new], remote: true do |f| %>
           <%= f.input :description, label: false %>
           <%= f.submit "SEND" %>
 <%# raise %>
@@ -23,11 +23,13 @@
 
 <% content_for :after_js do%>
   <script>
-    App['development_<%= @development.id%>_notice_board_<%= @notice_board.id %>'] = App.cable.subscriptions.create({ channel: 'NoticeBoardsChannel', notice_board: <%= @notice_board.id %>, development: <%= @development.id %> }, {
+    App['notice_board_<%= @notice_board.id %>'] = App.cable.subscriptions.create({ channel: 'NoticeBoardsChannel', notice_board: <%= @notice_board.id %> }, {
       received: (data) => {
-        const postsContainer = document.querySelector('.posts');
-        postsContainer.insertAdjacentHTML('beforeend', data.post_partial);
-
+        if (data.current_user_id !== <%= current_user.id %>) {
+          postsContainer = document.querySelector('.posts');
+          postsContainer.insertAdjacentHTML('beforeend', data.post_partial);
+          scrollLastMessageIntoView();
+        }
       }
     })
   </script>

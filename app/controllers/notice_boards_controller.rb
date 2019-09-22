@@ -3,7 +3,7 @@ class NoticeBoardsController < ApplicationController
 
   def show
     @notice_board = NoticeBoard.includes(posts: :tenant).find(params[:id])
-    @development = Development.find(params[:development_id])
+    @development = @notice_board.development.id
   end
 end
 
