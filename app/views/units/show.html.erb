@@ -9,23 +9,17 @@
 
 
 
-  <% @lease.each do |lease| %>
-    <% if lease.unit_id == @unit.id %>
-      <p>Lease info:</p>
-        <ul>Start date: <%= lease.start_date %></ul>
-        <ul>End date: <%= lease.end_date %></ul>
-        <ul>Duration: <%= lease.duration %></ul>
-        <ul>Rent: <%= lease.rent %></ul>
-        <ul>Depsoit: <%= lease.deposit %></ul>
-        <ul>Notes: <%= lease.notes%></ul>
-        <ul>Unit: <%= lease.unit_id %></ul>
-        <%= link_to do %>
-          <ul>Tenant: <%= lease.tenant_id %></ul>
-        <% end %>
+
+    <% if @unit.leases.to_a.last != nil %>
+      <p>Start Date: <%= @unit.leases.last.start_date %></p>
+      <p>End Date: <%= @unit.leases.last.end_date %></p>
+      <p>Tenant <%= @unit.leases.last.tenant.id %>: <%= @unit.leases.last.tenant.full_name %></p>
+      <p>Duration: <%= @unit.leases.last.duration %> <% if @unit.leases.last.duration == 1 %>year <% else %>years <% end %></p>
+      <p>Security Deposit: <%= @unit.leases.last.deposit %>USD</p>
+      <%= @unit.leases.last.unit_id %>
     <% else %>
-      <%= link_to "NEW LEASE", new_development_unit_lease_path(@development, @unit)  %>
+      <%=  link_to "New Lease" , new_development_unit_lease_path(@development, @unit) %>
     <% end %>
-  <% end %>
 
 
 <%# raise %>

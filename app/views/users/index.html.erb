@@ -1,15 +1,44 @@
 <div class="user-cards">
   <% @users.each do |user| %>
   <div class="user-card">
-
     <div class="card-top">
       <div class="top-avatar">
-        <img src="https://image.flaticon.com/icons/svg/701/701995.svg" alt="">
+        <%= link_to user_path(user) do %>
+          <% if user.gender == false%>
+            <img src="https://image.flaticon.com/icons/svg/701/701995.svg" alt="">
+          <% else %>
+            <img src="https://image.flaticon.com/icons/svg/702/702018.svg" alt="">
+          <% end %>
+        <% end %>
       </div>
     </div>
-
     <div class="card-bottom">
-      <p><%= link_to user.email, user_path(user)%></p>
+      <div class="card-job">
+        <% if user.job_title == nil && user.tenant == true %>
+          <h4>Tenant</h4>
+        <% else %>
+          <h4><%= user.job_title %></h4>
+        <% end %>
+      </div>
+      <div class="card-info">
+        <h3><%= user.full_name %></h3>
+        <div class="phone">
+          <i class="fas fa-phone"></i>
+          <p>    <%= user.contact_number %></p>
+        </div>
+        <div class="email">
+          <i class="far fa-envelope"></i>
+          <p> <%= user.email%></p>
+        </div>
+        <% if user.tenant == true %>
+          <div class="home">
+            <% if Lease.where(tenant_id: user).to_a != nil %>
+              <i class="fas fa-home"></i>
+              <p><%= @unit = Lease.where(tenant_id: user).to_a.first.unit.development.name %></p>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
   <% end %>
@@ -17,3 +46,4 @@
 </div>
 
 
+<%# raise %>

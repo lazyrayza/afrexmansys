@@ -1,33 +1,60 @@
 <div class="user-main">
-  <div class="user-profile">
-    <div class="user-avatar">
-      <% if @user.gender == false%>
-        <img src="https://image.flaticon.com/icons/svg/701/701995.svg" alt="">
-      <% else %>
-        <img src="https://image.flaticon.com/icons/svg/702/702018.svg" alt="">
-      <% end %>
-    </div>
-    <div class="user-picture">
-    </div>
-    <div class="user-info">
-      <div class="user-job">
-        <%= @user.job_title %>
+  <% if @user.tenant == true %>
+    <div class="tenant-profile">
+        <h2><%= Lease.where(tenant_id: @user).to_a.first.unit.development.name %></h2>
+      <div class="tenant-avatar">
+        <% if @user.gender == false%>
+          <img src="https://image.flaticon.com/icons/svg/701/701995.svg" alt="">
+        <% else %>
+          <img src="https://image.flaticon.com/icons/svg/702/702018.svg" alt="">
+        <% end %>
       </div>
-      <h1><%= @user.full_name %></h1>
-      <p><%= @user.email %></p>
-      <p><%= @user.nationality %></p>
-      <p><%= @user.contact_number %></p>
-      <p><%= @user.age %></p>
-      <p><%= @user.contact_number %></p>
-      <div class="actions">
-        <i class="far fa-heart"></i>
-        <a href="mailto:razapirbhai4@gmail.com" target="_blank">
-          <i class="far fa-envelope" title="E-mail"></i>
-        </a>
-        <i class="fas fa-phone"></i>
+      <div class="tenant-picture">
+      </div>
+      <div class="tenant-info">
+        <h1><%= @user.full_name %></h1>
+        <p><i class="fas fa-home"></i> <%= Lease.where(tenant_id: @user).to_a.first.unit.development.name %></p>
+        <p><i class="fas fa-list-ol"></i> Unit <%= Lease.where(tenant_id: @user).to_a.first.unit.unit_number %></p>
+        <p><i class="fas fa-globe-africa"></i><%= @user.nationality %></p>
+        <p><i class="far fa-envelope"></i>  <%= @user.email %></p>
+        <p><i class="fas fa-wrench"></i>  <%= Complaint.where(tenant_id: @user.id).count %></p>
       </div>
     </div>
-  </div>
+
+  <% else %>
+
+    <div class="user-profile">
+        <h2><%= Lease.where(tenant_id: @user).to_a.first.unit.development.name %></h2>
+      <div class="user-avatar">
+        <% if @user.gender == false%>
+          <img src="https://image.flaticon.com/icons/svg/701/701995.svg" alt="">
+        <% else %>
+          <img src="https://image.flaticon.com/icons/svg/702/702018.svg" alt="">
+        <% end %>
+      </div>
+      <div class="user-picture">
+      </div>
+      <div class="user-info">
+        <div class="user-job">
+          <%= @user.job_title %>
+        </div>
+        <h1><%= @user.full_name %></h1>
+        <p><%= @user.email %></p>
+        <p><%= @user.nationality %></p>
+        <p><%= @user.contact_number %></p>
+        <p><%= @user.age %></p>
+        <p><%= @user.contact_number %></p>
+        <p><%= @user.gender %></p>
+        <div class="actions">
+          <i class="far fa-heart"></i>
+          <a href="mailto:razapirbhai4@gmail.com" target="_blank">
+            <i class="far fa-envelope" title="E-mail"></i>
+          </a>
+          <i class="fas fa-phone"></i>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>
 
 <%# raise %>

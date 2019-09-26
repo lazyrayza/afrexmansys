@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_25_142059) do
+ActiveRecord::Schema.define(version: 2019_09_26_145926) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -133,7 +133,7 @@ ActiveRecord::Schema.define(version: 2019_09_25_142059) do
   end
 
   create_table "units", force: :cascade do |t|
-    t.integer "unit_number"
+    t.string "unit_number"
     t.integer "floor"
     t.float "size"
     t.integer "bedrooms"
