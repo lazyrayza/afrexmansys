@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @complaints = Complaint.where(tenant_id: @user.id)
   end
 
   def new

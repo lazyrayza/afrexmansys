@@ -20,22 +20,29 @@
         <p><i class="fas fa-wrench"></i>  <%= Complaint.where(tenant_id: @user.id).count %></p>
       </div>
     </div>
+    <div class="tenant-complaints">
+      <div class="complaints-title"><h2>Complaints Made By: <%= @user.first_name %></h2></div>
+      <% @complaints.each do |complaint| %>
+        <div class="modal-review-card">
+          <%= complaint.description %>
+        </div>
+      <% end %>
+    </div>
 
   <% else %>
 
-    <div class="user-profile">
-        <h2><%= Lease.where(tenant_id: @user).to_a.first.unit.development.name %></h2>
-      <div class="user-avatar">
+    <div class="employee-profile">
+      <div class="employee-avatar">
         <% if @user.gender == false%>
           <img src="https://image.flaticon.com/icons/svg/701/701995.svg" alt="">
         <% else %>
           <img src="https://image.flaticon.com/icons/svg/702/702018.svg" alt="">
         <% end %>
       </div>
-      <div class="user-picture">
+      <div class="employee-picture">
       </div>
-      <div class="user-info">
-        <div class="user-job">
+      <div class="employee-info">
+        <div class="employee-job">
           <%= @user.job_title %>
         </div>
         <h1><%= @user.full_name %></h1>
