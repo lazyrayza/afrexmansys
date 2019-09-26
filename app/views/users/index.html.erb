@@ -1,0 +1,19 @@
+<div class="user-cards">
+  <% @users.each do |user| %>
+  <div class="user-card">
+
+    <div class="card-top">
+      <div class="top-avatar">
+        <img src="https://image.flaticon.com/icons/svg/701/701995.svg" alt="">
+      </div>
+    </div>
+
+    <div class="card-bottom">
+      <p><%= link_to user.email, user_path(user)%></p>
+    </div>
+  </div>
+  <% end %>
+
+</div>
+
+

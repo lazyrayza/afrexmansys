@@ -1,9 +1,18 @@
 <div class="user-main">
   <div class="user-profile">
+    <div class="user-avatar">
+      <% if @user.gender == false%>
+        <img src="https://image.flaticon.com/icons/svg/701/701995.svg" alt="">
+      <% else %>
+        <img src="https://image.flaticon.com/icons/svg/702/702018.svg" alt="">
+      <% end %>
+    </div>
     <div class="user-picture">
-
     </div>
     <div class="user-info">
+      <div class="user-job">
+        <%= @user.job_title %>
+      </div>
       <h1><%= @user.full_name %></h1>
       <p><%= @user.email %></p>
       <p><%= @user.nationality %></p>
@@ -21,3 +30,4 @@
   </div>
 </div>
 
+<%# raise %>
