@@ -13,20 +13,23 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(users_params)
+    @user = User.new(user_params)
     if @user.save
-      redirect_to "/", notice: 'User has been updated!'
+      redirect_to "/", notice: 'User has been created!'
     else
       render :new
     end
   end
 
   def update
-    if @user.update(users_params)
+    if @user.update(user_params)
       redirect_to profile_path, notice: 'User was updated!'
     else
       render :new
     end
+  end
+
+  def edit
   end
 
   def destroy
@@ -35,7 +38,7 @@ class UsersController < ApplicationController
 private
 
   def user_params
-    params.require(:user).permit(:email, :job_title, :dob, :first_name, :last_name, :gender)
+    params.require(:user).permit(:email, :job_title, :dob, :age, :first_name, :last_name, :gender, :photo, :nationality, :first_name, :last_name)
   end
   def find_user
     @user = User.find(params[:id])

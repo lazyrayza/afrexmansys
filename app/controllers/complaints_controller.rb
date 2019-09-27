@@ -44,9 +44,9 @@ class ComplaintsController < ApplicationController
   end
 
   def update
-    if @complaint.save
+    if @complaint.update(complaint_params)
       respond_to do |format|
-        format.html { redirect_to new_complaint_report_path(@complaint) }
+        format.html { redirect_to complaint_path(@complaint) }
         format.js
       end
     else

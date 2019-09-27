@@ -8,7 +8,7 @@
                   :input_html => {:minlength => 10 , maxlength: 40}, placeholder: "Briefly describe your problem",
                   hint: "leave it blank if you don't want to change it",
                   required: false,
-                  input_html: { autocomplete: "New description"   %>
+                  input_html: { autocomplete: "New description" }   %>
       <%= f.input :resolved,
                   collection: [["Resolved", true],["Not Resolved", false]],
                   required: true  %>
