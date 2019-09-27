@@ -1,5 +1,6 @@
 <div class="user-main">
   <% if @user.tenant == true %>
+  <!-- Tenant Profile -->
     <div class="tenant-profile">
         <h2><%= Lease.where(tenant_id: @user).to_a.first.unit.development.name %></h2>
       <div class="tenant-avatar">
@@ -22,11 +23,12 @@
         <p><i class="fas fa-wrench"></i>  <%= Complaint.where(tenant_id: @user.id).count %></p>
       </div>
     </div>
+<!-- Tenant Complaints -->
     <div class="tenant-complaints">
       <div class="complaints-title"><h2><%= @user.full_name%>'s Complaints</h2></div>
       <% @complaints.each do |complaint| %>
         <div class="complaint-card">
-          <%= @user.photo %>
+          <%= cl_image_tag @user.photo, class: 'avatar', crop: :fill %>
           <%= complaint.description %>
         </div>
       <% end %>

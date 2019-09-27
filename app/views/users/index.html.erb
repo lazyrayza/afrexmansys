@@ -4,11 +4,12 @@
     <div class="card-top">
       <div class="top-avatar">
         <%= link_to user_path(user) do %>
-
-          <% if user.gender == false%>
+          <% if user.gender == false && user.photo == nil%>
             <img src="https://image.flaticon.com/icons/svg/701/701995.svg" alt="">
-          <% else %>
+          <% elsif user.gender == true && user.photo == nil %>
             <img src="https://image.flaticon.com/icons/svg/702/702018.svg" alt="">
+          <% else %>
+            <%= cl_image_tag user.photo, class: 'avatar-large', crop: :fill %>
           <% end %>
         <% end %>
       </div>
