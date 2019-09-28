@@ -3,12 +3,12 @@
     <% @developments.each do |development| %>
       <div class="dev-card">
         <div class="dev-card-picture", style="background-image: url(<%= cl_image_path(development.photo) %>);">
-          <div class="dev-card-title"><%= development.name.capitalize %></div>
-          <a class="mc-btn-action">
+          <div class="dev-card-title" onclick="openInfo"><%= development.name.capitalize %></div>
+          <button class="mc-btn-action" id="open-btn">
             <i class="fa fa-bars"></i>
-          </a>
+          </button>
         </div>
-        <div class="dev-card-info-hidden">
+        <div class="dev-card-info-hidden" id="hidden">
           <h1><%= link_to development.name, development_path(development) %></h1>
           <h2> <%= development.address %></h2>
         </div>
@@ -18,12 +18,22 @@
 </div>
 
 <script>
-  function myFunction(){
-    (".mc-btn-action").click(function(){
-      cardinfo = document.querySelector('.dev-card-info-hidden');
-      card.info.addClass("dev-card-info-active")
-    })
+
+  function openInfo() {
+    btn = document.querySelector('.mc-btn-action');
+    infoCard = document.querySelector('.dev-card-info-hidden');
+    btn.onclick = function click() {
+      infoCard.classList.add('dev-card-info-active');
+    }
   }
+
+  // function myFunction(){
+  //   let open = getElementById('#open-btn')
+  //     open.onclick(function(){
+  //     hiddenInfo = document.getElementById("hidden")
+  //     hiddenInfo.addClass("dev-card-info-active")
+  //   });
+  // };
 </script>
 <!-- <script>
   (function() {

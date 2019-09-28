@@ -61,10 +61,11 @@
     }
   }
   .dev-card-info-hidden{
-    visibility: hidden;
+    visibility: visible;
   }
 
   .dev-card-info-active{
+    visibility: hidden;
 
   }
   // dev-open-class
