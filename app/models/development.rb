@@ -1,4 +1,5 @@
 class Development < ApplicationRecord
+  mount_uploader :photo, PhotoUploader
   has_one :notice_board
   has_many :posts, through: :notice_board
   has_many :units

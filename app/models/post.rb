@@ -12,7 +12,7 @@ class Post < ApplicationRecord
 
   def broadcast_post
     @development = notice_board.development
-    ActionCable.server.broadcast("development_#{@development.id}_notice_board_#{notice_board.id}", {
+    ActionCable.server.broadcast("notice_board_#{notice_board.id}", {
         post_partial: ApplicationController.renderer.render(partial: "posts/post", locals: {post: self, tenant_is_posts_author: false})
       })
 

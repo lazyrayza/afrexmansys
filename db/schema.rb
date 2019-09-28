@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_04_070129) do
+ActiveRecord::Schema.define(version: 2019_09_28_090718) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 2019_09_04_070129) do
     t.integer "number_of_units"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "photo"
   end
 
   create_table "leases", force: :cascade do |t|
@@ -133,7 +134,7 @@ ActiveRecord::Schema.define(version: 2019_09_04_070129) do
   end
 
   create_table "units", force: :cascade do |t|
-    t.integer "unit_number"
+    t.string "unit_number"
     t.integer "floor"
     t.float "size"
     t.integer "bedrooms"
@@ -168,6 +169,8 @@ ActiveRecord::Schema.define(version: 2019_09_04_070129) do
     t.boolean "employee", default: false
     t.bigint "departments_id"
     t.string "photo"
+    t.string "job_title"
+    t.boolean "gender", default: false
     t.index ["departments_id"], name: "index_users_on_departments_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

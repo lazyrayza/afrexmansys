@@ -26,4 +26,9 @@ class PagesController < ApplicationController
     #   end
     # end
   end
+
+  def admininsights
+    @units = Units.all
+    @leases = Lease.all
+  end
 end

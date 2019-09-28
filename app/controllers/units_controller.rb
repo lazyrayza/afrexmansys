@@ -27,9 +27,9 @@ class UnitsController < ApplicationController
   def create
     @development = Development.find(params[:development_id])
     @unit = Unit.new(units_params)
-
     @unit.development_id = @development.id
-    if @unit.save!
+
+    if @unit.save
       redirect_to development_path(@development), notice: 'Unit has been created!'
     else
       render :new

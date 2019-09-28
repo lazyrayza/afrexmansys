@@ -6,6 +6,9 @@
     <ul> <u>Description:</u> <%= @complaint.description  %></ul>
     <ul><u>Photo:</u> <%= cl_image_tag @complaint.photo, height: 300, width: 400, crop: :fill %></ul>
     <ul><u>Resolved:</u> <%= @complaint.resolved  %></ul>
+    <%= link_to edit_complaint_path(@complaint) do %>
+    <button type="submit" class="primary-button">Edit</button>
+  <% end %>
   </div>
 
   <% if current_user.employee? %>

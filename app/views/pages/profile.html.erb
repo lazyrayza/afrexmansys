@@ -21,8 +21,12 @@
         <% else %>
           <u>Open complaints:</u> <p><%= @tenantcomplaints.to_a.count { |complaint| complaint.resolved == false}%></p>
         <% end %>
+        <%= link_to edit_user_registration_path(@user) do %>
+          <i class="fad fa-user-edit"></i>
+        <% end %>
       </div>
       <div class="profile-box-pic">
+        <% cl_image_tag current_user.photo %>
       </div>
     </div>
     <div class="profile-complaints">
