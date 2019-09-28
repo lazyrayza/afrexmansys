@@ -19,21 +19,12 @@
 
 <script>
 
-  function openInfo() {
-    btn = document.querySelector('.mc-btn-action');
-    infoCard = document.querySelector('.dev-card-info-hidden');
-    btn.onclick = function click() {
-      infoCard.classList.add('dev-card-info-active');
-    }
+  document.getElementById("open-btn").addEventListener("click", myFunction);
+
+  function myFunction() {
+    document.getElementById("hidden").classList.add('dev-card-info-active');
   }
 
-  // function myFunction(){
-  //   let open = getElementById('#open-btn')
-  //     open.onclick(function(){
-  //     hiddenInfo = document.getElementById("hidden")
-  //     hiddenInfo.addClass("dev-card-info-active")
-  //   });
-  // };
 </script>
 <!-- <script>
   (function() {
