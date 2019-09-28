@@ -1,13 +1,15 @@
 <div class="main-container">
-
   <div class="project-box">
     <% @developments.each do |development| %>
-      <div class="project-card">
-        <h1><%= link_to development.name, development_path(development) %></h1>
-        <h2> <%= development.address %></h2>
+      <div class="dev-card">
+        <div class="dev-card-picture">
+          <%= cl_image_tag development.photo, class: 'dev-index-picture' %>
+        </div>
+        <div class="dev-card-info">
+          <h1><%= link_to development.name, development_path(development) %></h1>
+          <h2> <%= development.address %></h2>
+        </div>
       </div>
     <% end %>
-
   </div>
 </div>
-

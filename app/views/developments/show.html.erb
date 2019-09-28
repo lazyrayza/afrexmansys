@@ -5,7 +5,8 @@
 <ul>S&S: <%= @development.sauna_and_steam %></ul>
 <ul>Generator: <%= @development.generator %></ul>
 <ul>Parkings: <%= @development.parking_space %></ul>
-<ul>Units: <%= @development.units.count %></ul> // need to either chnage or get ride of coloum no of units //
+<ul>Photo: <% cl_image_tag @development.photo  %></ul>
+<ul>Units: <% @development.units.count %></ul> // need to either chnage or get ride of coloum no of units //
 
 
 <div class="dev-page">
@@ -31,4 +32,7 @@
 
 <%= link_to notice_board_path(@development) do %>
  <button type="submit" class="primary-button">Notice Board</button>
+<% end %>
+<%= link_to edit_development_path(@development) do %>
+ <button type="submit" class="primary-button">Edit Development</button>
 <% end %>

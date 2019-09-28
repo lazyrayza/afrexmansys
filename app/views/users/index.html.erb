@@ -4,14 +4,15 @@
     <div class="card-top">
       <div class="top-avatar">
         <%= link_to user_path(user) do %>
-          <% if user.gender == false && user.photo == nil%>
-            <img src="https://image.flaticon.com/icons/svg/701/701995.svg" alt="">
-          <% elsif user.gender == true && user.photo == nil %>
-            <img src="https://image.flaticon.com/icons/svg/702/702018.svg" alt="">
+          <% if user.gender == false && user.photo.file == nil%>
+            <img src="https://image.flaticon.com/icons/svg/701/701995.svg" alt="", class="avatar-tenant-small">
+          <% elsif user.gender == true && user.photo.file == nil %>
+            <img src="https://image.flaticon.com/icons/svg/702/702018.svg" alt="", class="avatar-tenant-small">
           <% else %>
-            <%= cl_image_tag user.photo, class: 'avatar-large', crop: :fill %>
+            <%= cl_image_tag user.photo, class: 'avatar-tenant-small', crop: :fill %>
           <% end %>
         <% end %>
+        <%# raise %>
       </div>
     </div>
     <div class="card-bottom">
@@ -36,7 +37,8 @@
           <div class="home">
             <% if Lease.where(tenant_id: user).to_a != nil %>
               <i class="fas fa-home"></i>
-              <p><%= @unit = Lease.where(tenant_id: user).to_a.first.unit.development.name %></p>
+              <% @lease = Lease.where(tenant_id: user).to_a.first%>
+              <p><%= @lease.unit.development.name %> Unit: <%= @lease.unit.unit_number %></p>
             <% end %>
           </div>
         <% end %>

@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'pages#home'
 
-  resources :developments, only: [:index]
+  resources :developments, except: [:show]
   resources :developments, only: [:show] do
     resources :units, only: [:show, :new, :create] do
       resources :leases, only: [:show, :new, :create]

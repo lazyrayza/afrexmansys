@@ -5,7 +5,7 @@
         <h2><%= Lease.where(tenant_id: @user).to_a.first.unit.development.name %></h2>
       <div class="tenant-avatar">
         <% if @user.photo != nil %>
-        <%= cl_image_tag @user.photo, class: 'avatar-large', crop: :fill %>
+        <%= cl_image_tag @user.photo, class: 'avatar-tenant-large', crop: :fill %>
         <% elsif @user.gender == false && @user.photo == false %>
           <img src="https://image.flaticon.com/icons/svg/701/701995.svg" alt="">
         <% else %>
@@ -20,20 +20,25 @@
         <p><i class="fas fa-list-ol"></i> Unit <%= Lease.where(tenant_id: @user).to_a.first.unit.unit_number %></p>
         <p><i class="fas fa-globe-africa"></i>  <%= @user.nationality %></p>
         <p><i class="far fa-envelope"></i>  <%= @user.email %></p>
-        <p><i class="fas fa-wrench"></i>  <%= Complaint.where(tenant_id: @user.id).count %></p>
-      </div>
+        <p><i class="fas fa-phone"></i> <%= @user.contact_number %></p>
+<!--         <p><i class="fas fa-wrench"></i>  <%= Complaint.where(tenant_id: @user.id).count %></p>
+ -->      </div>
     </div>
 <!-- Tenant Complaints -->
     <div class="tenant-complaints">
       <div class="complaints-title"><h2><%= @user.full_name%>'s Complaints</h2></div>
       <% @complaints.each do |complaint| %>
         <div class="complaint-card">
-          <%= cl_image_tag @user.photo, class: 'avatar', crop: :fill %>
-          <%= complaint.description %>
+          <%= cl_image_tag @user.photo, class: 'avatar-complaint-card', crop: :fill %>
+          <p><%= complaint.description %></p>
+          <!-- <div class="view-complaint-modal"><i class="fas fa-eye fa-3x"></i></div> -->
         </div>
       <% end %>
     </div>
+<!-- Tenant Lease Agreement -->
+    <div class="tenant-lease-agreement">
 
+    </div>
   <% else %>
 
     <div class="employee-profile">
