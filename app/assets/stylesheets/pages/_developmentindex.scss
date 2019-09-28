@@ -20,7 +20,6 @@
     margin: 2%;
     .dev-card-picture{
     height: 35vh;
-    border-radius: 25px;
     box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.5);
     background: white;
     width: 50%;
@@ -29,7 +28,7 @@
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
     .dev-card-title {
-      border-radius: 16px 16px 0 0;
+      border-radius: 16px 0 0;
       display: flex;
       justify-content: space-around;
       font-weight: 700;
@@ -54,19 +53,18 @@
       cursor: pointer;
       // z-index: 1;
       left: 46.4%;
-      &:hover {
-        transform: sacle(1.1)
       }
     }
-    }
   }
-  .dev-card-info-hidden{
-    visibility: hidden;
-  }
-
-  .dev-card-info-active{
+  .dev-card-info{
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.5);
+    background-color: white;
+    width: 50%;
     visibility: visible;
-
+    display: flex;
+    flex-direction: column;
   }
   // dev-open-class
 

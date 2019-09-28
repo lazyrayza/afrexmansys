@@ -5,27 +5,52 @@
         <div class="dev-card-picture", style="background-image: url(<%= cl_image_path(development.photo) %>);">
           <div class="dev-card-title" onclick="openInfo"><%= development.name.capitalize %></div>
           <button class="mc-btn-action" id="open-btn">
-            <i class="fa fa-bars"></i>
+            <%= link_to development_path(development) do %>
+              <i class="fa fa-bars"></i>
+            <% end %>
           </button>
         </div>
-        <div class="dev-card-info-hidden" id="hidden">
-          <h1><%= link_to development.name, development_path(development) %></h1>
-          <h2> <%= development.address %></h2>
+        <div class="dev-card-info" id="hidden">
+          <p><i class="fas fa-map-marked-alt"></i> <%= development.address %></p>
+            <% available = 0 %>
+            <% development.units.to_a.each do |unit|%>
+              <% if unit.available == true %>
+                <% available += 1 %>
+              <% end %>
+            <% end %>
+            <p><i class="fas fa-building"></i><%= available %>/ <%= development.units.count %> </p>
+            <% if development.gym == true %>
+              <p><i class="fas fa-dumbbell"></i>Gym</p>
+            <% end %>
+            <% if development.swimming_pool == true %>
+              <p><i class="fas fa-swimmer"></i></i>Swimming Pool</p>
+            <% end %>
         </div>
       </div>
     <% end %>
   </div>
 </div>
 
-<script>
+<!-- <script>
+    for (const button of buttons) {
+  button.addEventListener('click', () => {
+    console.log("for .. of worked");
+  });
+}
 
-  document.getElementById("open-btn").addEventListener("click", myFunction);
+  let buttons = document.querySelectorAll(".mc-btn-action")
+    for (let button of buttons) {
+      button.addEventListener("click", myFunction);
+    }
+
+  let cardInfo = document.querySelector(".dev-card-info-hidden");
 
   function myFunction() {
-    document.getElementById("hidden").classList.add('dev-card-info-active');
-  }
+      cardInfo.classList.add('dev-card-info-hidden');
+    }
 
-</script>
+
+</script> -->
 <!-- <script>
   (function() {
   (".dev-card > .mc-btn-action").click(function() {
