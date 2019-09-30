@@ -21,6 +21,7 @@
       <%=  link_to "New Lease" , new_development_unit_lease_path(@development, @unit) %>
     <% end %>
 
+<%=  link_to "Lease" , development_unit_lease_path(@development, @unit, @unit.leases.last) %>
 
 <%# raise %>
 <!-- // Now displaying correct lease, but not showing new lease link for units without lease! Need to rethink logic for lease display // -->

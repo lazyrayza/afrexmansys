@@ -2,7 +2,11 @@
   <div class="project-box">
     <% @developments.each do |development| %>
       <div class="dev-card">
-        <div class="dev-card-picture", style="background-image: url(<%= cl_image_path(development.photo) %>);">
+        <% if development.photo.file == nil %>
+          <div class="dev-card-picture", style="background-image: url(https://images.pexels.com/photos/2976190/pexels-photo-2976190.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500);">
+        <% else %>
+          <div class="dev-card-picture", style="background-image: url(<%= cl_image_path(development.photo) %>);">
+        <% end %>
           <div class="dev-card-title" onclick="openInfo"><%= development.name.capitalize %></div>
           <button class="mc-btn-action" id="open-btn">
             <%= link_to development_path(development) do %>
@@ -18,12 +22,12 @@
                 <% available += 1 %>
               <% end %>
             <% end %>
-            <p><i class="fas fa-building"></i><%= available %>/ <%= development.units.count %> </p>
+            <p><i class="fas fa-building"></i> <%= available %> / <%= development.units.count %> Available</p>
             <% if development.gym == true %>
-              <p><i class="fas fa-dumbbell"></i>Gym</p>
+              <p><i class="fas fa-dumbbell"></i> Gym</p>
             <% end %>
             <% if development.swimming_pool == true %>
-              <p><i class="fas fa-swimmer"></i></i>Swimming Pool</p>
+              <p><i class="fas fa-swimmer"></i></i> Swimming Pool</p>
             <% end %>
         </div>
       </div>

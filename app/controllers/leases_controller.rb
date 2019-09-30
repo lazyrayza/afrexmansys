@@ -53,7 +53,7 @@ class LeasesController < ApplicationController
 private
 
   def find_lease
-    @lease = Lease.find(param[:lease_id])
+    @lease = Lease.find(params[:id])
   end
 
   def lease_params

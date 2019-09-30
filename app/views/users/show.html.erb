@@ -1,4 +1,6 @@
 <div class="user-main">
+
+  <div class="user-show-top">
   <% if @user.tenant == true %>
   <!-- Tenant Profile -->
     <div class="tenant-profile">
@@ -21,8 +23,11 @@
         <p><i class="fas fa-globe-africa"></i>  <%= @user.nationality %></p>
         <p><i class="far fa-envelope"></i>  <%= @user.email %></p>
         <p><i class="fas fa-phone"></i> <%= @user.contact_number %></p>
-<!--         <p><i class="fas fa-wrench"></i>  <%= Complaint.where(tenant_id: @user.id).count %></p>
- -->      </div>
+<!--         <p><i class="fas fa-wrench"></i>  <%= Complaint.where(tenant_id: @user.id).count %></p>-->
+        <%= link_to user_agreement_path(@user) do %>
+          <button type="submit" class="primary-button">Lease</button>
+        <% end %>
+      </div>
     </div>
 <!-- Tenant Complaints -->
     <div class="tenant-complaints">
@@ -30,15 +35,31 @@
       <% @complaints.each do |complaint| %>
         <div class="complaint-card">
           <%= cl_image_tag @user.photo, class: 'avatar-complaint-card', crop: :fill %>
-          <p><%= complaint.description %></p>
+          <p><%= complaint.description.capitalize %></p>
           <!-- <div class="view-complaint-modal"><i class="fas fa-eye fa-3x"></i></div> -->
         </div>
       <% end %>
     </div>
-<!-- Tenant Lease Agreement -->
-    <div class="tenant-lease-agreement">
+  </div>
 
+  <div class="user-middle">
+    <div class="action">
+      <div class="card">
+            <div class="face face1">
+                <div class="content">
+                    <img src="https://github.com/Jhonierpc/WebDevelopment/blob/master/CSS%20Card%20Hover%20Effects/img/design_128.png?raw=true">
+                    <h3>Lease</h3>
+                </div>
+            </div>
+            <div class="face face2">
+                <div class="content">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cum cumque minus iste veritatis provident at.</p>
+                        <a href="#">Read More</a>
+                </div>
+            </div>
+        </div>
     </div>
+  </div>
   <% else %>
 
     <div class="employee-profile">

@@ -18,7 +18,9 @@ Rails.application.routes.draw do
 
 
   # resources :units
-  resources :users, only: [:index, :show]
+  resources :users, only: [:index, :show] do
+    get "/agreement", to: "pages#agreement"
+  end
   resources :departments
   resources :complaints, except: [:show]
   resources :complaints, only: [:show] do

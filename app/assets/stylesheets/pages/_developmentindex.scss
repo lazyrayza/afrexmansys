@@ -61,10 +61,18 @@
     border-bottom-right-radius: 20px;
     box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.5);
     background-color: white;
-    width: 50%;
+    width: 40%;
     visibility: visible;
     display: flex;
     flex-direction: column;
+    padding: 2%;
+    p{
+      font-size: 24px;
+      color: #494949;
+     }
+     i {
+       color: #55a9b2;
+     }
   }
   // dev-open-class
 
