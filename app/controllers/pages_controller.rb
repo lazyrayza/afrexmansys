@@ -26,6 +26,10 @@ class PagesController < ApplicationController
     #   end
     # end
   end
+  def agreement
+    @tenant = User.find(params[:user_id])
+    @lease = Lease.where(tenant_id: @tenant.id).to_a.first
+  end
 
   def admininsights
     @units = Units.all
