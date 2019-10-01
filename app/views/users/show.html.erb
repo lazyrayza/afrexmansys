@@ -24,9 +24,6 @@
         <p><i class="far fa-envelope"></i>  <%= @user.email %></p>
         <p><i class="fas fa-phone"></i> <%= @user.contact_number %></p>
 <!--         <p><i class="fas fa-wrench"></i>  <%= Complaint.where(tenant_id: @user.id).count %></p>-->
-        <%= link_to user_agreement_path(@user) do %>
-          <button type="submit" class="primary-button">Lease</button>
-        <% end %>
       </div>
     </div>
 <!-- Tenant Complaints -->
@@ -44,17 +41,35 @@
 
   <div class="user-middle">
     <div class="action">
-      <div class="card">
+      <div class="cardo">
             <div class="face face1">
                 <div class="content">
-                    <img src="https://github.com/Jhonierpc/WebDevelopment/blob/master/CSS%20Card%20Hover%20Effects/img/design_128.png?raw=true">
+                    <img src="https://image.flaticon.com/icons/png/512/124/124736.png">
                     <h3>Lease</h3>
                 </div>
             </div>
             <div class="face face2">
                 <div class="content">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cum cumque minus iste veritatis provident at.</p>
-                        <a href="#">Read More</a>
+                    <p>View <%= @user.full_name %>'s Lease agreement for <%= Lease.where(tenant_id: @user).to_a.first.unit.development.name %> Unit <%= Lease.where(tenant_id: @user).to_a.first.unit.unit_number %></p>
+                        <%= link_to user_agreement_path(@user) do %>
+                          <button type="submit" class="primary-button">Lease</button>
+                        <% end %>
+                </div>
+            </div>
+        </div>
+        <div class="cardo">
+            <div class="face face1">
+                <div class="content">
+                    <img src="https://image.flaticon.com/icons/svg/2146/2146128.svg">
+                    <h3>Payment History</h3>
+                </div>
+            </div>
+            <div class="face face2">
+                <div class="content">
+                    <p><%= @user.full_name %>'s Payment History since <%= Lease.where(tenant_id: @user).to_a.first.start_date %></p>
+                        <%= link_to user_agreement_path(@user) do %>
+                          <button type="submit" class="primary-button">Lease</button>
+                        <% end %>
                 </div>
             </div>
         </div>
