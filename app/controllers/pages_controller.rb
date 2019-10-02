@@ -32,7 +32,15 @@ class PagesController < ApplicationController
   end
 
   def admininsights
-    @units = Units.all
+    @units = Unit.all
     @leases = Lease.all
+    @tenants = User.where(tenant: true)
+    @employees = User.where(employee: true)
+    @leases = Lease.all
+    @developments = Development.all
+  end
+
+  def devcharts
+    @development = Development.find(params[:development_id])
   end
 end

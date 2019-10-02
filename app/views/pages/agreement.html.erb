@@ -1,23 +1,25 @@
 <div class="container">
   <div class="lease-agreement">
     <div class="front-page">
-      <p class="big"><b>THE REGISTRATION OF DOCUMENTS ACT</b></p>
-      <p class="big"><b>CAP212</b></p>
+      <div class="font-page-info">
+        <p class="big"><b>THE REGISTRATION OF DOCUMENTS ACT</b></p>
+        <p class="big"><b>CAP212</b></p>
 
-      <p class="big"><b>LEASE AGREEMENT</b></p>
+        <p class="big"><b>LEASE AGREEMENT</b></p>
 
-      <p class="big"><b>BETWEEN</b></p>
+        <p class="big"><b>BETWEEN</b></p>
 
-      <p class="big"><b>MARINA TOWERS LIMITED</b></p>
+        <p class="big"><b>MARINA TOWERS LIMITED</b></p>
 
-      <p class="big"><b>AND</b></p>
-      <p class="big"><b><%= @lease.tenant.full_name %></b></p>
-      <p class="big"><b>_____________________________________</b></p>
+        <p class="big"><b>AND</b></p>
+        <p class="big"><b><%= @lease.tenant.full_name %></b></p>
+        <p class="big"><b>_____________________________________</b></p>
 
-      <p class="big"><b>FOR LEASE OF APARTMENT NO. <%= @lease.unit.unit_number %></b></p>
-      <p class="big"><b><%= @lease.unit.development.address %></b></p>
-      <p class="big"><b>DAR ES SALAAM.</b></p>
-      <br>
+        <p class="big"><b>FOR LEASE OF APARTMENT NO. <%= @lease.unit.unit_number %></b></p>
+        <p class="big"><b><%= @lease.unit.development.address %></b></p>
+        <p class="big"><b>DAR ES SALAAM.</b></p>
+        <br>
+      </div>
     </div>
     <div class="document">
       <p>THE REGISTRATION OF DOCUMENTS ACT

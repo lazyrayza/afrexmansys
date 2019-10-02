@@ -10,8 +10,15 @@
 }
 .front-page{
   text-align: center;
-  height: 98vh;
+  height: 104vh;
+  border: solid 8px;
+  .font-page-info{
+
+  }
   p.big {
     line-height: 4;
   }
+  // p.big-breaks {
+  //   line-height: 25;
+  // }
 }

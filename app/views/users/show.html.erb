@@ -4,7 +4,7 @@
   <% if @user.tenant == true %>
   <!-- Tenant Profile -->
     <div class="tenant-profile">
-        <h2><%= Lease.where(tenant_id: @user).to_a.first.unit.development.name %></h2>
+        <!-- <h2><%= Lease.where(tenant_id: @user).to_a.first.unit.development.name %></h2> -->
       <div class="tenant-avatar">
         <% if @user.photo != nil %>
         <%= cl_image_tag @user.photo, class: 'avatar-tenant-large', crop: :fill %>
@@ -14,7 +14,7 @@
           <img src="https://image.flaticon.com/icons/svg/702/702018.svg" alt="">
         <% end %>
       </div>
-      <div class="tenant-picture">
+      <div class="tenant-dev-picture" style="background-image: url(<%= cl_image_path(Lease.where(tenant_id: @user).to_a.first.unit.development.photo) %>);">
       </div>
       <div class="tenant-info">
         <h1><%= @user.full_name %></h1>
@@ -23,6 +23,7 @@
         <p><i class="fas fa-globe-africa"></i>  <%= @user.nationality %></p>
         <p><i class="far fa-envelope"></i>  <%= @user.email %></p>
         <p><i class="fas fa-phone"></i> <%= @user.contact_number %></p>
+        <p><i class="fab fa-tumblr"></i> <%= @user.tin_number %></p>
 <!--         <p><i class="fas fa-wrench"></i>  <%= Complaint.where(tenant_id: @user.id).count %></p>-->
       </div>
     </div>
@@ -33,6 +34,11 @@
         <div class="complaint-card">
           <%= cl_image_tag @user.photo, class: 'avatar-complaint-card', crop: :fill %>
           <p><%= complaint.description.capitalize %></p>
+          <% if complaint.resolved == false %>
+            <i class="fas fa-times-circle fa-3x" data-toggle="tooltip" title="Not Resolved"></i>
+          <% else %>
+            <i class="far fa-check-circle fa-3x" data-toggle="tooltip" title="Resolved"></i>
+          <% end %>
           <!-- <div class="view-complaint-modal"><i class="fas fa-eye fa-3x"></i></div> -->
         </div>
       <% end %>
