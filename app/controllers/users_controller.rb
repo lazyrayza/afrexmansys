@@ -2,6 +2,10 @@ class UsersController < ApplicationController
   before_action :find_user, only: [:show, :update, :destroy, :edit]
   def index
     @users = User.all
+    @tenants = User.where(tenant: true)
+    @employees = User.where(employee: true)
+    @managers = User.where(manager: true)
+    @admins = User.where(admin: true)
   end
 
   def show

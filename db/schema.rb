@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_02_122306) do
+ActiveRecord::Schema.define(version: 2019_10_02_143529) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -173,6 +173,7 @@ ActiveRecord::Schema.define(version: 2019_10_02_122306) do
     t.boolean "gender", default: false
     t.string "tin_number"
     t.string "company"
+    t.boolean "manager", default: false
     t.index ["departments_id"], name: "index_users_on_departments_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

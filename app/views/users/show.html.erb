@@ -24,6 +24,7 @@
         <p><i class="far fa-envelope"></i>  <%= @user.email %></p>
         <p><i class="fas fa-phone"></i> <%= @user.contact_number %></p>
         <p><i class="fab fa-tumblr"></i> <%= @user.tin_number %></p>
+        <p><i class="fas fa-briefcase"></i> <%= @user.company %></p>
 <!--         <p><i class="fas fa-wrench"></i>  <%= Complaint.where(tenant_id: @user.id).count %></p>-->
       </div>
     </div>
@@ -32,7 +33,9 @@
       <div class="complaints-title"><h2><%= @user.full_name%>'s Complaints</h2></div>
       <% @complaints.each do |complaint| %>
         <div class="complaint-card">
-          <%= cl_image_tag @user.photo, class: 'avatar-complaint-card', crop: :fill %>
+          <%= link_to complaint_path(complaint) do  %>
+            <%= cl_image_tag @user.photo, class: 'avatar-complaint-card', crop: :fill %>
+          <% end %>
           <p><%= complaint.description.capitalize %></p>
           <% if complaint.resolved == false %>
             <i class="fas fa-times-circle fa-3x" data-toggle="tooltip" title="Not Resolved"></i>
@@ -41,6 +44,7 @@
           <% end %>
           <!-- <div class="view-complaint-modal"><i class="fas fa-eye fa-3x"></i></div> -->
         </div>
+
       <% end %>
     </div>
   </div>
@@ -98,19 +102,11 @@
           <%= @user.job_title %>
         </div>
         <h1><%= @user.full_name %></h1>
-        <p><%= @user.email %></p>
-        <p><%= @user.nationality %></p>
-        <p><%= @user.contact_number %></p>
-        <p><%= @user.age %></p>
-        <p><%= @user.contact_number %></p>
-        <p><%= @user.gender %></p>
-        <div class="actions">
-          <i class="far fa-heart"></i>
-          <a href="mailto:razapirbhai4@gmail.com" target="_blank">
-            <i class="far fa-envelope" title="E-mail"></i>
-          </a>
-          <i class="fas fa-phone"></i>
-        </div>
+        <p><i class="far fa-envelope"></i>  <%= @user.email %></p>
+        <p><i class="fas fa-phone"></i> <%= @user.contact_number %></p>
+        <p><i class="fab fa-tumblr"></i> <%= @user.tin_number %></p>
+        <p><i class="fas fa-briefcase"></i>  HQ</p>
+
       </div>
     </div>
   <% end %>
