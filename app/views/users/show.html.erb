@@ -4,7 +4,6 @@
   <% if @user.tenant == true %>
   <!-- Tenant Profile -->
     <div class="tenant-profile">
-        <!-- <h2><%= Lease.where(tenant_id: @user).to_a.first.unit.development.name %></h2> -->
       <div class="tenant-avatar">
         <% if @user.photo != nil %>
         <%= cl_image_tag @user.photo, class: 'avatar-tenant-large', crop: :fill %>
