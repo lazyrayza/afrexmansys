@@ -1,0 +1,14 @@
+<% @developments.each do |dev| %>
+  <% dev.units.each do |unit| %>
+    <% total_rent_received = 0 %>
+    <% total_rent = 0 %>
+    <% if unit.leases.first != nil %>
+      <% total_rent_received += unit.leases.first.rent %>
+    <% end %>
+    <p><%= total_rent_received %></p>
+    <% total_rent += unit.price %>
+   <p><%= total_rent %> </p>
+  <% end %>
+<% end %>
+
+<%# @leases.each %>

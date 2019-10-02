@@ -1,0 +1,13 @@
+.chart-container {
+  display: grid;
+  // grid-template-columns: 160px 160px 160px 160px 160px 160px ;
+  // grid-template-rows: 160px 160px 160px 160px 160px 160px ;
+
+
+  .chart-unit{
+    border: solid 1px;
+    height: 150px;
+    width: 150px;
+    justify-self: center;
+  }
+}

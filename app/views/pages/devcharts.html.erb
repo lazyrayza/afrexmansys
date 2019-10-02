@@ -1,0 +1,15 @@
+<div class="chart-container">
+  <div class="row">
+    <% @development.units.each do |unit| %>
+      <div class="col-sm-12 col-md-6 col-lg-2">
+        <div class="chart-unit">
+        Unit: <%= unit.unit_number %>
+        Price: <%= unit.price %>
+        <% if unit.leases.first != nil %>
+          Rent: <%= unit.leases.first.rent %>
+        <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

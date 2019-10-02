@@ -1,49 +1,70 @@
 <div class="container">
-  <div class="title">
-    <div class="lease-agreement">
+  <div class="lease-agreement">
+    <div class="front-page">
+      <div class="font-page-info">
+        <p class="big"><b>THE REGISTRATION OF DOCUMENTS ACT</b></p>
+        <p class="big"><b>CAP212</b></p>
+
+        <p class="big"><b>LEASE AGREEMENT</b></p>
+
+        <p class="big"><b>BETWEEN</b></p>
+
+        <p class="big"><b>MARINA TOWERS LIMITED</b></p>
+
+        <p class="big"><b>AND</b></p>
+        <p class="big"><b><%= @lease.tenant.full_name %></b></p>
+        <p class="big"><b>_____________________________________</b></p>
+
+        <p class="big"><b>FOR LEASE OF APARTMENT NO. <%= @lease.unit.unit_number %></b></p>
+        <p class="big"><b><%= @lease.unit.development.address %></b></p>
+        <p class="big"><b>DAR ES SALAAM.</b></p>
+        <br>
+      </div>
+    </div>
+    <div class="document">
       <p>THE REGISTRATION OF DOCUMENTS ACT
           (CAP 117)</p>
 
-<p><u>LEASE AGREEMENT</u></p>
+      <p><u>LEASE AGREEMENT</u></p>
 
-<p>THIS  LEASE  AGREEMENT  is  made  at  Dar  es  Salaam within the Republic of Tanzania  on  this <b><%= @lease.start_date %></b></p>
+      <p>THIS  LEASE  AGREEMENT  is  made  at  Dar  es  Salaam within the Republic of Tanzania  on  this <b><%= @lease.start_date %></b></p>
 
-<p><u>BETWEEN</u></p>
+      <p><u>BETWEEN</u></p>
 
-<p><b>MARINA TOWERS LIMITED</b>, a limited liability company incorporated in Tanzania under the Companies Ordinance (Cap. 212, replaced by Act. No. 12 of 2002) of P.O. Box 5998, DAR ES SALAAM (hereinafter referred to as “the LESSOR”, which expression shall, where the context so admits, include his assigns, executors and other successors in title) of the one part.</p>
+      <p><b>MARINA TOWERS LIMITED</b>, a limited liability company incorporated in Tanzania under the Companies Ordinance (Cap. 212, replaced by Act. No. 12 of 2002) of P.O. Box 5998, DAR ES SALAAM (hereinafter referred to as “the LESSOR”, which expression shall, where the context so admits, include his assigns, executors and other successors in title) of the one part.</p>
 
-<p><b><u>AND</u></b></p>
+      <p><b><u>AND</u></b></p>
 
-<p><b><%= @lease.tenant.full_name %></b>, of P.O.BOX…, DAR ES SALAAM (hereinafter referred to as “the LESSEE” which expression shall,   where   the   context   so   admits   include   its   assigns,   executors and other successors in title) of the other part.</p>
+      <p><b><%= @lease.tenant.full_name %></b>, of P.O.BOX…, DAR ES SALAAM (hereinafter referred to as “the LESSEE” which expression shall,   where   the   context   so   admits   include   its   assigns,   executors and other successors in title) of the other part.</p>
 
-<p><b>WHEREAS</b>,  the LESSOR  is  the  owner  of  all  those  premises  known  as Apartment No <%= @lease.unit.unit_number %>, measuring <%= @lease.unit.size %>sqm, situated at <b><%= @lease.unit.development.address %></b>. (Hereinafter referred to as “the demised premises”).</p>
+      <p><b>WHEREAS</b>,  the LESSOR  is  the  owner  of  all  those  premises  known  as Apartment No <%= @lease.unit.unit_number %>, measuring <%= @lease.unit.size %>sqm, situated at <b><%= @lease.unit.development.address %></b>. (Hereinafter referred to as “the demised premises”).</p>
 
-<p><b>AND  WHEREAS  the  LESSOR</b>  has  agreed  to  let  the  demised  premises referred  hereinabove  on  the  terms  and  conditions  hereinafter  contained.</p>
+      <p><b>AND  WHEREAS  the  LESSOR</b>  has  agreed  to  let  the  demised  premises referred  hereinabove  on  the  terms  and  conditions  hereinafter  contained.</p>
 
-<p>1.  <b>THE LESSEE HEREBY COVENANTS WITH THE LESSOR</b> as follows:</p>
+      <p>1.  <b>THE LESSEE HEREBY COVENANTS WITH THE LESSOR</b> as follows:</p>
 
-<p>(a) The Lessor hereby demises unto the Lessee the demised premises to hold the same for a period of <b><%= @lease.duration %></b> commencing on the <b><%= @lease.start_date %></b> (hereinafter called effective date) TO <b><%= @lease.end_date %></b>(Renewable by mutual agreement) payable in <b>Tanzanian shillings</b> only at the prevailing Commercial bank’s exchange rate. The rent is  at a monthly Rent of USD <b><%= @lease.rent %>.00</b> <b>(USD. <%= @lease.rent.to_i.humanize %>. Only)</b> payable in <b>Tanzanian Shillings</b>. in advance.
+      <p><ul>(a) The Lessor hereby demises unto the Lessee the demised premises to hold the same for a period of <b><%= @lease.duration %></b> commencing on the <b><%= @lease.start_date %></b> (hereinafter called effective date) TO <b><%= @lease.end_date %></b>(Renewable by mutual agreement) payable in <b>Tanzanian shillings</b> only at the prevailing Commercial bank’s exchange rate. The rent is  at a monthly Rent of USD <b><%= @lease.rent %>.00</b> <b>(USD. <%= @lease.rent.to_i.humanize %>. Only)</b> payable in <b>Tanzanian Shillings</b>. in advance.</ul></p>
 
-<p>(b) An amount equivalent to one month rent i.e. USD<b><%= @lease.rent %>.00</b>. <b>(USD. <%= @lease.rent.to_i.humanize %>. Only)</b> shall be paid by the Lessee withheld by Lessor as a caution deposit against any repairs / damages to be held until the end of the term.  Any repairs or damages beyond a reasonable wear and tear will be deducted by the Lessor and the balance refunded.</p>
+      <p><ul>(b) An amount equivalent to one month rent i.e. USD<b><%= @lease.rent %>.00</b>. <b>(USD. <%= @lease.rent.to_i.humanize %>. Only)</b> shall be paid by the Lessee withheld by Lessor as a caution deposit against any repairs / damages to be held until the end of the term.  Any repairs or damages beyond a reasonable wear and tear will be deducted by the Lessor and the balance refunded.</ul></p>
 
 
 
 
 
 
-<p>(c) It is mandatory that the lessee to withhold 10% of the rental rate, service expenses, and security charges and remit to TRA on Lessor’s behalf. Proof of payment to be submitted to Lessor.</p>
+      <p><ul>(c) It is mandatory that the lessee to withhold 10% of the rental rate, service expenses, and security charges and remit to TRA on Lessor’s behalf. Proof of payment to be submitted to Lessor.</ul></p>
 
-<p>(d) To pay all charges for electricity, telephones, Internet, DSTV& Cable TV, Water and sewerage Charges, if any, in respect of the demised premises accrued and payable during the tenure of the lease period and upon the expiration to provide documentary evidence for having settled all the above referred charges.</p>
+      <p><ul>(d) To pay all charges for electricity, telephones, Internet, DSTV& Cable TV, Water and sewerage Charges, if any, in respect of the demised premises accrued and payable during the tenure of the lease period and upon the expiration to provide documentary evidence for having settled all the above referred charges.</ul></p>
 
-<p>(e) It is specifically agreed that the power will be generated either through TANESCO and/or a Public Utility Co authorities or through stand by generator.  The power so utilized will be metered through a common meter provided to all the tenants.  Units of power consumed between both sources will be prepaid by the tenant.</p>
+      <p><ul>(e) It is specifically agreed that the power will be generated either through TANESCO and/or a Public Utility Co authorities or through stand by generator.  The power so utilized will be metered through a common meter provided to all the tenants.  Units of power consumed between both sources will be prepaid by the tenant.</ul></p>
 
-<p>(f) Not (without the previous consent in writing of the Lessor) to make any alterations or additions to the demised premises or to cut maim or injure any walls, structures, or timbers thereof.</p>
+      <p><ul>(f) Not (without the previous consent in writing of the Lessor) to make any alterations or additions to the demised premises or to cut maim or injure any walls, structures, or timbers thereof.</ul></p>
 
-<p>(g) To maintain the demised premises, including all additions thereto, fixtures, doors, windows, locks, sanitary, water apparatus, electric wiring, etc, in good repair and tenantable condition fair wear and tear excepted.</p>
+      <p><ul>(g) To maintain the demised premises, including all additions thereto, fixtures, doors, windows, locks, sanitary, water apparatus, electric wiring, etc, in good repair and tenantable condition fair wear and tear excepted.</ul></p>
 
-<p>(h)  Not to keep or permit to be kept on the demised premises any materials of dangerous or explosive nature or the keeping of which may contravene any statues or local regulations or by Laws or to carry on or do anything that may constitute a nuisance to public or private nature or be a cause of disturbance or annoyance, or danger to neighbors, or public.</p>
+      <p><ul>(h)  Not to keep or permit to be kept on the demised premises any materials of dangerous or explosive nature or the keeping of which may contravene any statues or local regulations or by Laws or to carry on or do anything that may constitute a nuisance to public or private nature or be a cause of disturbance or annoyance, or danger to neighbors, or public.</ul></p>
 
-<p>(i) To permit the Lessor or its agents or servants by reasonable prior notice, and at all reasonable hours to enter and view the condition of the demised premises and in the event of any repairs being necessary to carry the same out within one month of receiving a notice to do so and certainly prior to vacating the premises (subject to the same being the Lessee’s Responsibility).</p>
+      <p><ul>(i) To permit the Lessor or its agents or servants by reasonable prior notice, and at all reasonable hours to enter and view the condition of the demised premises and in the event of any repairs being necessary to carry the same out within one month of receiving a notice to do so and certainly prior to vacating the premises (subject to the same being the Lessee’s Responsibility).</ul></p>
 
 
 
@@ -54,90 +75,90 @@
 
 
 
-<p>(j) To use the demised premises for use and occupation as a residential premises for use by one family only and not to assign sublet, or part with possession of the demised premises without the previous written consent of the Lessor. In the case of a company any misdemeanors or breaches of the occupants shall be automatically imputed upon the Company, Tenant, Lessee, jointly and severally in all respects with the occupant, and or the person committing the breach or misdemeanor. Such breach includes those committed by the agents, employees, or invitees of the Lessee, whether by carelessness or negligence.</p>
+      <p><ul>(j) To use the demised premises for use and occupation as a residential premises for use by one family only and not to assign sublet, or part with possession of the demised premises without the previous written consent of the Lessor. In the case of a company any misdemeanors or breaches of the occupants shall be automatically imputed upon the Company, Tenant, Lessee, jointly and severally in all respects with the occupant, and or the person committing the breach or misdemeanor. Such breach includes those committed by the agents, employees, or invitees of the Lessee, whether by carelessness or negligence.</ul></p>
 
-<p>(k) Not to do or permit or suffer to be done anything whereby any insurance of the demised premises against loss or damage by fire or other risks covered by the Lessor’s insurance policy may become void or avoidable or whereby the rate of premium for such insurance may be increased and in such case to reimburse the Lessor all such excess premium and to make good any losses suffered due to non-coverage of such occurrence.</p>
+      <p><ul>(k) Not to do or permit or suffer to be done anything whereby any insurance of the demised premises against loss or damage by fire or other risks covered by the Lessor’s insurance policy may become void or avoidable or whereby the rate of premium for such insurance may be increased and in such case to reimburse the Lessor all such excess premium and to make good any losses suffered due to non-coverage of such occurrence.</ul></p>
 
-<p>(l) To yield up peaceably the demised premises to the Lessor or its agent or
-Nominee at the expiration of the fixed term aforesaid in good and tenantable
-Repair and condition in accordance with the covenants herein before
-Contained allowing for normal wear and tear.</p>
+      <p><ul>(l) To yield up peaceably the demised premises to the Lessor or its agent or
+      Nominee at the expiration of the fixed term aforesaid in good and tenantable
+      Repair and condition in accordance with the covenants herein before
+      Contained allowing for normal wear and tear.</ul></p>
 
-<p>(m) Not to park trucks or any other commercial vehicle in the compound of the
-     Demised premises and common areas.</p>
+      <p><ul>(m) Not to park trucks or any other commercial vehicle in the compound of the
+           Demised premises and common areas.</ul></p>
 
-<p>(n)  Not to allow or keep animals within the demised premises or the compound.</p>
+      <p><ul>(n)  Not to allow or keep animals within the demised premises or the compound.</ul></p>
 
-<p>(o) To give notice of at least three months before the expiry of the term hereby created to the Lessor expressing his (Lessee’s) intention whether or not to renew the lease for a further term. In the absence of which the Lessor may choose to assume continuation of the existing lease for another period of twelve months.</p>
+      <p><ul>(o) To give notice of at least three months before the expiry of the term hereby created to the Lessor expressing his (Lessee’s) intention whether or not to renew the lease for a further term. In the absence of which the Lessor may choose to assume continuation of the existing lease for another period of twelve months.</ul></p>
 
-<p>(p) The Lessee is obliged by the TRA regulations to have this lease document duly registered with the Revenue Authorities by paying the necessary stamp duty assessed by TRA.</p>
+      <p><ul>(p) The Lessee is obliged by the TRA regulations to have this lease document duly registered with the Revenue Authorities by paying the necessary stamp duty assessed by TRA.</ul></p>
 
-<p><b>2.  THE LESSOR HEREBY COVENANTS WITH THE LESSEE AS FOLLOWS:</b></p>
+      <p><b>2.  THE LESSOR HEREBY COVENANTS WITH THE LESSEE AS FOLLOWS:</b></p>
 
-(a) To keep the main structure, roof, drainage system, sewer system, electrical system, walls and all other exterior parts of the house and building comprised in the demised premises in good repair.</p>
+      <p><ul>(a) To keep the main structure, roof, drainage system, sewer system, electrical system, walls and all other exterior parts of the house and building comprised in the demised premises in good repair.</ul></p>
 
 
 
 
-<p>(b) To pay all existing and future land rates taxes and outgoing in respect of the demised premises.</p>
+      <p><ul>(b) To pay all existing and future land rates taxes and outgoing in respect of the demised premises.</ul></p>
 
-<p>(c) To insure and keep insured, at the Lessor’s discretion, the demised premises against loss or damage by fire or such other risk as are commonly insured in Tanzania. In case demised premises are damaged by fire, water, thunderstorm etc., and becomes temporarily or permanently unfit for human inhabitation the Lessor shall refund the rental for the concerned period provided the Lessee has vacated upon the happening of such an event.</p>
+      <p><ul>(c) To insure and keep insured, at the Lessor’s discretion, the demised premises against loss or damage by fire or such other risk as are commonly insured in Tanzania. In case demised premises are damaged by fire, water, thunderstorm etc., and becomes temporarily or permanently unfit for human inhabitation the Lessor shall refund the rental for the concerned period provided the Lessee has vacated upon the happening of such an event.</ul></p>
 
-<p>(d) The Lesser and/or his agents shall not be liable for any damage to any personal belongings or personal injury or personal life of the Lessee and/or the occupants of the demised premises.</p>
+      <p><ul>(d) The Lesser and/or his agents shall not be liable for any damage to any personal belongings or personal injury or personal life of the Lessee and/or the occupants of the demised premises.</ul></p>
 
-<p>(e)The Lessee shall be responsible for safekeeping of his personal belongings</p>
+      <p><ul>(e)The Lessee shall be responsible for safekeeping of his personal belongings</ul></p>
 
-<p><b>3.   PROVIDED ALWAYS THAT IT IS HEREBY MUTUALLY
-      AGREED AND DECLARED AS FOLLOWS:</b></p>
+      <p><b>3.   PROVIDED ALWAYS THAT IT IS HEREBY MUTUALLY
+            AGREED AND DECLARED AS FOLLOWS:</b></p>
 
-<p>(a) That if the rent hereby reserved or any part thereof shall at any time be in arrears and unpaid for twenty one days after the same shall have become due (whether formally or legally demanded or not) or if the Lessee shall at any time fail or neglect to perform or observe any of the covenants and obligations here in contained and its part to be performed and observed the Lessor shall be entitled to re-enter and take possession of the demised premises without prejudice to any antecedent or other claims that either party shall have against the other</p>
+      <p><ul>(a) That if the rent hereby reserved or any part thereof shall at any time be in arrears and unpaid for twenty one days after the same shall have become due (whether formally or legally demanded or not) or if the Lessee shall at any time fail or neglect to perform or observe any of the covenants and obligations here in contained and its part to be performed and observed the Lessor shall be entitled to re-enter and take possession of the demised premises without prejudice to any antecedent or other claims that either party shall have against the other</p></ul>
 
-<p>(b) Pursuant to the aforementioned 3(a), The Lessee hereby gives undisputed/unconditional rights to the Lessor to enforce his right to re-occupy the demised premise and conduct his business in his normal course of business. The lessor also has an option to charge to levy 2% Interest on overdue vets.</p>
+      <p><ul>(b) Pursuant to the aforementioned 3(a), The Lessee hereby gives undisputed/unconditional rights to the Lessor to enforce his right to re-occupy the demised premise and conduct his business in his normal course of business. The lessor also has an option to charge to levy 2% Interest on overdue vets.</p></ul>
 
-<p>(c) In the event of any dispute of claim arising from or in connection with this
-               Lease agreement which is not settled mutually by the parties thereto such
-               dispute or claim may be referred by either party to court or tribunal in
-               Dar es Salaam Tanzania for adjudication and settlement. Should the
-       Landlord fail to repair the Premises within one (1) month of being notified
-     of the necessary repairs, the Tenant reserves the right to have the necessary
-       repairs of the Premises carried out at the Landlord’s expense, by deducting
-       them from future rent payments to the Landlord, or by the Landlord
-       returning the portion of the paid rent to the Tenant.</p>
+      <p><ul>(c) In the event of any dispute of claim arising from or in connection with this
+                     Lease agreement which is not settled mutually by the parties thereto such
+                     dispute or claim may be referred by either party to court or tribunal in
+                     Dar es Salaam Tanzania for adjudication and settlement. Should the
+             Landlord fail to repair the Premises within one (1) month of being notified
+           of the necessary repairs, the Tenant reserves the right to have the necessary
+             repairs of the Premises carried out at the Landlord’s expense, by deducting
+             them from future rent payments to the Landlord, or by the Landlord
+             returning the portion of the paid rent to the Tenant.</p></ul>
 
 
 
 
-<p>(d) The agreed rent is subject to review after every twelve Months as agreed
-Between both the Parties.</p>
+      <p><ul>(d) The agreed rent is subject to review after every twelve Months as agreed
+      Between both the Parties.</p></ul>
 
-<p>(e) The Lessor and/or his agents shall not be liable for any injury what’s ever to the Lessee invitees servants or visitors of any kind wherever on the demised premises, including injury caused by the diligent working of machinery by tradesman on the demised premises and the Lessor. Management Company gives no warranty that the swimming pool, gym, Sauna/steam room and other amenities are legally or physically fit for the purposes intended and the Lessee is required to conduct personal verification and investigation in order to satisfy himself on the fitness of the same and uses at his own risk.</p>
+      <p><ul>(e) The Lessor and/or his agents shall not be liable for any injury what’s ever to the Lessee invitees servants or visitors of any kind wherever on the demised premises, including injury caused by the diligent working of machinery by tradesman on the demised premises and the Lessor. Management Company gives no warranty that the swimming pool, gym, Sauna/steam room and other amenities are legally or physically fit for the purposes intended and the Lessee is required to conduct personal verification and investigation in order to satisfy himself on the fitness of the same and uses at his own risk.</p></ul>
 
-<p>(f) The Lessor shall keep the building(s) and his chattels insured against fire
-and theft and it is the responsibility of the Lessee to insure his or her own
-chattels against fire and theft and themselves personally against injury or
-death.</p>
+      <p><ul>(f) The Lessor shall keep the building(s) and his chattels insured against fire
+      and theft and it is the responsibility of the Lessee to insure his or her own
+      chattels against fire and theft and themselves personally against injury or
+      death.</p></ul>
 
-<p>(g)The Lessee will provide evidence of his right to reside in Tanzania by
-  providing:-
-<ul>i.  In case of a corporation, a certificate of <b>INCORPORATION OF THE COMPANY AND TIN CERTIFICATE.</b></ul>
-<ul>ii. In case of a person, a copy of the passport and copy of residence permit</ul></p>
+      <p><ul>(g)The Lessee will provide evidence of his right to reside in Tanzania by
+        providing:-</ul>
+      <ul>i.  In case of a corporation, a certificate of <b>INCORPORATION OF THE COMPANY AND TIN CERTIFICATE.</b></ul>
+      <ul>ii. In case of a person, a copy of the passport and copy of residence permit</ul></p>
 
-<p>4. Mode of payment should be made by either Crossed Cheque or Telegraphic
-    Transfer to:-</p>
+      <p>4. Mode of payment should be made by either Crossed Cheque or Telegraphic
+          Transfer to:-</p>
 
-<ul><b>BENEFICIERY   : MARINA TOWERS LTD</ul>
+      <ul><b>BENEFICIERY   : MARINA TOWERS LTD</ul>
 
-<ul>BANKERS NAME  : BANK OF AFRICA TANZANIA LTD</ul>
+      <ul>BANKERS NAME  : BANK OF AFRICA TANZANIA LTD</ul>
 
-<ul>BRANCH      <ul>: NDC DEVELOPMENT HOUSE</ul>
-<ul>            : DAR ES SALAAM</ul>
-<ul>            : TANZANIA</ul>
-</ul>
-<ul>CURRENCY    : TSHS</ul>
+      <ul>BRANCH  &nbsp;&nbsp; &nbsp;&nbsp;    : NDC DEVELOPMENT HOUSE
+      <ul>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : DAR ES SALAAM</ul>
+      <ul> &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : TANZANIA</ul>
+      </ul>
+      <ul>CURRENCY    : TSHS</ul>
 
-<ul>ACCOUNT NO    : 02054520006</ul>
+      <ul>ACCOUNT NO    : 02054520006</ul>
 
-<ul>SWIFT     : EUAFTZTZ</b></ul>
+      <ul>SWIFT     : EUAFTZTZ</b></ul>
 
 
 
@@ -145,13 +166,48 @@ death.</p>
 
 
 
-<p>IN WITNESS WHERE OF THE PARTIES HERETO HAVE HEREUNTO SET THEIR HANDS AND SEALS the day year first above written.</p>
+      <p>IN WITNESS WHERE OF THE PARTIES HERETO HAVE HEREUNTO SET THEIR HANDS AND SEALS the day year first above written.</p>
 
-<p>SEALED with the COMMON SEAL of the said
-MARINA TOWERS LIMITED
-And DELIVERED before us</p>
+      <p>SEALED with the COMMON SEAL of the said
+      MARINA TOWERS LIMITED
+      And DELIVERED before us</p>
 
+      <p><b>SEALED</b> with the <b>COMMON SEAL</b> of the said</p>
+      <p><b>MARINA TOWERS LIMITED</b></p>
+      <p>And <b>DELIVERED before</b> us  &nbsp;&nbsp;  &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;  &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;  &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;  &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;-------------</p>
+      <p>this ………. day of …………………2019.  &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;  &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;  &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; SEAL</p>
 
+      <p>Signature:    ………………………</p>
+      <p>Address:    <b>P. O. BOX 5998,</b></p>
+      <p> &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;<b>DAR-ES-SALAAM.</b></p>
+      <p>Designation:  <b>DIRECTOR OF FINANCE</b></p>
+
+      <p><b>SIGNED</b> and <b>DELIVERED</b> by the said</p>
+      <p>………………</p>
+      <p>Who is known to me personally/identified</p>
+      <p>To me by …………………………. latter &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;  &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; --------------</p>
+      <p>Being known to me personally in my presence &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;  &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;  &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; SEAL</p>
+      <p>This ……day of ………………… 2019.</p>
+    </div>
+
+    <div class="lease-last">
+    <p>Name  :     …………………………</p>
+
+    <p><b>Signature:    …………………………</b></p>
+    <p><b>Postal Address: …………………………</b></p>
+    <p><b>   ………………………….</b></p>
+    <p><b>Designation:  ………………………..…</b></p>
+
+    <p><b>TIN NO:     ………………………….. </b></p>
+    <p><b>VRN NO:   …………………………. </b></p>
+
+
+    <p><b>CONTACT PERSON: </b></p>
+    <p><b>PHONE NO    :  </b></p>
+    <p><b>CELL NO   : </b></p>
+    <p><b>EMAIL ADD   : </b></p>
+    <p><b>OCCUPANT NAME : </b></p>
     </div>
   </div>
 </div>
+
