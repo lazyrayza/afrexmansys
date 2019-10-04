@@ -13,12 +13,19 @@
           <img src="https://image.flaticon.com/icons/svg/702/702018.svg" alt="">
         <% end %>
       </div>
-      <div class="tenant-dev-picture" style="background-image: url(<%= cl_image_path(Lease.where(tenant_id: @user).to_a.first.unit.development.photo) %>);">
+      <div class="tenant-dev-picture" style="background-image: url(
+        <% if @lease != nil %>
+          <%= cl_image_path(@lease.unit.development.photo) %>
+          <% else %>
+          https://images.pexels.com/photos/2987769/pexels-photo-2987769.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260
+        <% end %>);">
       </div>
       <div class="tenant-info">
         <h1><%= @user.full_name %></h1>
-        <p><i class="fas fa-home"></i> <%= Lease.where(tenant_id: @user).to_a.first.unit.development.name %></p>
-        <p><i class="fas fa-list-ol"></i> Unit <%= Lease.where(tenant_id: @user).to_a.first.unit.unit_number %></p>
+        <% if @lease != nil %>
+          <p><i class="fas fa-home"></i><%= @lease.unit.development.name %></p>
+          <p><i class="fas fa-list-ol"></i> Unit <%= Lease.where(tenant_id: @user).to_a.first.unit.unit_number %></p>
+        <% end %>
         <p><i class="fas fa-globe-africa"></i>  <%= @user.nationality %></p>
         <p><i class="far fa-envelope"></i>  <%= @user.email %></p>
         <p><i class="fas fa-phone"></i> <%= @user.contact_number %></p>
@@ -33,7 +40,9 @@
       <% @complaints.each do |complaint| %>
         <div class="complaint-card">
           <%= link_to complaint_path(complaint) do  %>
-            <%= cl_image_tag @user.photo, class: 'avatar-complaint-card', crop: :fill %>
+            <% if complaint.employee != nil %>
+              <%= cl_image_tag complaint.employee.photo, class: 'avatar-complaint-card', crop: :fill %>
+            <% end %>
           <% end %>
           <p><%= complaint.description.capitalize %></p>
           <% if complaint.resolved == false %>
@@ -59,10 +68,14 @@
             </div>
             <div class="face face2">
                 <div class="content">
+                  <% if @lease != nil %>
                     <p>View <%= @user.full_name %>'s Lease agreement for <%= Lease.where(tenant_id: @user).to_a.first.unit.development.name %> Unit <%= Lease.where(tenant_id: @user).to_a.first.unit.unit_number %></p>
                         <%= link_to user_agreement_path(@user) do %>
                           <button type="submit" class="primary-button">Lease</button>
                         <% end %>
+                    <% else %>
+                      <p>Create New Lease</p>
+                    <% end %>
                 </div>
             </div>
         </div>
@@ -75,17 +88,21 @@
             </div>
             <div class="face face2">
                 <div class="content">
+                  <% if @lease != nil %>
                     <p><%= @user.full_name %>'s Payment History since <%= Lease.where(tenant_id: @user).to_a.first.start_date %></p>
-                        <%= link_to user_agreement_path(@user) do %>
-                          <button type="submit" class="primary-button">Lease</button>
-                        <% end %>
+                    <%= link_to user_agreement_path(@user) do %>
+                      <button type="submit" class="primary-button">Lease</button>
+                    <% end %>
+                  <% else %>
+                  <p>No Payments Made yet</p>
+                  <% end %>
                 </div>
             </div>
         </div>
     </div>
   </div>
   <% else %>
-
+<!-- EMPLOYEE PROFILE -->
     <div class="employee-profile">
       <div class="employee-avatar">
         <% if @user.gender == false%>

@@ -1,0 +1,11 @@
+import Typed from 'typed.js';
+
+const loadDynamicBannerText = () => {
+  new Typed('#profile-typed-text', {
+    strings: ["Welcome back", "@user.full_name "],
+    typeSpeed: 50,
+    loop: true
+  });
+}
+
+export { loadDynamicBannerText };

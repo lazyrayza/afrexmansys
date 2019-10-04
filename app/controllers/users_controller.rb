@@ -10,6 +10,7 @@ class UsersController < ApplicationController
 
   def show
     @complaints = Complaint.where(tenant_id: @user.id)
+    @lease = Lease.where(tenant_id: @user).to_a.first
   end
 
   def new
