@@ -10,6 +10,7 @@ gem 'rails', '5.2.3'
 gem 'redis', '3.0.0'
 gem 'emoji_flag'
 gem 'humanize'
+gem 'geocoder'
 
 
 gem 'autoprefixer-rails'

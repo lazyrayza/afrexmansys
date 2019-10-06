@@ -1,0 +1,81 @@
+<!-- Predefined Calculations -->
+<%= total_rent = @lease.rent * (@lease.duration * 12) %>
+<%=  %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 payment-table">
+      <table class="table table-responsive table-hover">
+        <thead class="title">
+          <tr>
+            <td class="text-center" colspan="1"><i class="fa fa-bars menu-open"></i></td>
+            <td class="text-center" colspan="3">Payment</td>
+          </tr>
+        </thead>
+        <tbody class="payment-table-content">
+          <tr class="true">
+            <td><%= cl_image_tag @user.photo, class: 'avatar-complaint-card' %></td>
+            <td><%= @user.first_name[0] %>. <%= @user.last_name %></td>
+            <td>Aaron, Smith</td>
+            <td>$<span>591, 99</span></td>
+          </tr>
+          <tr>
+            <td>IMG</td>
+            <td>1005</td>
+            <td>Aaron, Smith</td>
+            <td>$<span>591, 99</span></td>
+          </tr>
+          <tr class="true">
+            <td>IMG</td>
+            <td>1005</td>
+            <td>Aaron, Smith</td>
+            <td>$<span>591, 99</span></td>
+          </tr>
+          <tr>
+            <td>IMG</td>
+            <td>1005</td>
+            <td>Aaron, Smith</td>
+            <td>$<span>591, 99</span></td>
+          </tr>
+          <tfooter>
+            <tr>
+              <td colspan="2"></td>
+              <td>Deposit</td>
+              <td>$0</td>
+            </tr>
+          </tfooter>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-6">
+      <table class="table table-responsive table-hover">
+        <thead class="title">
+          <tr>
+            <td class="text-center" colspan="1"><i class="fa fa-bars menu-open"></i></td>
+            <td class="text-center" colspan="3">Traces</td>
+          </tr>
+        </thead>
+        <tbody class="payment-table-content">
+          <tr>
+            <td class="text-center" colspan="4">No Traces provided</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-6">
+      <table class="table table-responsive table-hover">
+        <thead class="title">
+          <tr>
+            <td class="text-center" colspan="1"><i class="fa fa-bars menu-open"></i></td>
+            <td class="text-center" colspan="3">Other Info</td>
+          </tr>
+        </thead>
+        <tbody class="payment-table-content">
+          <tr>
+            <td class="text-center" colspan="4">No Other Info provided</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -90,8 +90,8 @@
                 <div class="content">
                   <% if @lease != nil %>
                     <p><%= @user.full_name %>'s Payment History since <%= Lease.where(tenant_id: @user).to_a.first.start_date %></p>
-                    <%= link_to user_agreement_path(@user) do %>
-                      <button type="submit" class="primary-button">Lease</button>
+                    <%= link_to user_paymenthistory_path(@user) do %>
+                      <button type="submit" class="primary-button">Rent Payments</button>
                     <% end %>
                   <% else %>
                   <p>No Payments Made yet</p>

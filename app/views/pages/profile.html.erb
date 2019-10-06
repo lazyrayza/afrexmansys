@@ -14,7 +14,7 @@
               <p><i class="fas fa-home"></i> <%= @lease.unit.development.name %></p>
               <p><i class="fas fa-list-ol"></i> Unit <%= Lease.where(tenant_id: @user).to_a.first.unit.unit_number %></p>
             <p><i class="fas fa-bed"></i> <%= @lease.unit.bedrooms %></p>
-            <p><i class="fas fa-phone"></i> <%= @user.contact_number %></p>
+            <p><i class="fas fa-dollar-sign"></i></i> <%= @lease.rent.to_i %> / pm</p>
             <p><i class="fas fa-briefcase"></i> <%= @user.company %></p>
           </div>
           <div class="tenant-profile-box-pic">

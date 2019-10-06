@@ -1,0 +1,18 @@
+.title {
+  background: #489099;
+  line-height: 2em;
+  color: white;
+}
+
+.table {
+  border: 0;
+}
+
+.payment-table-content {
+  height: 300px;
+  overflow: scroll;
+}
+
+.payment-table {
+  transition: 0.3s width;
+}
