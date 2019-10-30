@@ -1,6 +1,8 @@
 <!-- Predefined Calculations -->
-<%= total_rent = @lease.rent * (@lease.duration * 12) %>
-<%=  %>
+<%= from_date = @lease.start_date.strftime("%B") %>
+<%= to_date = @lease.end_date.strftime("%B") %>
+<%= months = [] %>
+
 
 <div class="container">
   <div class="row">
@@ -13,35 +15,24 @@
           </tr>
         </thead>
         <tbody class="payment-table-content">
-          <tr class="true">
-            <td><%= cl_image_tag @user.photo, class: 'avatar-complaint-card' %></td>
-            <td><%= @user.first_name[0] %>. <%= @user.last_name %></td>
-            <td>Aaron, Smith</td>
-            <td>$<span>591, 99</span></td>
-          </tr>
-          <tr>
-            <td>IMG</td>
-            <td>1005</td>
-            <td>Aaron, Smith</td>
-            <td>$<span>591, 99</span></td>
-          </tr>
-          <tr class="true">
-            <td>IMG</td>
-            <td>1005</td>
-            <td>Aaron, Smith</td>
-            <td>$<span>591, 99</span></td>
-          </tr>
-          <tr>
-            <td>IMG</td>
-            <td>1005</td>
-            <td>Aaron, Smith</td>
-            <td>$<span>591, 99</span></td>
-          </tr>
-          <tfooter>
-            <tr>
+          <%# (@lease.duration * 12).times do  %>
+          <%= (from_date..to_date).each do |month| %>
+              <tr class="true">
+                <td><%= cl_image_tag @user.photo, class: 'avatar-complaint-card' %></td>
+                <td><%= @user.first_name[0] %>. <%= @user.last_name %></td>
+                <td><%= @lease.start_date.strftime("%B")%></td>
+                <td>$<span><%= @lease.rent %></span></td>
+                <td></td>
+                <td>Invoice No.</td>
+              </tr>
+          <% end %>
               <td colspan="2"></td>
               <td>Deposit</td>
-              <td>$0</td>
+              <td>$<%= @lease.deposit %></td>
+             </tr>
+              <td colspan="2"></td>
+              <td>Total</td>
+              <td><b><u>$<%= @lease.rent * (@lease.duration * 12) %></b></u></td>
             </tr>
           </tfooter>
         </tbody>
@@ -62,20 +53,6 @@
         </tbody>
       </table>
     </div>
-    <div class="col-md-6">
-      <table class="table table-responsive table-hover">
-        <thead class="title">
-          <tr>
-            <td class="text-center" colspan="1"><i class="fa fa-bars menu-open"></i></td>
-            <td class="text-center" colspan="3">Other Info</td>
-          </tr>
-        </thead>
-        <tbody class="payment-table-content">
-          <tr>
-            <td class="text-center" colspan="4">No Other Info provided</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+
   </div>
 </div>
