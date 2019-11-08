@@ -22,3 +22,30 @@
     color: white;
   }
 }
+.profile-button {
+  font-family: $body-font;
+  background-color: #489099;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px !important;
+  width: 150px;
+  height: 50px;
+  i {
+    font-size: 22px;
+  }
+  &:hover, &:focus {
+    background: #74d5e0 !important;
+    text-decoration: none;
+    color: white;
+    transform: scale(1.3);
+    transition: 0.3s;
+  }
+}
+

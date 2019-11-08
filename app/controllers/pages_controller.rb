@@ -5,9 +5,16 @@ class PagesController < ApplicationController
     @user = current_user
     @tenantcomplaints = Complaint.where({tenant_id: @user.id})
     @employeecomplaints = Complaint.where({employee_id: @user.id})
+    @lease = Lease.where(tenant_id: current_user).to_a.first
   end
 
   def home
+  end
+
+  def paymenthistory
+    @user = User.find(params[:user_id])
+    @lease = Lease.where(tenant_id: @user.id).to_a.first
+
   end
 
   def insights

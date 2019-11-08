@@ -1,3 +1,114 @@
+// TENANT PROFILE SCSS
+.tenant-profile-main{
+  display: flex;
+  flex-direction: column;
+  .tenant-profile-top{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    .tenant-profile-left{
+      width: 55vw;
+      height: 50%;
+      border-radius: 3%;
+      box-shadow: 0 10px 30px rgba(0,0,0,.1);
+          background-color: #fff;
+      .tenant-profile-title{
+        text-align: center;
+        border-radius: 8px 8px 0 0;
+        display: flex;
+        justify-content: space-around;
+        font-weight: 700;
+        padding: 16px 0;
+        color: #FFFFFF;
+        font-size: 24px;
+        background-color: #6ECAD6;
+        }
+      .tenant-info-container{
+        display: flex;
+        justify-content: space-between;
+        padding: 3%;
+        .tenant-profile-box-info{
+          h1{
+            color: #489099;
+          }
+          p{
+            font-size: 24px;
+            color: #494949;
+           }
+          i {
+           color: #55a9b2;
+          }
+        }
+      }
+      .tenant-profile-box-pic{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .tenant-profile-actions{
+        display: flex;
+        justify-content: space-around;
+        padding: 3%;
+      }
+    }
+    .tenant-profile-complaints{
+      overflow-y: scroll;
+      width: 600px;
+      box-shadow: -6px 6px 5px 0px #e3e3e3;
+      border-radius: 10px;
+      background-color: #f9f9f9;
+      height: 600px;
+      background-color: #fff;
+      .complaints-title{
+        text-align: center;
+        border-radius: 8px 8px 0 0;
+        display: flex;
+        justify-content: space-around;
+        font-weight: 700;
+        padding: 16px 0;
+        color: #FFFFFF;
+        font-size: 24px;
+        background-color: #6ECAD6;
+      }
+      .tenant-profile-complaint-card{
+        display: flex;
+        justify-content: space-between;
+        border-radius: 25px;
+        box-shadow: 0 10px 30px rgba(0,0,0,.1);
+        margin: 4%;
+        padding: 2%;
+        .profile-complaint-card-info{
+          display: flex;
+          flex-direction: column;
+          p{
+            color: #494949;
+          }
+        }
+        i {
+          color: #335C58;
+        }
+      }
+    }
+  }
+  .tenant-profile-insights{
+    // height: 50vh;
+    // width: 100%;
+    margin: 10%;
+    box-shadow: -6px 6px 5px 0px #e3e3e3;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    .insight-title{
+      text-align: center;
+    }
+    .bar-chart{
+      margin: 4%;
+    }
+  }
+}
+
+// EMPLOYEE PROFILE SCSS
 .profile-main{
   display: flex;
   flex-direction: column;
@@ -6,7 +117,7 @@
     flex-direction: row;
     justify-content: space-around;
     .profile-left{
-      width: 35%;
+      width: 45vw;
       height: 50%;
       border-radius: 3%;
       box-shadow: 0 10px 30px rgba(0,0,0,.1);

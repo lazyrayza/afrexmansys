@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   resources :developments, except: [:show]
   resources :developments, only: [:show] do
-    get "/devcharts", to: "pages#devcharts"
+    # get "/devcharts", to: "pages#devcharts"
     resources :units, only: [:show, :new, :create] do
       resources :leases, only: [:show, :new, :create]
     end
@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   # resources :units
   resources :users, only: [:index, :show] do
     get "/agreement", to: "pages#agreement"
+    get "/paymenthistory", to: "pages#paymenthistory"
   end
   resources :departments
   resources :complaints, except: [:show]

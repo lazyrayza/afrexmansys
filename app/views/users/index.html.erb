@@ -40,7 +40,9 @@
             <% if Lease.where(tenant_id: user).to_a != nil %>
               <i class="fas fa-home"></i>
               <% @lease = Lease.where(tenant_id: user).to_a.first%>
-              <p><%= @lease.unit.development.name %> Unit: <%= @lease.unit.unit_number %></p>
+              <% if @lease != nil %>
+                <p><%= @lease.unit.development.name %> Unit: <%= @lease.unit.unit_number %></p>
+              <% end %>
             <% end %>
           </div>
         <% end %>

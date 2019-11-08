@@ -4,6 +4,7 @@
   <%= f.input :end_date %>
   <%= f.input :duration %>
   <%= f.input :rent %>
+  <%= f.input :installments, as: :radio_buttons, collection: [['1', 'Yearly'], ['2', 'Biannually'], ['3', 'Triannually'], ['4', 'Quarterly'], ['6', 'Every 2 Months'], ['12', 'Monthly']], label_method: :second, value_method: :first %>
   <%= f.input :deposit %>
   <%= f.input :notes %>
   <%= f.input :tenant_id,
