@@ -14,6 +14,22 @@
   border: 3px solid #489099;
   margin: -2px;
 }
+.avatar-payment-paid-card {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #00d43f;
+  margin: -2px;
+}
+.avatar-payment-not-paid-card {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #00d43f;
+  margin: -2px;
+}
 .avatar-tenant-large {
   width: 140px;
   height: 140px;

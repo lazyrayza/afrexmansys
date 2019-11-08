@@ -1,9 +1,8 @@
 <!-- Predefined Calculations -->
-<%= from_date = @lease.start_date.strftime("%B") %>
-<%= to_date = @lease.end_date.strftime("%B") %>
-<%= months = [] %>
-
-
+<% from_date = @lease.start_date.month %>
+<% to_date = @lease.end_date.strftime("%B, %Y") %>
+<% months_no = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] %>
+<%= Date.today.day %>
 <div class="container">
   <div class="row">
     <div class="col-md-6 payment-table">
@@ -16,14 +15,32 @@
         </thead>
         <tbody class="payment-table-content">
           <%# (@lease.duration * 12).times do  %>
-          <%= (from_date..to_date).each do |month| %>
+          <% months_no.drop(from_date - 1).each do |m| %>
               <tr class="true">
-                <td><%= cl_image_tag @user.photo, class: 'avatar-complaint-card' %></td>
+                <% if '.invoice' === "invoice no"%>
+                  <td><%= cl_image_tag @user.photo, class: 'avatar-payment-not-paid-card' %></td>
+                <% else %>
+                  <td><%= cl_image_tag @user.photo, class: 'avatar-payment-paid-card' %></td>
+                <% end %>
                 <td><%= @user.first_name[0] %>. <%= @user.last_name %></td>
-                <td><%= @lease.start_date.strftime("%B")%></td>
+                <td><%= Date::MONTHNAMES[m] %>, <%= Date.today.year %></td>
                 <td>$<span><%= @lease.rent %></span></td>
-                <td></td>
-                <td>Invoice No.</td>
+                <td><form>
+                  <input type="submit" value="">
+                </form></td>
+                <td class="invoice"></td>
+              </tr>
+          <% end %>
+          <% months_no[0..from_date - 2].each do |m| %>
+            <tr class="true">
+                <td><%= cl_image_tag @user.photo, class: 'avatar-payment-paid-card' %></td>
+                <td><%= @user.first_name[0] %>. <%= @user.last_name %></td>
+                <td><%= Date::MONTHNAMES[m] %>,  <%= Date.today.next_year.year %></td>
+                <td>$<span><%= @lease.rent %></span></td>
+                <td><form>
+                  <input type="submit" value="invoice no">
+                </form></td>
+                <td class="invoice"></td>
               </tr>
           <% end %>
               <td colspan="2"></td>
@@ -56,3 +73,21 @@
 
   </div>
 </div>
+
+
+
+
+<script>
+  const f = document.querySelector('form');
+
+f.addEventListener('submit', (ev) => {
+  let but = f.querySelector('input');
+  but.type = (but.type === 'search') ? 'submit' : 'search';
+  ev.preventDefault();
+});
+
+document.querySelector('invoice').addEventListener('click', (ev) => {
+  let field = ev.target;
+  field.contentEditable = field.contentEditable === true ? false: true;
+});
+</script>
