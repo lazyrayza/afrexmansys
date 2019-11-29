@@ -1,44 +1,171 @@
+<aside class="side-nav" id="show-side-navigation1">
+      <i class="fa fa-bars close-aside hidden-sm hidden-md hidden-lg" data-close="show-side-navigation1"></i>
+      <div class="heading">
+        <%= cl_image_tag current_user.photo, class: 'avatar-complaint-card', crop: :fill  %>
+          <h3><%= current_user.full_name %></h3>
+          <p><%= current_user.job_title %></p>
+        </div>
+      </div>
+      <div class="search">
+        <input type="text" placeholder="Type here"><i class="fa fa-search"></i>
+      </div>
+      <ul class="categories">
+        <li><i class="fa fa-home fa-fw" aria-hidden="true"></i><a href="#">Tenant Information</a>
+          <ul class="side-nav-dropdown">
+            <li><a href="#">Lorem ipsum</a></li>
+            <li><a href="#">ipsum dolor</a></li>
+            <li><a href="#">dolor ipsum</a></li>
+            <li><a href="#">amet consectetur</a></li>
+            <li><a href="#">ipsum dolor sit</a></li>
+          </ul>
+        </li>
+        <li><i class="fa fa-support fa-fw"></i><a href="#"> Property Analytics</a>
+          <ul class="side-nav-dropdown">
+            <li><a href="#">Lorem ipsum</a></li>
+            <li><a href="#">ipsum dolor</a></li>
+            <li><a href="#">dolor ipsum</a></li>
+            <li><a href="#">amet consectetur</a></li>
+            <li><a href="#">ipsum dolor sit</a></li>
+          </ul>
+        </li>
+        <li><i class="fa fa-envelope fa-fw"></i><a href="#"> Employee Analytics</a>
+          <ul class="side-nav-dropdown">
+            <li><a href="#">Lorem ipsum</a></li>
+            <li><a href="#">ipsum dolor</a></li>
+            <li><a href="#">dolor ipsum</a></li>
+            <li><a href="#">amet consectetur</a></li>
+            <li><a href="#">ipsum dolor sit</a></li>
+          </ul>
+        </li>
+        <li><i class="fa fa-users fa-fw"></i><a href="#"> Our team</a>
+          <ul class="side-nav-dropdown">
+            <li><a href="#">Lorem ipsum</a></li>
+            <li><a href="#">ipsum dolor</a></li>
+            <li><a href="#">dolor ipsum</a></li>
+            <li><a href="#">amet consectetur</a></li>
+            <li><a href="#">ipsum dolor sit</a></li>
+          </ul>
+        </li>
+        <li><i class="fa fa-bolt fa-fw"></i><a href="#"> Tenant Feedback</a>
+          <ul class="side-nav-dropdown">
+            <li><a href="#">Lorem ipsum</a></li>
+            <li><a href="#">ipsum dolor</a></li>
+            <li><a href="#">dolor ipsum</a></li>
+            <li><a href="#">amet consectetur</a></li>
+            <li><a href="#">ipsum dolor sit</a></li>
+          </ul>
+        </li>
+        <p>Example:</p>
+        <li><i class="fa fa-envelope-open-o fa-fw"></i><a href="#"> Messages <span class="num dang">56</span></a></li>
+        <li><i class="fa fa-wrench fa-fw"></i><a href="#"> Settings <span class="num prim">6</span></a>
+          <ul class="side-nav-dropdown">
+            <li><a href="#">Lorem ipsum</a></li>
+            <li><a href="#">ipsum dolor</a></li>
+            <li><a href="#">dolor ipsum</a></li>
+            <li><a href="#">amet consectetur</a></li>
+            <li><a href="#">ipsum dolor sit</a></li>
+          </ul>
+        </li>
+        <li><i class="fa fa-laptop fa-fw"></i><a href="#"> About UI &amp; UX <span class="num succ">43</span></a></li>
+        <li><i class="fa fa-comments-o fa-fw"></i><a href="#"> Something else</a></li>
+      </ul>
+    </aside>
 <div class="insight-main">
-  <div class="first-chart">
-    <%# line_chart User.group_by_day(:created_at).count %>
+  <div class="row">
+    <div class="col-xs-12 col-md-6">
+      <div class="chart">
+        <div class="chart-heading">
+          <h3 class="chart-title">Tenants by country<ul class="rad-chart-action">
+            <li class="pick"><i class="fas fa-times"></i></li>
+          </ul></h3>
+        </div>
+        <div class="chat-body">
+          <%= pie_chart User.where(tenant: "true").group(:nationality).count %>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-md-6">
+      <div class="chart">
+        <div class="chart-heading">
+          <h3 class="chart-title">Tenants World Map<ul class="rad-chart-action">
+            <li><i class="fa fa-chevron-down"></i></li>
+            <li class="pick"><i class="fas fa-times"></i></li>
+          </ul></h3>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="first-chart">
-    <h1>Tenants by country</h1>
-    <%= pie_chart User.where(tenant: "true").group(:nationality).count %>
+  <% totalunits = Unit.all.count %>
+  <% occupied = Unit.where(available: false).count %>
+  <% available = Unit.where(available: true).count %>
+  <div class="row">
+    <div class="col-xs-12 col-md-6">
+      <div class="chart">
+        <div class="chart-heading">
+          <h3 class="chart-title">Units available<ul class="rad-chart-action">
+            <li><i class="fa fa-chevron-down"></i></li>
+            <li class="pick"><i class="fas fa-times"></i></li>
+          </ul></h3>
+        </div>
+        <%= bar_chart [["Occupenied", "#{occupied}"], ["Available", "#{available}"]] %>
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-md-6">
+      <div class="chart">
+        <div class="chart-heading">
+          <h3 class="chart-title">Occupency Percentage<ul class="rad-chart-action">
+            <li><i class="fa fa-chevron-down"></i></li>
+            <li class="pick"><i class="fas fa-times"></i></li>
+          </ul></h3>
+        </div>
+        <%= pie_chart Unit.group(:available).count  %>
+      </div>
+    </div>
   </div>
-  <div class="first-chart">
-    <h1>Tenants Nationality</h1>
-    <%= geo_chart User.group(:nationality).count %>
-    <!-- Need to add project to google cloud to get API key -->
-  </div>
-  <div class="first-chart">
-    <h1>No of complaints per Tenant</h1>
-    <%= line_chart @tenants.map { |tenant|
-        {name: tenant.first_name, data: Complaint.where(tenant_id: tenant.id).group_by_day_of_week(:created_at).count}
-    } %>
-  </div>
-  <div class="first-chart">
-    <h1>Occupency</h1>
-    <% totalunits = Unit.all.count %>
-    <%= occupied = Unit.where(available: false).count %>
-    <%= available = Unit.where(available: true).count %>
-    <h2>Units available</h2>
-    <%= bar_chart [["Occupenied", "#{occupied}"], ["Available", "#{available}"]] %>
-    <h2>Occupency Percentage</h2>
-    <%= pie_chart [["Occupenied", "#{occupied / totalunits}"], ["Available", "#{available / totalunits}"]] %>
-    <%# dev1 = (Development.find(1).units.count) %>
-    <%# dev2 = Development.find(2).units.count %>
-    <%# pie_chart [["#{Development.find(1).name}", "#{dev1}"], ["#{Development.find(2).name}", "#{dev2}"]] %>
-  </div>
-  <div class="first-chart">
-    <%= @resolvedcomplaints %>
-  </div>
-  <div class="first-chart">
-    <h1>Employee performance</h1>
-    <h2></h2>
-    <%= line_chart @employees.map { |employee|
-        {name: employee.first_name, data: Report.where(employee_id: employee.id).group_by_day_of_week(:updated_at, format: "%a").count}
-    } %>
+
+  <div class="row">
+    <div class="col-xs-12 col-md-6">
+      <div class="chart">
+        <div class="chart-heading">
+          <h3 class="chart-title">No of complaints per Tenant<ul class="rad-chart-action">
+            <li><i class="fa fa-chevron-down"></i></li>
+            <li class="pick"><i class="fas fa-times"></i></li>
+          </ul></h3>
+        </div>
+        <%= line_chart @tenants.map { |tenant|
+            {name: tenant.first_name, data: Complaint.where(tenant_id: tenant.id).group_by_month(:created_at).count}
+        } %>
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-md-6">
+      <div class="chart">
+        <div class="chart-heading">
+            <h3 class="chart-title">Employee performance<ul class="rad-chart-action">
+              <li class="pick"><i class="fa fa-chevron-down"></i></li>
+              <li><i class="fas fa-times"></i></li>
+            </ul></h3>
+          </div>
+        <h2></h2>
+        <%= line_chart @employees.map { |employee|
+            {name: employee.first_name, data: Report.where(employee_id: employee.id).group_by_day_of_week(:updated_at, format: "%a").count}
+        } %>
+      </div>
+    </div>
   </div>
 </div>
+
+<i class="fas fa-times"></i>
+<script>
+  const list = document.querySelector(".rad-chart-action")
+  list.querySelector(".pick").onClick = function() {
+    var $ele = $(this).parents('.chart-heading');
+    $ele.siblings('.chart-body').toggleClass("chart-collapse", function() {
+      setTimeout(function() {
+        initializeCharts();
+      }, 200);
+    });
+  };
+</script>
 

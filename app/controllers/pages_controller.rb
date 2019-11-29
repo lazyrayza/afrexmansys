@@ -6,6 +6,8 @@ class PagesController < ApplicationController
     @tenantcomplaints = Complaint.where({tenant_id: @user.id})
     @employeecomplaints = Complaint.where({employee_id: @user.id})
     @lease = Lease.where(tenant_id: current_user).to_a.first
+
+    # @user_lease = Lease.find(params[:id])
   end
 
   def home
@@ -36,6 +38,8 @@ class PagesController < ApplicationController
   def agreement
     @tenant = User.find(params[:user_id])
     @lease = Lease.where(tenant_id: @tenant.id).to_a.first
+
+
   end
 
   def admininsights

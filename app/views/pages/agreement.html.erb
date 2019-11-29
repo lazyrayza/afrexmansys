@@ -1,3 +1,7 @@
+<head>
+<title>Lease agreement</title>
+    <%= wicked_pdf_stylesheet_link_tag "Lease" %>
+</head>
 <div class="container">
   <div class="lease-agreement">
     <div class="front-page">
@@ -210,4 +214,5 @@
     </div>
   </div>
 </div>
+<%= link_to ‘DOWNLOAD PDF’, user_agreement_path(@lease, format: :pdf) %>
 
