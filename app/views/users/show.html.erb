@@ -70,7 +70,7 @@
                 <div class="content">
                   <% if @lease != nil %>
                     <p>View <%= @user.full_name %>'s Lease agreement for <%= Lease.where(tenant_id: @user).to_a.first.unit.development.name %> Unit <%= Lease.where(tenant_id: @user).to_a.first.unit.unit_number %></p>
-                        <%= link_to user_agreement_path(@user) do %>
+                        <%= link_to user_lease_path(@lease) do %>
                           <button type="submit" class="primary-button">Lease</button>
                         <% end %>
                     <% else %>

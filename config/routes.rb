@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show] do
     get "/agreement", to: "pages#agreement"
     get "/paymenthistory", to: "pages#paymenthistory"
+    resources :leases, only: [:show]
   end
   resources :departments
   resources :complaints, except: [:show]

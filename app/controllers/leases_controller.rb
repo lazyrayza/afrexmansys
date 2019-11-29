@@ -1,10 +1,25 @@
 class LeasesController < ApplicationController
-  before_action :find_lease, only: [:show, :update, :destroy]
+  before_action :find_lease, only: [ :update, :destroy]
   def index
     @leases = Lease.all
   end
 
   def show
+    @lease = Lease.find(params[:user_id])
+    @tenant = @lease.tenant
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "lease",
+        template: 'leases/show',
+        page_size: 'A4',
+        orientation: "Portrait",
+        layout: "pdf.html",
+        zoom: 1,
+        dpi: 75
+      end
+    end
   end
 
   def new

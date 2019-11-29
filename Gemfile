@@ -24,6 +24,8 @@ gem 'cloudinary', '~> 1.9.1'
 gem 'notifications'
 gem "chartkick"
 gem 'groupdate'
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
 
 
 group :development do
