@@ -35,5 +35,6 @@ Rails.application.routes.draw do
   get "/profile", to: "pages#profile"
   get "/insights", to: "pages#insights"
   get "/admininsights", to: "pages#admininsights"
+  get "/devcharts", to: "pages#devcharts"
 
 end

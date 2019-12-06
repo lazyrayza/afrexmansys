@@ -1,21 +1,217 @@
+<!-- Complaint Tables -->
+
+     <!--  <div class="complaints-box">
+        <ul><u>Complaint ID:</u> <%# complaint.id %> </ul>
+        <ul><u>Made by:</u> <%# complaint.tenant.full_name %></ul>
+        <ul><u>Tenant:</u> <%# Lease.find_by(tenant_id: complaint.tenant.id).unit_id %></ul>
+        <ul><u>Description:</u> <%# complaint.description  %></ul>
+      </div>
+ -->
+
+<% @complaints.each do |complaint| %>
+  <div class="wrapper">
+  <!-- Current Day Complaints -->
+    <div class="table">
+
+      <div class="row header blue">
+        <div class="cell">
+          Avatar
+        </div>
+        <div class="cell">
+          Name
+        </div>
+        <div class="cell">
+          Complaint
+        </div>
+        <div class="cell">
+          Complaint Photo
+        </div>
+        <div class="cell">
+          Time sent
+        </div>
+        <div class="cell">
+          Status
+        </div>
+      </div>
+
+    <% if complaint.created_at == Date.today %>
+      <div class="row">
+        <div class="cell" data-title="Avatar">
+        <%= cl_image_tag complaint.tenant.photo, class: 'avatar-complaint-card', crop: :fill %>
+        </div>
+        <div class="cell" data-title="Name">
+          <%= complaint.tenant.first_name.capitalize[0] %>. <%= complaint.tenant.last_name %>
+        </div>
+        <div class="cell" data-title="Complaint">
+          <%= complaint.description %>
+        </div>
+        <div class="cell" data-title="Complaint Photo", id="complaint-photo">
+          <%= cl_image_tag complaint.photo, class: 'avatar-square', crop: :fill %>
+        </div>
+        <div class="cell" data-title="Time Sent">
+          <%= complaint.created_at.to_date %>
+        </div>
+        <div class="cell" data-title="Status">
+          <%= complaint.resolved %>
+        </div>
+      </div>
+    <% end %>
+
+    </div>
+
+    <!-- Complaints received 5 days ago -->
+    <div class="table">
+
+      <div class="row header yellow">
+        <div class="cell">
+          Avatar
+        </div>
+        <div class="cell">
+          Name
+        </div>
+        <div class="cell">
+          Complaint
+        </div>
+        <div class="cell">
+          Complaint Photo
+        </div>
+        <div class="cell">
+          Time sent
+        </div>
+        <div class="cell">
+          Status
+        </div>
+      </div>
+
+    <% if complaint.created_at < 5.days %>
+        <div class="row">
+          <div class="cell" data-title="Avatar">
+            <%= cl_image_tag complaint.tenant.photo, class: 'avatar-complaint-card', crop: :fill %>
+          </div>
+          <div class="cell" data-title="Name">
+            <%= complaint.tenant.first_name.capitalize[0] %>. <%= complaint.tenant.last_name %>
+          </div>
+          <div class="cell" data-title="Complaint">
+            <%= complaint.description %>
+          </div>
+          <div class="cell" data-title="Complaint Photo", id="complaint-photo">
+            <%= cl_image_tag complaint.photo, class: 'avatar-square', crop: :fill %>
+          </div>
+          <div class="cell" data-title="Time Sent">
+            <%= complaint.created_at.to_date %>
+          </div>
+          <div class="cell" data-title="Status">
+            <%= complaint.resolved %>
+          </div>
+        </div>
+
+    <% end %>
+    </div>
+    <!-- Complaints older than 1 week -->
+    <div class="table">
+
+      <div class="row header red">
+        <div class="cell">
+          Avatar
+        </div>
+        <div class="cell">
+          Name
+        </div>
+        <div class="cell">
+          Complaint
+        </div>
+        <div class="cell">
+          Complaint Photo
+        </div>
+        <div class="cell">
+          Time sent
+        </div>
+        <div class="cell">
+          Status
+        </div>
+      </div>
+
+    <% if complaint.created_at > 1.week && complaint.resolved == false%>
+      <div class="row">
+        <div class="cell" data-title="Avatar">
+          <%= cl_image_tag complaint.tenant.photo, class: 'avatar-complaint-card', crop: :fill %>
+        </div>
+        <div class="cell" data-title="Name">
+          <%= complaint.tenant.first_name.capitalize[0] %>. <%= complaint.tenant.last_name %>
+        </div>
+        <div class="cell" data-title="Complaint">
+          <%= complaint.description %>
+        </div>
+        <div class="cell" data-title="Complaint Photo", id="complaint-photo" id="complaint-photo">
+          <%= cl_image_tag complaint.photo, class: 'avatar-square', crop: :fill %>
+        </div>
+        <div class="cell" data-title="Time Sent">
+          <%= complaint.created_at.to_date %>
+        </div>
+        <div class="cell" data-title="Status">
+          <%= complaint.resolved %>
+        </div>
+      </div>
+
+    <% end %>
+    </div>
+
+    <!-- Complaints completed -->
+    <div class="table">
+
+      <div class="row header green">
+        <div class="cell">
+          Avatar
+        </div>
+        <div class="cell">
+          Name
+        </div>
+        <div class="cell">
+          Complaint
+        </div>
+        <div class="cell">
+          Complaint Photo
+        </div>
+        <div class="cell">
+          Time sent
+        </div>
+        <div class="cell">
+          Status
+        </div>
+      </div>
+
+    <% if complaint.resolved == true %>
+      <div class="row">
+        <div class="cell" data-title="Avatar">
+          <%= cl_image_tag complaint.tenant.photo, class: 'avatar-complaint-card', crop: :fill %>
+        </div>
+        <div class="cell" data-title="Name">
+          <%= complaint.tenant.first_name.capitalize[0] %>. <%= complaint.tenant.last_name %>
+        </div>
+        <div class="cell" data-title="Complaint">
+          <%= complaint.description %>
+        </div>
+        <div class="cell" data-title="Complaint Photo", id="complaint-photo">
+          <%= cl_image_tag cl_image_tag complaint.photo, class: 'avatar-square', crop: :fill, class: 'avatar-square', crop: :fill %>
+        </div>
+        <div class="cell" data-title="Time Sent">
+          <%= complaint.created_at.to_date %>
+        </div>
+        <div class="cell" data-title="Status">
+          <%= complaint.resolved %>
+        </div>
+      </div>
+      <% end %>
+
+    </div>
+  </div>
+<% end %>
+
 <%= link_to new_complaint_path do %>
   <button type="submit" class="primary-button">New Complaint</button>
 <% end %>
 
-<div class="complaints-page">
-
-  <% @complaints.each do |complaint| %>
-    <%= link_to complaint_path(complaint) do  %>
-      <div class="complaints-box">
-        <ul><u>Complaint ID:</u> <%= complaint.id %> </ul>
-        <ul><u>Made by:</u> <%= complaint.tenant.full_name %></ul>
-        <ul><u>Tenant:</u> <%# Lease.find_by(tenant_id: complaint.tenant.id).unit_id %></ul>
-        <ul><u>Description:</u> <%= complaint.description  %></ul>
-      </div>
-    <% end %>
-  <% end %>
-
-</div>
 <%# raise %>
 <!-- wording in the clickable div also becomes link and changes to blue link. Need to change that! -->
+
 
