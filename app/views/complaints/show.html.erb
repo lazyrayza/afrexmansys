@@ -1,4 +1,71 @@
-<div class="complaints-main">
+<div class="complaint-show-card">
+
+  <div class="complaint-show-card-header">
+    <h2>COMPLAINT CARD NO. <%= @number.index(@complaint) +1 %></h2>
+  </div>
+
+  <div class="complaint-show-card-info">
+    <div class="complaint-show-card-info-top">
+
+    </div>
+    <div class="complaint-show-card-info-bottom">
+
+    </div>
+
+  <div class="complaint-show-card-footer">
+
+  </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="complaints-main">
   <div class="complaint-info" id="my-complaint">
     <% if current_user.employee == %>
       <ul> <u>Made by:</u>  <%= link_to @complaint.tenant.full_name, user_path(@complaint.tenant) %></ul>
@@ -9,11 +76,17 @@
     <ul><u>Development:</u> <%# Unit.find_by(unit_id: @unit) %></ul>
     <ul> <u>Description:</u> <%= @complaint.description  %></ul>
     <ul><u>Photo:</u> <%= cl_image_tag @complaint.photo, height: 300, width: 400, crop: :fill %></ul>
-    <ul><u>Resolved:</u> <%= @complaint.resolved  %></ul>
+    <ul><u>Assigned to:</u> <%= @complaint.employee.full_name  %></ul>
     <%= link_to edit_complaint_path(@complaint) do %>
-    <button type="submit" class="primary-button">Edit</button>
+    <% if @complaint.tenant == current_user %>
+      <button type="submit" class="primary-button">Edit</button>
+    <% elsif @complaint.reports.exists? == false && current_user.first_name == 'farhan' %>
+      <%= link_to new_complaint_report_path(@complaint) do %>
+        <button type="submit" class="primary-button">Create Report</button>
+      <% end %>
+    <% end %>
   <% end %>
-  </div>
+  </div> -->
 
   <% if @complaint.reports.exists? %>
     <div class="complaint-report">
