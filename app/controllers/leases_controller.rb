@@ -27,6 +27,7 @@ class LeasesController < ApplicationController
     @unit = Unit.find(params[:unit_id])
     @lease = Lease.new
     @tenants = User.where(tenant: true)
+
   end
 
   def update

@@ -1,0 +1,7 @@
+function refreshCards(innerHTML) {
+  newCardsContainer = document.querySelector(".user-cards")
+  newCardsContainer.innerHTML = innerHTML;
+ }
+
+refreshCards('<%= j render "users", tenants: @tenants %>');
+

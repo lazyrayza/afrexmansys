@@ -16,7 +16,11 @@
         <p class="big"><b>MARINA TOWERS LIMITED</b></p>
 
         <p class="big"><b>AND</b></p>
-        <p class="big"><b><%= @lease.tenant.full_name %></b></p>
+        <% if @lease.tenantpaying == true %>
+          <p class="big"><b><%= @lease.tenant.full_name %></b></p>
+        <% else %>
+          <p class="big"><b><%= @lease.tenant.company %></b></p>
+        <% end %>
         <p class="big"><b>_____________________________________</b></p>
 
         <p class="big"><b>FOR LEASE OF APARTMENT NO. <%= @lease.unit.unit_number %></b></p>
@@ -31,7 +35,7 @@
 
       <p><u>LEASE AGREEMENT</u></p>
 
-      <p>THIS  LEASE  AGREEMENT  is  made  at  Dar  es  Salaam within the Republic of Tanzania  on  this <b><%= @lease.start_date %></b></p>
+      <p>THIS  LEASE  AGREEMENT  is  made  at  Dar  es  Salaam within the Republic of Tanzania  on  this <b><%= @lease.start_date.strftime(" %d day of %B, %Y")  %>.</b></p>
 
       <p><u>BETWEEN</u></p>
 
@@ -39,15 +43,15 @@
 
       <p><b><u>AND</u></b></p>
 
-      <p><b><%= @lease.tenant.full_name %></b>, of P.O.BOX…, DAR ES SALAAM (hereinafter referred to as “the LESSEE” which expression shall,   where   the   context   so   admits   include   its   assigns,   executors and other successors in title) of the other part.</p>
+      <p><b><% if @lease.tenantpaying == true %><%= @lease.tenant.full_name.upcase %> <% else %> <%= @lease.tenant.company.upcase %> <% end %> </b>, of P.O.BOX…, DAR ES SALAAM (hereinafter referred to as “the LESSEE” which expression shall,   where   the   context   so   admits   include   its   assigns,   executors and other successors in title) of the other part.</p>
 
-      <p><b>WHEREAS</b>,  the LESSOR  is  the  owner  of  all  those  premises  known  as Apartment No <%= @lease.unit.unit_number %>, measuring <%= @lease.unit.size %>sqm, situated at <b><%= @lease.unit.development.address %></b>. (Hereinafter referred to as “the demised premises”).</p>
+      <p><b>WHEREAS</b>,  the LESSOR  is  the  owner  of  all  those  premises  known  as Apartment NO: <b> <%= @lease.unit.unit_number %>, measuring <%= @lease.unit.size %>sqm</b>, situated at <b><%= @lease.unit.development.address %></b>. (Hereinafter referred to as “the demised premises”).</p>
 
       <p><b>AND  WHEREAS  the  LESSOR</b>  has  agreed  to  let  the  demised  premises referred  hereinabove  on  the  terms  and  conditions  hereinafter  contained.</p>
 
       <p>1.  <b>THE LESSEE HEREBY COVENANTS WITH THE LESSOR</b> as follows:</p>
 
-      <p><ul>(a) The Lessor hereby demises unto the Lessee the demised premises to hold the same for a period of <b><%= @lease.duration %></b> commencing on the <b><%= @lease.start_date %></b> (hereinafter called effective date) TO <b><%= @lease.end_date %></b>(Renewable by mutual agreement) payable in <b>Tanzanian shillings</b> only at the prevailing Commercial bank’s exchange rate. The rent is  at a monthly Rent of USD <b><%= @lease.rent %>.00</b> <b>(USD. <%= @lease.rent.to_i.humanize %>. Only)</b> payable in <b>Tanzanian Shillings</b>. in advance.</ul></p>
+      <p><ul>(a) The Lessor hereby demises unto the Lessee the demised premises to hold the same for a period of <b><%= @lease.duration * 12 %> (<%= (@lease.duration * 12).humanize.capitalize %>) Months</b> commencing on the <b><%= @lease.start_date.strftime(" %d day of %B, %Y") %></b> (hereinafter called effective date) TO <b><%= @lease.end_date.strftime(" %d day of %B, %Y") %></b>(Renewable by mutual agreement) payable in <b>Tanzanian shillings</b> only at the prevailing Commercial bank’s exchange rate. The rent is  at a monthly Rent of USD <b><%= @lease.rent %>.00</b> <b>(USD. <%= @lease.rent.to_i.humanize %>. Only)</b> payable in <b>Tanzanian Shillings</b>. in advance.</ul></p>
 
       <p><ul>(b) An amount equivalent to one month rent i.e. USD<b><%= @lease.rent %>.00</b>. <b>(USD. <%= @lease.rent.to_i.humanize %>. Only)</b> shall be paid by the Lessee withheld by Lessor as a caution deposit against any repairs / damages to be held until the end of the term.  Any repairs or damages beyond a reasonable wear and tear will be deducted by the Lessor and the balance refunded.</ul></p>
 
@@ -187,7 +191,7 @@
       <p>Designation:  <b>DIRECTOR OF FINANCE</b></p>
 
       <p><b>SIGNED</b> and <b>DELIVERED</b> by the said</p>
-      <p>………………</p>
+      <p><b> <% if @lease.tenantpaying == true %> <%= @lease.tenant.full_name.upcase %> <% else %> <%= @lease.tenant.company.upcase %> <% end %></b> </p>
       <p>Who is known to me personally/identified</p>
       <p>To me by …………………………. latter &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;  &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; --------------</p>
       <p>Being known to me personally in my presence &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;  &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;  &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; SEAL</p>
@@ -195,7 +199,7 @@
     </div>
 
     <div class="lease-last">
-    <p>Name  :     …………………………</p>
+    <p>Name  :  </p>
 
     <p><b>Signature:    …………………………</b></p>
     <p><b>Postal Address: …………………………</b></p>
@@ -206,10 +210,10 @@
     <p><b>VRN NO:   …………………………. </b></p>
 
 
-    <p><b>CONTACT PERSON: </b></p>
-    <p><b>PHONE NO    :  </b></p>
+    <p><b>CONTACT PERSON: <%= @lease.tenant.full_name.upcase %></b></p>
+    <p><b>PHONE NO    : <%= @lease.tenant.contact_number %> </b></p>
     <p><b>CELL NO   : </b></p>
-    <p><b>EMAIL ADD   : </b></p>
+    <p><b>EMAIL ADD   : <%= @lease.tenant.email %></b></p>
     <p><b>OCCUPANT NAME : </b></p>
     </div>
   </div>

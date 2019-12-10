@@ -8,9 +8,9 @@
           <div class="dev-card-picture", style="background-image: url(<%= cl_image_path(development.photo) %>);">
         <% end %>
           <div class="dev-card-title" onclick="openInfo"><%= development.name.capitalize %></div>
-          <button class="mc-btn-action" id="open-btn">
+          <button onclick="myFunction()" class="mc-btn-action" id="open-btn">
             <%= link_to development_path(development) do %>
-              <i class="fa fa-bars"></i>
+              <i class="fas fa-arrow-circle-right fa-2x"></i>
             <% end %>
           </button>
         </div>
@@ -34,6 +34,18 @@
     <% end %>
   </div>
 </div>
+
+
+<!-- <script>
+function myFunction() {
+  var x = document.getElementById("hidden");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script> -->
 
 <!-- <script>
     for (const button of buttons) {

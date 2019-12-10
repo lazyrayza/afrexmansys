@@ -26,6 +26,7 @@ gem "chartkick"
 gem 'groupdate'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
+gem 'pg_search'
 
 
 group :development do
