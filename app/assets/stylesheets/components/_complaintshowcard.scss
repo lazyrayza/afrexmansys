@@ -1,0 +1,127 @@
+.complaint-show-card{
+  height: 85vh;
+  width: 55vw;
+  margin: 4%;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.1);
+  margin: 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: white;
+
+  .complaint-show-card-header{
+    border-radius: 20px 20px 0 0;
+    display: -webkit-box;
+    display: flex;
+    justify-content: space-around;
+    font-weight: 700;
+    padding: 16px 0;
+    color: #FFFFFF;
+    font-size: 24px;
+    background-color: #244846
+  }
+
+  .complaint-show-card-info{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    .complaint-show-card-info-top{
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      .complaint-show-card-info-first{
+        display: flex;
+        justify-content: space-between;
+        .info-first-left{
+          display: flex;
+          width: 40%;
+          justify-content: space-evenly;
+          .info-tenant-picture{
+            margin: 4%;
+          }
+          .info-tentant-info{
+            margin: 4%;
+          }
+        }
+        .info-complaint-date{
+          font-family: $body-font;
+          background-color: #244846;
+          border: none;
+          color: white;
+          padding: 8px 16px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          margin: 4px 2px;
+          cursor: pointer;
+          border-radius: 2rem;
+          box-sizing: border-box;
+          max-height: 80px;
+          &:hover, &:focus {
+            background:   #416E6B !important;
+            text-decoration: none;
+            color: white;
+            box-sizing: border-box;
+          }
+        }
+      }
+      .complaint-show-card-info-second{
+        padding: 20px;
+      }
+    }
+    .complaint-show-card-info-bottom{
+      display: flex;
+      justify-content: space-evenly;
+      .complaint-show-card-comment{
+        height: 80%;
+        width: 40%;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,.1);
+        .comment-title{
+          border-radius: 20px 20px 0px 0px;
+          display: flex;
+          justify-content: space-around;
+          padding: 6px 0;
+          background-color: #244846;
+          color: #FFFFFF;
+        }
+      }
+    }
+  }
+
+  .complaint-show-card-footer{
+    height: 20%;
+    border-radius: 0px 0px 20px 20px ;
+    display: flex;
+    justify-content: space-between;
+    background-color: #244846;
+    color: #FFFFFF;
+    .complaint-show-card-footer-left{
+      display: flex;
+      .complaint-show-card-employee-info{
+
+      }
+    }
+    .complaint-show-card-time-frame{
+      padding: 0.5rem 1rem;
+      color: white;
+      background-color: #416E6B;
+      border: 1px solid transparent;
+      border-radius: 1rem;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      transition: box-shadow 0.15s ease-in-out;
+      cursor: pointer;
+      height: 50px;
+      width: 135px;
+      font-size: 100%;
+      line-height: 1.15;
+      padding: 1px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      top: -1px;
+    }
+  }
+}

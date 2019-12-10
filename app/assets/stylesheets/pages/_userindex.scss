@@ -12,12 +12,14 @@
     justify-self: center;
     display: flex;
     flex-direction: column;
+    background: white;
     .card-top{
       display: flex;
       justify-content: space-around;
       height: 35%;
       background-image: url("https://images.pexels.com/photos/1824392/pexels-photo-1824392.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500");
       background-size: cover;
+      border-radius: 25px 25px 0px 0px;
       .top-avatar{
         position: absolute;
         margin-top: 3.7%;
@@ -31,6 +33,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-around;
+      background: white;
       // width: 80%;
       .card-job{
         padding: 2%;

@@ -65,7 +65,7 @@
             <%= cl_image_tag complaint.photo, class: 'avatar-square', crop: :fill %>
           </div>
           <div class="cell" data-title="Time Sent">
-            <%= (complaint.created_at + 8).strftime("%I:%M%p") %>
+            <%= (complaint.created_at + 3).strftime("%I:%M%p") %>
           </div>
           <div class="cell" data-title="Status">
             <% if complaint.resolved == true %>
