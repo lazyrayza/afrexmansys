@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   # mount Notifications::Engine => "/notifications"
   devise_for :users
   root to: 'pages#home'
+  resources :users_admin, :controller => 'users'
 
   resources :developments, except: [:show]
   resources :developments, only: [:show] do

@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:create, :new], raise: false
   before_action :find_user, only: [:show, :update, :destroy, :edit]
   def index
     if params[:query].present?

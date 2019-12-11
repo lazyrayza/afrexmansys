@@ -167,16 +167,16 @@
       </div>
     </div>
 
-<% elsif current_user.manager == true %>
+<% elsif current_user.manager == true || current_user.admin == true %>
 <!-- Manager profile -->
   <h2>Welcome back <%= @user.full_name %></h2>
-    <div class="profile-main">
-      <div class="profile-top">
-        <div class="profile-left">
-          <div class="profile-title">
+    <div class="tenant-profile-main">
+      <div class="tenant-profile-top">
+        <div class="tenant-profile-left">
+          <div class="tenant-profile-title">
             <h1>Profile</h1>
           </div>
-          <div class="profile-box-info">
+          <div class="tenant-profile-box-info">
             <u>Name:</u> <p><%= @user.full_name %></p>
             <u>Email:</u> <p><%= @user.email %></p>
             <% if current_user.employee %>
@@ -196,11 +196,11 @@
               <i class="fad fa-user-edit"></i>
             <% end %>
           </div>
-          <div class="profile-box-pic">
+          <div class="tenant-profile-box-pic">
             <%= cl_image_tag current_user.photo, class: 'avatar-tenant-large', crop: :fill  %>
           </div>
         </div>
-        <div class="profile-complaints">
+        <div class="tenant-profile-complaints">
           <div class="complaints-title">
             <h1>Complaints</h1>
           </div>

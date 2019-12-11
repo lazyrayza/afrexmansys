@@ -11,16 +11,34 @@
 
 <div class="dev-page">
   <% @units.each do |unit| %>
-    <div class="dev-box">
-      <%= link_to development_unit_path(unit) do %>
-        <p>Number:</p> <%= unit.unit_number %></h2>
-      <% end %>
-      <h4>Floor:</h4> <p><%= unit.floor %></p>
-      <h4>Size:</h4> <p><%= unit.size %>m2</p>
-      <h4>Bedrooms:</h4> <p><%= unit.bedrooms %></p>
-      <h4>Bathrooms:</h4> <p><%= unit.bathrooms %></p>
-      <h4>Price:</h4> <p><%= unit.price %></p>
-      <h4>description:</h4> <p><%= unit.description %></p>
+    <div class="dev-unit">
+
+      <div class="dev-unit-info">
+        <%= link_to development_unit_path(@development, unit) do %>
+          <% if unit.apartment == false %>
+            <h4><i class="fas fa-sort-numeric-up"></i> <%= unit.unit_number %></h4>
+          <% else %>
+            <h4><i class="far fa-building"></i></i> <%= unit.unit_number %></h4>
+          <% end %>
+        <% end %>
+        <h4><i class="fas fa-ruler-combined"></i> <%= unit.size %>m2</h4>
+        <h4><i class="fas fa-bed"></i> <%= unit.bedrooms %></h4>
+        <h4><i class="fas fa-shower"></i> <%= unit.bathrooms %></h4>
+        <h4><i class="fas fa-dollar-sign"></i> <%= unit.price %></h4>
+        <h4>  <%# unit.description %></h4>
+
+      </div>
+      <div class="dev-unit-occupant">
+        <% if unit.leases.to_a.last == nil %>
+          <div class="empty">
+            <i class="far fa-eye fa-4x"></i>
+          </div>
+        <% elsif unit.leases.to_a.last != nil   %>
+          <div class="occupied">
+            <%= cl_image_tag unit.leases.to_a.last.tenant.photo, class: 'avatar-tenant-occupied '  %>
+          </div>
+        <% end %>
+      </div>
     </div>
   <% end %>
 </div>
