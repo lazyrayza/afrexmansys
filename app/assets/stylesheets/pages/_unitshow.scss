@@ -1,0 +1,98 @@
+.unit-main{
+  display: flex;
+  justify-content: space-evenly;
+  padding: 5%;
+  // flex-direction: column;
+  .unit-profile{
+    height: 45vh;
+    width: 40vw;
+    background: #fff;
+    border-radius: 25px;
+    box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.5);
+    display: flex;
+    flex-direction: row;
+    // h2{
+    //     position: absolute;
+    //     z-index: 1;
+    //     border-radius: 8px 8px 0 0;
+    //     display: flex;
+    //     justify-content: space-around;
+    //     font-weight: 700;
+    //     padding: 16px 0;
+    //     color: #FFFFFF;
+    //     font-size: 24px;
+    //     background-color: #6ECAD6;
+    //   }
+    .unit-avatar {
+      position: absolute;
+      top: 25%;
+      left: 21%;
+      padding: 1%;
+      &:hover{
+        transform: scale(1.3);
+        transition: 0.3s;
+      }
+    }
+    .unit-dev-picture{
+      width: 35%;
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
+      background-position: bottom center;
+      background-size: cover;
+    }
+    .unit-info{
+      margin: 10%;
+      h1{
+        color: #55a9b2;
+      }
+      p{
+        font-size: 24px;
+        color: #494949;
+       }
+       i {
+         color: #55a9b2;
+       }
+      .unit-job{
+        padding: 2%;
+        text-align: right;
+        color: #74d5e0;
+        font-weight: bold;
+        font-size: 28px;
+      }
+    }
+  }
+
+
+
+  .unit-lease{
+    background: #fff;
+    border-radius: 25px;
+    box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.5);
+    height: 45vh;
+    // width: 60vw;
+    .unit-lease-title{
+      border-radius: 8px 8px 0 0;
+        display: flex;
+        justify-content: space-around;
+        font-weight: 700;
+        padding: 16px 0;
+        color: #FFFFFF;
+        font-size: 24px;
+        background-color: #6ECAD6;
+    }
+    .unit-lease-main{
+      display: flex;
+      justify-content: space-around;
+      .unit-lease-info{
+        padding: 2%;
+        min-width: 50%;
+        .blue-word{
+          color: #6ECAD6;
+        }
+      }
+      .unit-lease-avatar{
+        padding: 2%;
+      }
+    }
+  }
+}

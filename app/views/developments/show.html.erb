@@ -26,10 +26,10 @@
         <h4><i class="fas fa-bed"></i> <%= unit.bedrooms %></h4>
         <h4><i class="fas fa-shower"></i> <%= unit.bathrooms %></h4>
         <% if unit.leases.to_a.last == nil %>
-          <h4><i class="fas fa-dollar-sign"></i> <%= unit.price %>
+          <h4><i class="fas fa-dollar-sign"></i> <%= unit.price %>/pm
           </h4>
         <% else %>
-          <h4><i class="fas fa-dollar-sign"></i> <%= unit.leases.to_a.last.rent%>  [<% if (unit.leases.to_a.last.rent - unit.price) > 1 %><u class="pos"> + <%= (unit.leases.to_a.last.rent - unit.price).to_i %></u> <% else %> <u class="neg"> <%= (unit.leases.to_a.last.rent - unit.price).to_i %></u> <% end %>]
+          <h4><i class="fas fa-dollar-sign"></i> <%= unit.leases.to_a.last.rent%>/pm  [<% if (unit.leases.to_a.last.rent - unit.price) > 1 %><u class="pos"> + <%= (unit.leases.to_a.last.rent - unit.price).to_i %></u> <% else %> <u class="neg"> <%= (unit.leases.to_a.last.rent - unit.price).to_i %></u> <% end %>]
           </h4>
         <% end %>
 
@@ -40,10 +40,12 @@
           <div class="empty">
             <%= cl_image_tag 'https://res.cloudinary.com/durtng53m/image/upload/v1576134572/real-estate_1.png', class: 'avatar-unit-free ' %>
           </div>
-        <% elsif unit.leases.to_a.last != nil   %>
-          <div class="occupied">
-            <%= cl_image_tag unit.leases.to_a.last.tenant.photo, class: 'avatar-tenant-occupied '  %>
-          </div>
+        <% elsif unit.leases.to_a.last != nil %>
+          <%= link_to user_path(unit.leases.to_a.last.tenant) do %>
+            <div class="occupied">
+              <%= cl_image_tag unit.leases.to_a.last.tenant.photo, class: 'avatar-tenant-occupied '  %>
+            </div>
+          <% end %>
         <% end %>
       </div>
     </div>
