@@ -14,6 +14,7 @@
     <div class="dev-unit">
 
       <div class="dev-unit-info">
+
         <%= link_to development_unit_path(@development, unit) do %>
           <% if unit.apartment == false %>
             <h4><i class="fas fa-sort-numeric-up"></i> <%= unit.unit_number %></h4>
@@ -24,14 +25,20 @@
         <h4><i class="fas fa-ruler-combined"></i> <%= unit.size %>m2</h4>
         <h4><i class="fas fa-bed"></i> <%= unit.bedrooms %></h4>
         <h4><i class="fas fa-shower"></i> <%= unit.bathrooms %></h4>
-        <h4><i class="fas fa-dollar-sign"></i> <%= unit.price %></h4>
-        <h4>  <%# unit.description %></h4>
+        <% if unit.leases.to_a.last == nil %>
+          <h4><i class="fas fa-dollar-sign"></i> <%= unit.price %>
+          </h4>
+        <% else %>
+          <h4><i class="fas fa-dollar-sign"></i> <%= unit.leases.to_a.last.rent%>  [<% if (unit.leases.to_a.last.rent - unit.price) > 1 %><u class="pos"> + <%= (unit.leases.to_a.last.rent - unit.price).to_i %></u> <% else %> <u class="neg"> <%= (unit.leases.to_a.last.rent - unit.price).to_i %></u> <% end %>]
+          </h4>
+        <% end %>
 
       </div>
+
       <div class="dev-unit-occupant">
         <% if unit.leases.to_a.last == nil %>
           <div class="empty">
-            <i class="far fa-eye fa-4x"></i>
+            <%= cl_image_tag 'https://res.cloudinary.com/durtng53m/image/upload/v1576134572/real-estate_1.png', class: 'avatar-unit-free ' %>
           </div>
         <% elsif unit.leases.to_a.last != nil   %>
           <div class="occupied">

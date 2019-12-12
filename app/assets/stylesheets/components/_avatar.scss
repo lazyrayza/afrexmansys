@@ -99,3 +99,13 @@
   object-fit: cover;
   border: 6px solid #ea6153;
 }
+.avatar-unit-free {
+    width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      position: relative;
+      object-fit: cover;
+      border: 6px solid #27ae60;
+      display: flex;
+      justify-content: space-evenly;
+}
