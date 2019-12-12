@@ -1,0 +1,55 @@
+.development-show-card{
+  width: 80vw;
+  background: #fff;
+  border-radius: 25px;
+  box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.5);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 10px;
+  border: 6px solid white;
+  .development-show-card-picture{
+    height: 100%;
+    width :70%;
+    img{
+      fit: crop;
+      border-radius: 25px 0 0 25px;
+    }
+  }
+  .development-show-card-info{
+    display: flex;
+    flex-direction: column;
+    // width: 50%;
+    .development-show-card-info-title{
+      border-radius: 0 25px 0 0;
+      display: flex;
+      justify-content: space-around;
+      font-weight: 700;
+      padding: 16px 0;
+      color: #FFFFFF;
+      font-size: 24px;
+      background-color: #6ECAD6;
+    }
+    .development-show-card-info-list{
+      padding: 10px;
+      h1{
+        color: #55a9b2;
+      }
+      p{
+        font-size: 24px;
+        color: #494949;
+       }
+       i {
+         color: #55a9b2;
+       }
+    }
+  }
+  .development-action-btns{
+    display: flex;
+    // flex-direction: column;
+    justify-content: space-around;
+
+  }
+}
+
+

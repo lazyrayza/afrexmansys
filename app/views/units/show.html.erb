@@ -14,17 +14,16 @@
         <% else %>
           <p><i class="far fa-building"></i></i> <%= @unit.unit_number %></p>
         <% end %>
-      <p><i class="fas fa-ruler-combined"></i> <%= @unit.size %>m2</p>
+      <p><i class="fas fa-ruler-combined"></i> <%= @unit.size.to_i %>m2</p>
       <p><i class="fas fa-bed"></i> <%= @unit.bedrooms %></p>
       <p><i class="fas fa-shower"></i><%= @unit.bathrooms %></p>
       <% if @unit.leases.to_a.last == nil %>
         <h4><i class="fas fa-dollar-sign"></i> <%= @unit.price %>/pm
         </h4>
       <% else %>
-        <h4><i class="fas fa-dollar-sign"></i> <%= @unit.leases.to_a.last.rent%>/pm  [<% if (@unit.leases.to_a.last.rent - @unit.price) > 1 %><u class="pos"> + <%= (@unit.leases.to_a.last.rent - @unit.price).to_i %></u> <% else %> <u class="neg"> <%= (@unit.leases.to_a.last.rent - @unit.price).to_i %></u> <% end %>]
+        <h4><i class="fas fa-dollar-sign"></i> <%= @unit.leases.to_a.last.rent.to_i%>/pm  [<% if (@unit.leases.to_a.last.rent - @unit.price) > 1 %><u class="pos"> + <%= (@unit.leases.to_a.last.rent - @unit.price).to_i %></u> <% else %> <u class="neg"> <%= (@unit.leases.to_a.last.rent - @unit.price).to_i %></u> <% end %>]
         </h4>
       <% end %>
-      <p>description: <%= @unit.description %></p>
     </div>
   </div>
 
@@ -45,16 +44,19 @@
           <p><b class="blue-word">Security Deposit: </b> <%= @unit.leases.last.deposit %>USD</p>
           <p><b class="blue-word">Rent: </b><%= @unit.leases.last.rent %>/pm</p><p><b class="blue-word">Installments: </b><%= @unit.leases.last.installments %></p>
         <% else %>
-          <%=  link_to "New Lease" , new_development_unit_lease_path(@development, @unit) %>
+
+          <%=  link_to new_development_unit_lease_path(@development, @unit) do %>
+              <button type="submit" class="secondary-button"> New Lease </button>
+          <% end %>
         <% end %>
       </div>
       <div class="unit-lease-avatar">
-        <% if @unit.leases.to_a.last.tenant.photo != nil %>
+        <% if @unit.leases.to_a.last != nil %>
         <%= cl_image_tag @unit.leases.to_a.last.tenant.photo, class: 'avatar-tenant-large', crop: :fill %>
-        <% elsif @unit.leases.to_a.last.tenant.gender == false && @unit.leases.to_a.last.tenant.photo == false %>
+        <!-- <%# elsif @unit.leases.to_a.last.tenant.gender == false && @unit.leases.to_a.last.tenant.photo == false %>
           <img src="https://image.flaticon.com/icons/svg/701/701995.svg" alt="">
-        <% else %>
-          <img src="https://image.flaticon.com/icons/svg/702/702018.svg" alt="">
+        <%# else %>
+          <img src="https://image.flaticon.com/icons/svg/702/702018.svg" alt=""> -->
         <% end %>
       </div>
     </div>

@@ -1,79 +1,449 @@
 <!-- Predefined Calculations -->
 <% from_date = @lease.start_date.month %>
 <% to_date = @lease.end_date.strftime("%B, %Y") %>
-<% months_no = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] %>
-<%= Date.today.day %>
-<div class="container">
-  <div class="row">
-    <div class="col-md-6 payment-table">
-      <table class="table table-responsive table-hover">
-        <thead class="title">
-          <tr>
-            <td class="text-center" colspan="1"><i class="fa fa-bars menu-open"></i></td>
-            <td class="text-center" colspan="3">Payment</td>
-          </tr>
-        </thead>
-        <tbody class="payment-table-content">
-          <%# (@lease.duration * 12).times do  %>
-          <% months_no.drop(from_date - 1).each do |m| %>
-              <tr class="true">
-                <% if '.invoice' === "invoice no"%>
-                  <td><%= cl_image_tag @user.photo, class: 'avatar-payment-not-paid-card' %></td>
-                <% else %>
-                  <td><%= cl_image_tag @user.photo, class: 'avatar-payment-paid-card' %></td>
-                <% end %>
-                <td><%= @user.first_name[0] %>. <%= @user.last_name %></td>
-                <td><%= Date::MONTHNAMES[m] %>, <%= Date.today.year %></td>
-                <td>$<span><%= @lease.rent %></span></td>
-                <td><form>
-                  <input type="submit" value="">
-                </form></td>
-                <td class="invoice"></td>
-              </tr>
-          <% end %>
-          <% months_no[0..from_date - 2].each do |m| %>
-            <tr class="true">
-                <td><%= cl_image_tag @user.photo, class: 'avatar-payment-paid-card' %></td>
-                <td><%= @user.first_name[0] %>. <%= @user.last_name %></td>
-                <td><%= Date::MONTHNAMES[m] %>,  <%= Date.today.next_year.year %></td>
-                <td>$<span><%= @lease.rent %></span></td>
-                <td><form>
-                  <input type="submit" value="invoice no">
-                </form></td>
-                <td class="invoice"></td>
-              </tr>
-          <% end %>
-              <td colspan="2"></td>
-              <td>Deposit</td>
-              <td>$<%= @lease.deposit %></td>
-             </tr>
-              <td colspan="2"></td>
-              <td>Total</td>
-              <td><b><u>$<%= @lease.rent * (@lease.duration * 12) %></b></u></td>
+<% monthly = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] %>
+<% everytwomonthly = [1, 3, 5, 7, 9, 11, ] %>
+<% everythreemonths = [1, 4, 7, 10, 12] %>
+<% quarterly = [1, 4, 7, 10] %>
+<% everysixmonths = [1,6] %>
+<% everyyear = [1] %>
+
+<% Date.today.day %>
+<% if @lease.installments == 12 %>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 payment-table">
+        <table class="table table-responsive table-hover">
+          <thead class="title">
+            <tr>
+              <td class="text-center" colspan="1"><i class="fa fa-bars menu-open"></i></td>
+              <td class="text-center" colspan="3">Payment</td>
             </tr>
-          </tfooter>
-        </tbody>
-      </table>
+          </thead>
+          <tbody class="payment-table-content">
+            <%# (@lease.duration * 12).times do  %>
+            <% monthly.drop(from_date - 1).each do |m| %>
+                <tr class="true">
+                  <% if '.invoice' === "invoice no"%>
+                    <td><%= cl_image_tag @user.photo, class: 'avatar-payment-not-paid-card' %></td>
+                  <% else %>
+                    <td><%= cl_image_tag @user.photo, class: 'avatar-payment-paid-card' %></td>
+                  <% end %>
+                  <td><%= @user.first_name[0] %>. <%= @user.last_name %></td>
+                  <td><%= Date::MONTHNAMES[m] %>, <%= Date.today.year %></td>
+                  <td>$<span><%= @lease.rent %></span></td>
+                  <td><form>
+                    <input type="submit" value="">
+                  </form></td>
+                  <td class="invoice"></td>
+                </tr>
+            <% end %>
+            <% monthly[0..from_date - 2].each do |m| %>
+              <tr class="true">
+                  <td><%= cl_image_tag @user.photo, class: 'avatar-payment-paid-card' %></td>
+                  <td><%= @user.first_name[0] %>. <%= @user.last_name %></td>
+                  <td><%= Date::MONTHNAMES[m] %>,  <%= Date.today.next_year.year %></td>
+                  <td>$<span><%= @lease.rent %></span></td>
+                  <!-- <td><form>
+                    <input type="submit" value="invoice no">
+                  </form></td>
+                  <td class="invoice"></td> -->
+                </tr>
+            <% end %>
+                <td colspan="2"></td>
+                <td>Deposit</td>
+                <td>$<%= @lease.deposit %></td>
+               </tr>
+                <td colspan="2"></td>
+                <td>Total</td>
+                <td><b><u>$<%= @lease.rent * (@lease.duration * 12) %></b></u></td>
+              </tr>
+            </tfooter>
+          </tbody>
+        </table>
+      </div>
+      <!-- <div class="col-md-6">
+        <table class="table table-responsive table-hover">
+          <thead class="title">
+            <tr>
+              <td class="text-center" colspan="1"><i class="fa fa-bars menu-open"></i></td>
+              <td class="text-center" colspan="3">Traces</td>
+            </tr>
+          </thead>
+          <tbody class="payment-table-content">
+            <tr>
+              <td class="text-center" colspan="4">No Traces provided</td>
+            </tr>
+          </tbody>
+        </table>
+      </div> -->
+
     </div>
-    <!-- <div class="col-md-6">
-      <table class="table table-responsive table-hover">
-        <thead class="title">
-          <tr>
-            <td class="text-center" colspan="1"><i class="fa fa-bars menu-open"></i></td>
-            <td class="text-center" colspan="3">Traces</td>
-          </tr>
-        </thead>
-        <tbody class="payment-table-content">
-          <tr>
-            <td class="text-center" colspan="4">No Traces provided</td>
-          </tr>
-        </tbody>
-      </table>
-    </div> -->
-
   </div>
-</div>
 
+<% elsif @lease.installments == 6 %>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 payment-table">
+        <table class="table table-responsive table-hover">
+          <thead class="title">
+            <tr>
+              <td class="text-center" colspan="1"><i class="fa fa-bars menu-open"></i></td>
+              <td class="text-center" colspan="3">Payment</td>
+            </tr>
+          </thead>
+          <tbody class="payment-table-content">
+            <%# (@lease.duration * 12).times do  %>
+            <% everytwomonthly.drop(from_date - 1).each do |m| %>
+                <tr class="true">
+                  <% if '.invoice' === "invoice no"%>
+                    <td><%= cl_image_tag @user.photo, class: 'avatar-payment-not-paid-card' %></td>
+                  <% else %>
+                    <td><%= cl_image_tag @user.photo, class: 'avatar-payment-paid-card' %></td>
+                  <% end %>
+                  <td><%= @user.first_name[0] %>. <%= @user.last_name %></td>
+                  <td><%= Date::MONTHNAMES[m] %>, <%= Date.today.year %></td>
+                  <td>$<span><%= @lease.rent %></span></td>
+                  <!-- <td><form>
+                    <input type="submit" value="">
+                  </form></td>
+                  <td class="invoice"></td> -->
+                </tr>
+            <% end %>
+            <% everytwomonthly[0..from_date - 2].each do |m| %>
+              <tr class="true">
+                  <td><%= cl_image_tag @user.photo, class: 'avatar-payment-paid-card' %></td>
+                  <td><%= @user.first_name[0] %>. <%= @user.last_name %></td>
+                  <td><%= Date::MONTHNAMES[m] %>,  <%= Date.today.next_year.year %></td>
+                  <td>$<span><%= @lease.rent %></span></td>
+                  <td><form>
+                    <input type="submit" value="invoice no">
+                  </form></td>
+                  <td class="invoice"></td>
+                </tr>
+            <% end %>
+                <td colspan="2"></td>
+                <td>Deposit</td>
+                <td>$<%= @lease.deposit %></td>
+               </tr>
+                <td colspan="2"></td>
+                <td>Total</td>
+                <td><b><u>$<%= @lease.rent * (@lease.duration * 12) %></b></u></td>
+              </tr>
+            </tfooter>
+          </tbody>
+        </table>
+      </div>
+      <!-- <div class="col-md-6">
+        <table class="table table-responsive table-hover">
+          <thead class="title">
+            <tr>
+              <td class="text-center" colspan="1"><i class="fa fa-bars menu-open"></i></td>
+              <td class="text-center" colspan="3">Traces</td>
+            </tr>
+          </thead>
+          <tbody class="payment-table-content">
+            <tr>
+              <td class="text-center" colspan="4">No Traces provided</td>
+            </tr>
+          </tbody>
+        </table>
+      </div> -->
+
+    </div>
+  </div>
+
+
+<% elsif @lease.installments == 4 %>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 payment-table">
+        <table class="table table-responsive table-hover">
+          <thead class="title">
+            <tr>
+              <td class="text-center" colspan="1"><i class="fa fa-bars menu-open"></i></td>
+              <td class="text-center" colspan="3">Payment</td>
+            </tr>
+          </thead>
+          <tbody class="payment-table-content">
+            <%# (@lease.duration * 12).times do  %>
+            <% quarterly.drop(from_date - 1).each do |m| %>
+                <tr class="true">
+                  <% if '.invoice' === "invoice no"%>
+                    <td><%= cl_image_tag @user.photo, class: 'avatar-payment-not-paid-card' %></td>
+                  <% else %>
+                    <td><%= cl_image_tag @user.photo, class: 'avatar-payment-paid-card' %></td>
+                  <% end %>
+                  <td><%= @user.first_name[0] %>. <%= @user.last_name %></td>
+                  <td><%= Date::MONTHNAMES[m] %>, <%= Date.today.year %></td>
+                  <td>$<span><%= @lease.rent %></span></td>
+                  <td><form>
+                    <input type="submit" value="">
+                  </form></td>
+                  <td class="invoice"></td>
+                </tr>
+            <% end %>
+            <% quarterly[0..from_date - 2].each do |m| %>
+              <tr class="true">
+                  <td><%= cl_image_tag @user.photo, class: 'avatar-payment-paid-card' %></td>
+                  <td><%= @user.first_name[0] %>. <%= @user.last_name %></td>
+                  <td><%= Date::MONTHNAMES[m] %>,  <%= Date.today.next_year.year %></td>
+                  <td>$<span><%= @lease.rent %></span></td>
+                  <!-- <td><form>
+                    <input type="submit" value="invoice no">
+                  </form></td>
+                  <td class="invoice"></td> -->
+                </tr>
+            <% end %>
+                <td colspan="2"></td>
+                <td>Deposit</td>
+                <td>$<%= @lease.deposit %></td>
+               </tr>
+                <td colspan="2"></td>
+                <td>Total</td>
+                <td><b><u>$<%= @lease.rent * (@lease.duration * 12) %></b></u></td>
+              </tr>
+            </tfooter>
+          </tbody>
+        </table>
+      </div>
+      <!-- <div class="col-md-6">
+        <table class="table table-responsive table-hover">
+          <thead class="title">
+            <tr>
+              <td class="text-center" colspan="1"><i class="fa fa-bars menu-open"></i></td>
+              <td class="text-center" colspan="3">Traces</td>
+            </tr>
+          </thead>
+          <tbody class="payment-table-content">
+            <tr>
+              <td class="text-center" colspan="4">No Traces provided</td>
+            </tr>
+          </tbody>
+        </table>
+      </div> -->
+
+    </div>
+  </div>
+
+<% elsif @lease.installments == 3 %>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 payment-table">
+        <table class="table table-responsive table-hover">
+          <thead class="title">
+            <tr>
+              <td class="text-center" colspan="1"><i class="fa fa-bars menu-open"></i></td>
+              <td class="text-center" colspan="3">Payment</td>
+            </tr>
+          </thead>
+          <tbody class="payment-table-content">
+            <%# (@lease.duration * 12).times do  %>
+            <% everythreemonths.drop(from_date - 1).each do |m| %>
+                <tr class="true">
+                  <% if '.invoice' === "invoice no"%>
+                    <td><%= cl_image_tag @user.photo, class: 'avatar-payment-not-paid-card' %></td>
+                  <% else %>
+                    <td><%= cl_image_tag @user.photo, class: 'avatar-payment-paid-card' %></td>
+                  <% end %>
+                  <td><%= @user.first_name[0] %>. <%= @user.last_name %></td>
+                  <td><%= Date::MONTHNAMES[m] %>, <%= Date.today.year %></td>
+                  <td>$<span><%= @lease.rent %></span></td>
+                  <td><form>
+                    <input type="submit" value="">
+                  </form></td>
+                  <td class="invoice"></td>
+                </tr>
+            <% end %>
+            <% everythreemonths[0..from_date - 2].each do |m| %>
+              <tr class="true">
+                  <td><%= cl_image_tag @user.photo, class: 'avatar-payment-paid-card' %></td>
+                  <td><%= @user.first_name[0] %>. <%= @user.last_name %></td>
+                  <td><%= Date::MONTHNAMES[m] %>,  <%= Date.today.next_year.year %></td>
+                  <td>$<span><%= @lease.rent %></span></td>
+                  <!-- <td><form>
+                    <input type="submit" value="invoice no">
+                  </form></td>
+                  <td class="invoice"></td> -->
+                </tr>
+            <% end %>
+                <td colspan="2"></td>
+                <td>Deposit</td>
+                <td>$<%= @lease.deposit %></td>
+               </tr>
+                <td colspan="2"></td>
+                <td>Total</td>
+                <td><b><u>$<%= @lease.rent * (@lease.duration * 12) %></b></u></td>
+              </tr>
+            </tfooter>
+          </tbody>
+        </table>
+      </div>
+      <!-- <div class="col-md-6">
+        <table class="table table-responsive table-hover">
+          <thead class="title">
+            <tr>
+              <td class="text-center" colspan="1"><i class="fa fa-bars menu-open"></i></td>
+              <td class="text-center" colspan="3">Traces</td>
+            </tr>
+          </thead>
+          <tbody class="payment-table-content">
+            <tr>
+              <td class="text-center" colspan="4">No Traces provided</td>
+            </tr>
+          </tbody>
+        </table>
+      </div> -->
+
+    </div>
+  </div>
+
+<% elsif @lease.installments == 2 %>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 payment-table">
+        <table class="table table-responsive table-hover">
+          <thead class="title">
+            <tr>
+              <td class="text-center" colspan="1"><i class="fa fa-bars menu-open"></i></td>
+              <td class="text-center" colspan="3">Payment</td>
+            </tr>
+          </thead>
+          <tbody class="payment-table-content">
+            <%# (@lease.duration * 12).times do  %>
+            <% everysixmonths.drop(from_date - 1).each do |m| %>
+                <tr class="true">
+                  <% if '.invoice' === "invoice no"%>
+                    <td><%= cl_image_tag @user.photo, class: 'avatar-payment-not-paid-card' %></td>
+                  <% else %>
+                    <td><%= cl_image_tag @user.photo, class: 'avatar-payment-paid-card' %></td>
+                  <% end %>
+                  <td><%= @user.first_name[0] %>. <%= @user.last_name %></td>
+                  <td><%= Date::MONTHNAMES[m] %>, <%= Date.today.year %></td>
+                  <td>$<span><%= @lease.rent %></span></td>
+                  <td><form>
+                    <input type="submit" value="">
+                  </form></td>
+                  <td class="invoice"></td>
+                </tr>
+            <% end %>
+            <% everysixmonths[0..from_date - 2].each do |m| %>
+              <tr class="true">
+                  <td><%= cl_image_tag @user.photo, class: 'avatar-payment-paid-card' %></td>
+                  <td><%= @user.first_name[0] %>. <%= @user.last_name %></td>
+                  <td><%= Date::MONTHNAMES[m] %>,  <%= Date.today.next_year.year %></td>
+                  <td>$<span><%= @lease.rent %></span></td>
+                  <!-- <td><form>
+                    <input type="submit" value="invoice no">
+                  </form></td>
+                  <td class="invoice"></td> -->
+                </tr>
+            <% end %>
+                <td colspan="2"></td>
+                <td>Deposit</td>
+                <td>$<%= @lease.deposit %></td>
+               </tr>
+                <td colspan="2"></td>
+                <td>Total</td>
+                <td><b><u>$<%= @lease.rent * (@lease.duration * 12) %></b></u></td>
+              </tr>
+            </tfooter>
+          </tbody>
+        </table>
+      </div>
+      <!-- <div class="col-md-6">
+        <table class="table table-responsive table-hover">
+          <thead class="title">
+            <tr>
+              <td class="text-center" colspan="1"><i class="fa fa-bars menu-open"></i></td>
+              <td class="text-center" colspan="3">Traces</td>
+            </tr>
+          </thead>
+          <tbody class="payment-table-content">
+            <tr>
+              <td class="text-center" colspan="4">No Traces provided</td>
+            </tr>
+          </tbody>
+        </table>
+      </div> -->
+
+    </div>
+  </div>
+
+<% elsif @lease.installments == 1 %>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 payment-table">
+        <table class="table table-responsive table-hover">
+          <thead class="title">
+            <tr>
+              <td class="text-center" colspan="1"><i class="fa fa-bars menu-open"></i></td>
+              <td class="text-center" colspan="3">Payment</td>
+            </tr>
+          </thead>
+          <tbody class="payment-table-content">
+            <%# (@lease.duration * 12).times do  %>
+            <% everyyear.drop(from_date - 1).each do |m| %>
+                <tr class="true">
+                  <% if '.invoice' === "invoice no"%>
+                    <td><%= cl_image_tag @user.photo, class: 'avatar-payment-not-paid-card' %></td>
+                  <% else %>
+                    <td><%= cl_image_tag @user.photo, class: 'avatar-payment-paid-card' %></td>
+                  <% end %>
+                  <td><%= @user.first_name[0] %>. <%= @user.last_name %></td>
+                  <td><%= Date::MONTHNAMES[m] %>, <%= Date.today.year %></td>
+                  <td>$<span><%= @lease.rent %></span></td>
+                  <td><form>
+                    <input type="submit" value="">
+                  </form></td>
+                  <td class="invoice"></td>
+                </tr>
+            <% end %>
+            <% everyyear[0..from_date - 2].each do |m| %>
+              <tr class="true">
+                  <td><%= cl_image_tag @user.photo, class: 'avatar-payment-paid-card' %></td>
+                  <td><%= @user.first_name[0] %>. <%= @user.last_name %></td>
+                  <td><%= Date::MONTHNAMES[m] %>,  <%= Date.today.next_year.year %></td>
+                  <td>$<span><%= @lease.rent %></span></td>
+                  <!-- <td><form>
+                    <input type="submit" value="invoice no">
+                  </form></td>
+                  <td class="invoice"></td> -->
+                </tr>
+            <% end %>
+                <td colspan="2"></td>
+                <td>Deposit</td>
+                <td>$<%= @lease.deposit %></td>
+               </tr>
+                <td colspan="2"></td>
+                <td>Total</td>
+                <td><b><u>$<%= @lease.rent * (@lease.duration * 12) %></b></u></td>
+              </tr>
+            </tfooter>
+          </tbody>
+        </table>
+      </div>
+      <!-- <div class="col-md-6">
+        <table class="table table-responsive table-hover">
+          <thead class="title">
+            <tr>
+              <td class="text-center" colspan="1"><i class="fa fa-bars menu-open"></i></td>
+              <td class="text-center" colspan="3">Traces</td>
+            </tr>
+          </thead>
+          <tbody class="payment-table-content">
+            <tr>
+              <td class="text-center" colspan="4">No Traces provided</td>
+            </tr>
+          </tbody>
+        </table>
+      </div> -->
+
+    </div>
+  </div>
+
+<% end %>
 
 
 

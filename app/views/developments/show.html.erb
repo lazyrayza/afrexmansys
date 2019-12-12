@@ -1,68 +1,92 @@
-<ul><%= cl_image_tag @development.photo, class: 'dev-show-picture'  %></ul>
-<h1><%= @development.name %></h1>
-<h1><%= @development.address %></h1>
-<ul>GYM: <%= @development.gym %></ul>
-<ul>Pool: <%= @development.swimming_pool %></ul>
-<ul>S&S: <%= @development.sauna_and_steam %></ul>
-<ul>Generator: <%= @development.generator %></ul>
-<ul>Parkings: <%= @development.units.count * 2 %></ul>
-<ul>Units: <% @development.units.count %></ul>
-
-
 <div class="dev-page">
-  <% @units.each do |unit| %>
-    <div class="dev-unit">
+  <div class="development-show-card">
 
-      <div class="dev-unit-info">
-
-        <%= link_to development_unit_path(@development, unit) do %>
-          <% if unit.apartment == false %>
-            <h4><i class="fas fa-sort-numeric-up"></i> <%= unit.unit_number %></h4>
-          <% else %>
-            <h4><i class="far fa-building"></i></i> <%= unit.unit_number %></h4>
-          <% end %>
-        <% end %>
-        <h4><i class="fas fa-ruler-combined"></i> <%= unit.size %>m2</h4>
-        <h4><i class="fas fa-bed"></i> <%= unit.bedrooms %></h4>
-        <h4><i class="fas fa-shower"></i> <%= unit.bathrooms %></h4>
-        <% if unit.leases.to_a.last == nil %>
-          <h4><i class="fas fa-dollar-sign"></i> <%= unit.price %>/pm
-          </h4>
-        <% else %>
-          <h4><i class="fas fa-dollar-sign"></i> <%= unit.leases.to_a.last.rent%>/pm  [<% if (unit.leases.to_a.last.rent - unit.price) > 1 %><u class="pos"> + <%= (unit.leases.to_a.last.rent - unit.price).to_i %></u> <% else %> <u class="neg"> <%= (unit.leases.to_a.last.rent - unit.price).to_i %></u> <% end %>]
-          </h4>
-        <% end %>
-
-      </div>
-
-      <div class="dev-unit-occupant">
-        <% if unit.leases.to_a.last == nil %>
-          <div class="empty">
-            <%= cl_image_tag 'https://res.cloudinary.com/durtng53m/image/upload/v1576134572/real-estate_1.png', class: 'avatar-unit-free ' %>
-          </div>
-        <% elsif unit.leases.to_a.last != nil %>
-          <%= link_to user_path(unit.leases.to_a.last.tenant) do %>
-            <div class="occupied">
-              <%= cl_image_tag unit.leases.to_a.last.tenant.photo, class: 'avatar-tenant-occupied '  %>
-            </div>
-          <% end %>
-        <% end %>
-      </div>
+    <div class="development-show-card-picture">
+      <%= cl_image_tag @development.photo, class: 'dev-show-picture'%>
     </div>
-  <% end %>
+
+    <div class="development-show-card-info">
+
+      <div class="development-show-card-info-title">
+        <h1><%= @development.name %></h1>
+      </div>
+
+      <div class="development-show-card-info-list">
+        <p><i class="fas fa-map-marked-alt"></i><%= @development.address %></p>
+         <% available = 0 %>
+            <% @development.units.to_a.each do |unit|%>
+              <% if unit.available == true %>
+                <% available += 1 %>
+              <% end %>
+            <% end %>
+            <p><i class="fas fa-building"></i> <%= available %> / <%= @development.units.count %> Available</p>
+        <% if @development.gym == true %>
+              <p><i class="fas fa-dumbbell"></i> Gym</p>
+            <% end %>
+            <% if @development.swimming_pool == true %>
+              <p><i class="fas fa-swimmer"></i></i> Swimming Pool</p>
+            <% end %>
+      </div>
+    <div class="development-action-btns">
+      <%= link_to new_development_unit_path(@development) do %>
+       <button type="submit" class="secondary-button">New Unit</button>
+      <% end %>
+      <%= link_to notice_board_path(@development) do %>
+       <button type="submit" class="secondary-button">Notice Board</button>
+      <% end %>
+      <%= link_to edit_development_path(@development) do %>
+       <button type="submit" class="secondary-button">Edit Development</button>
+      <% end %>
+    </div>
+    </div>
+
+  </div>
+
+
+  <div class="dev-units">
+    <% @units.each do |unit| %>
+      <div class="dev-unit">
+
+        <div class="dev-unit-info">
+
+          <%= link_to development_unit_path(@development, unit) do %>
+            <% if unit.apartment == false %>
+              <h4><i class="fas fa-sort-numeric-up"></i> <%= unit.unit_number %></h4>
+            <% else %>
+              <h4><i class="fas fa-list-ol"></i> <%= unit.unit_number %></h4>
+            <% end %>
+          <% end %>
+          <h4><i class="fas fa-ruler-combined"></i> <%= unit.size %>m2</h4>
+          <h4><i class="fas fa-bed"></i> <%= unit.bedrooms %></h4>
+          <h4><i class="fas fa-shower"></i> <%= unit.bathrooms %></h4>
+          <% if unit.leases.to_a.last == nil %>
+            <h4><i class="fas fa-dollar-sign"></i> <%= unit.price %>/pm
+            </h4>
+          <% else %>
+            <h4><i class="fas fa-dollar-sign"></i> <%= unit.leases.to_a.last.rent%>/pm  [<% if (unit.leases.to_a.last.rent - unit.price) > 1 %><u class="pos"> + <%= (unit.leases.to_a.last.rent - unit.price).to_i %></u> <% else %> <u class="neg"> <%= (unit.leases.to_a.last.rent - unit.price).to_i %></u> <% end %>]
+            </h4>
+          <% end %>
+
+        </div>
+
+        <div class="dev-unit-occupant">
+          <% if unit.leases.to_a.last == nil %>
+            <div class="empty">
+              <%= cl_image_tag 'https://res.cloudinary.com/durtng53m/image/upload/v1576134572/real-estate_1.png', class: 'avatar-unit-free ' %>
+            </div>
+          <% elsif unit.leases.to_a.last != nil %>
+            <%= link_to user_path(unit.leases.to_a.last.tenant) do %>
+              <div class="occupied">
+                <%= cl_image_tag unit.leases.to_a.last.tenant.photo, class: 'avatar-tenant-occupied '  %>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
 </div>
-<%= link_to new_development_unit_path(@development) do %>
- <button type="submit" class="primary-button">New Unit</button>
-<% end %>
-
-
-
-<%= link_to notice_board_path(@development) do %>
- <button type="submit" class="primary-button">Notice Board</button>
-<% end %>
-<%= link_to edit_development_path(@development) do %>
- <button type="submit" class="primary-button">Edit Development</button>
-<% end %>
 <%# link_to development_devcharts_path(@development) do %>
  <!-- <button type="submit" class="primary-button">Development Chart</button> -->
 <%# end %>
