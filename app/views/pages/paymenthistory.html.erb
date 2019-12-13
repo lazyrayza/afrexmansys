@@ -8,7 +8,23 @@
 <% everysixmonths = [1,6] %>
 <% everyyear = [1] %>
 
-<% Date.today.day %>
+<%# ((@lease.start_date)...(@lease.end_date)).to_a.map{|x| x.to_s(:db)} %>
+<%# start_month = @lease.start_date.strftime("%m/%Y").to_date %>
+<%# end_month = @lease.end_date.strftime("%m/%Y").to_date %>
+
+<h4><%= @lease.start_date %></h4>
+<h4><%= @lease.end_date %></h4>
+
+<% nonsense = (@lease.start_date...@lease.end_date).map {|m| m.month } %>
+  <% months = nonsense.uniq { |m| m} %>
+  <% if @lease.duration/12 >= 1 %>
+    <% @final_months =  months * (@lease.duration / 12) %>
+  <% else %>
+  <% @final_months = months %>
+  <% end %>
+
+  <%= @final_months %>
+
 <% if @lease.installments == 12 %>
 
   <div class="container">
@@ -23,32 +39,30 @@
           </thead>
           <tbody class="payment-table-content">
             <%# (@lease.duration * 12).times do  %>
-            <% monthly.drop(from_date - 1).each do |m| %>
+            <% @final_months.drop(from_date -1).each do |m| %>
                 <tr class="true">
-                  <% if '.invoice' === "invoice no"%>
                     <td><%= cl_image_tag @user.photo, class: 'avatar-payment-not-paid-card' %></td>
-                  <% else %>
-                    <td><%= cl_image_tag @user.photo, class: 'avatar-payment-paid-card' %></td>
-                  <% end %>
                   <td><%= @user.first_name[0] %>. <%= @user.last_name %></td>
                   <td><%= Date::MONTHNAMES[m] %>, <%= Date.today.year %></td>
                   <td>$<span><%= @lease.rent %></span></td>
-                  <td><form>
-                    <input type="submit" value="">
-                  </form></td>
-                  <td class="invoice"></td>
+                  <td>
+                    <%= link_to user_lease_performainvoice_path(@user, @lease) do  %>
+                      <button class="primary-button"><i class="fas fa-file-invoice"></i></button>
+                    <% end %>
+                  </td>
                 </tr>
             <% end %>
             <% monthly[0..from_date - 2].each do |m| %>
               <tr class="true">
-                  <td><%= cl_image_tag @user.photo, class: 'avatar-payment-paid-card' %></td>
+                  <td><%= cl_image_tag @user.photo, class: 'avatar-payment-not-paid-card' %></td>
                   <td><%= @user.first_name[0] %>. <%= @user.last_name %></td>
                   <td><%= Date::MONTHNAMES[m] %>,  <%= Date.today.next_year.year %></td>
                   <td>$<span><%= @lease.rent %></span></td>
-                  <!-- <td><form>
-                    <input type="submit" value="invoice no">
-                  </form></td>
-                  <td class="invoice"></td> -->
+                  <td>
+                    <%= link_to user_lease_performainvoice_path(@user, @lease) do  %>
+                      <button class="primary-button"><i class="fas fa-file-invoice"></i></button>
+                    <% end %>
+                  </td>
                 </tr>
             <% end %>
                 <td colspan="2"></td>
@@ -83,6 +97,7 @@
   </div>
 
 <% elsif @lease.installments == 6 %>
+
   <div class="container">
     <div class="row">
       <div class="col-md-6 payment-table">
@@ -97,30 +112,28 @@
             <%# (@lease.duration * 12).times do  %>
             <% everytwomonthly.drop(from_date - 1).each do |m| %>
                 <tr class="true">
-                  <% if '.invoice' === "invoice no"%>
                     <td><%= cl_image_tag @user.photo, class: 'avatar-payment-not-paid-card' %></td>
-                  <% else %>
-                    <td><%= cl_image_tag @user.photo, class: 'avatar-payment-paid-card' %></td>
-                  <% end %>
                   <td><%= @user.first_name[0] %>. <%= @user.last_name %></td>
                   <td><%= Date::MONTHNAMES[m] %>, <%= Date.today.year %></td>
                   <td>$<span><%= @lease.rent %></span></td>
-                  <!-- <td><form>
-                    <input type="submit" value="">
-                  </form></td>
-                  <td class="invoice"></td> -->
+                  <td>
+                    <%= link_to user_lease_performainvoice_path(@user, @lease) do  %>
+                      <button class="primary-button"><i class="fas fa-file-invoice"></i></button>
+                    <% end %>
+                  </td>
                 </tr>
             <% end %>
             <% everytwomonthly[0..from_date - 2].each do |m| %>
               <tr class="true">
-                  <td><%= cl_image_tag @user.photo, class: 'avatar-payment-paid-card' %></td>
+                  <td><%= cl_image_tag @user.photo, class: 'avatar-payment-not-paid-card' %></td>
                   <td><%= @user.first_name[0] %>. <%= @user.last_name %></td>
                   <td><%= Date::MONTHNAMES[m] %>,  <%= Date.today.next_year.year %></td>
                   <td>$<span><%= @lease.rent %></span></td>
-                  <td><form>
-                    <input type="submit" value="invoice no">
-                  </form></td>
-                  <td class="invoice"></td>
+                  <td>
+                    <%= link_to user_lease_performainvoice_path(@user, @lease) do  %>
+                      <button class="primary-button"><i class="fas fa-file-invoice"></i></button>
+                    <% end %>
+                  </td>
                 </tr>
             <% end %>
                 <td colspan="2"></td>
@@ -156,6 +169,7 @@
 
 
 <% elsif @lease.installments == 4 %>
+
   <div class="container">
     <div class="row">
       <div class="col-md-6 payment-table">
@@ -170,30 +184,30 @@
             <%# (@lease.duration * 12).times do  %>
             <% quarterly.drop(from_date - 1).each do |m| %>
                 <tr class="true">
-                  <% if '.invoice' === "invoice no"%>
+
                     <td><%= cl_image_tag @user.photo, class: 'avatar-payment-not-paid-card' %></td>
-                  <% else %>
-                    <td><%= cl_image_tag @user.photo, class: 'avatar-payment-paid-card' %></td>
-                  <% end %>
+
                   <td><%= @user.first_name[0] %>. <%= @user.last_name %></td>
                   <td><%= Date::MONTHNAMES[m] %>, <%= Date.today.year %></td>
                   <td>$<span><%= @lease.rent %></span></td>
-                  <td><form>
-                    <input type="submit" value="">
-                  </form></td>
-                  <td class="invoice"></td>
+                  <td>
+                    <%= link_to user_lease_performainvoice_path(@user, @lease) do  %>
+                      <button class="primary-button"><i class="fas fa-file-invoice"></i></button>
+                    <% end %>
+                  </td>
                 </tr>
             <% end %>
             <% quarterly[0..from_date - 2].each do |m| %>
               <tr class="true">
-                  <td><%= cl_image_tag @user.photo, class: 'avatar-payment-paid-card' %></td>
+                  <td><%= cl_image_tag @user.photo, class: 'avatar-payment-not-paid-card' %></td>
                   <td><%= @user.first_name[0] %>. <%= @user.last_name %></td>
                   <td><%= Date::MONTHNAMES[m] %>,  <%= Date.today.next_year.year %></td>
                   <td>$<span><%= @lease.rent %></span></td>
-                  <!-- <td><form>
-                    <input type="submit" value="invoice no">
-                  </form></td>
-                  <td class="invoice"></td> -->
+                  <td>
+                    <%= link_to user_lease_performainvoice_path(@user, @lease) do  %>
+                      <button class="primary-button"><i class="fas fa-file-invoice"></i></button>
+                    <% end %>
+                  </td>
                 </tr>
             <% end %>
                 <td colspan="2"></td>
@@ -228,6 +242,7 @@
   </div>
 
 <% elsif @lease.installments == 3 %>
+
   <div class="container">
     <div class="row">
       <div class="col-md-6 payment-table">
@@ -242,30 +257,30 @@
             <%# (@lease.duration * 12).times do  %>
             <% everythreemonths.drop(from_date - 1).each do |m| %>
                 <tr class="true">
-                  <% if '.invoice' === "invoice no"%>
+
                     <td><%= cl_image_tag @user.photo, class: 'avatar-payment-not-paid-card' %></td>
-                  <% else %>
-                    <td><%= cl_image_tag @user.photo, class: 'avatar-payment-paid-card' %></td>
-                  <% end %>
+
                   <td><%= @user.first_name[0] %>. <%= @user.last_name %></td>
                   <td><%= Date::MONTHNAMES[m] %>, <%= Date.today.year %></td>
                   <td>$<span><%= @lease.rent %></span></td>
-                  <td><form>
-                    <input type="submit" value="">
-                  </form></td>
-                  <td class="invoice"></td>
+                  <td>
+                    <%= link_to user_lease_performainvoice_path(@user, @lease) do  %>
+                      <button class="primary-button"><i class="fas fa-file-invoice"></i></button>
+                    <% end %>
+                  </td>
                 </tr>
             <% end %>
             <% everythreemonths[0..from_date - 2].each do |m| %>
               <tr class="true">
-                  <td><%= cl_image_tag @user.photo, class: 'avatar-payment-paid-card' %></td>
+                  <td><%= cl_image_tag @user.photo, class: 'avatar-payment-not-paid-card' %></td>
                   <td><%= @user.first_name[0] %>. <%= @user.last_name %></td>
                   <td><%= Date::MONTHNAMES[m] %>,  <%= Date.today.next_year.year %></td>
                   <td>$<span><%= @lease.rent %></span></td>
-                  <!-- <td><form>
-                    <input type="submit" value="invoice no">
-                  </form></td>
-                  <td class="invoice"></td> -->
+                  <td>
+                    <%= link_to user_lease_performainvoice_path(@user, @lease) do  %>
+                      <button class="primary-button"><i class="fas fa-file-invoice"></i></button>
+                    <% end %>
+                  </td>
                 </tr>
             <% end %>
                 <td colspan="2"></td>
@@ -300,6 +315,7 @@
   </div>
 
 <% elsif @lease.installments == 2 %>
+
   <div class="container">
     <div class="row">
       <div class="col-md-6 payment-table">
@@ -314,30 +330,30 @@
             <%# (@lease.duration * 12).times do  %>
             <% everysixmonths.drop(from_date - 1).each do |m| %>
                 <tr class="true">
-                  <% if '.invoice' === "invoice no"%>
+
                     <td><%= cl_image_tag @user.photo, class: 'avatar-payment-not-paid-card' %></td>
-                  <% else %>
-                    <td><%= cl_image_tag @user.photo, class: 'avatar-payment-paid-card' %></td>
-                  <% end %>
+
                   <td><%= @user.first_name[0] %>. <%= @user.last_name %></td>
                   <td><%= Date::MONTHNAMES[m] %>, <%= Date.today.year %></td>
                   <td>$<span><%= @lease.rent %></span></td>
-                  <td><form>
-                    <input type="submit" value="">
-                  </form></td>
-                  <td class="invoice"></td>
+                  <td>
+                    <%= link_to user_lease_performainvoice_path(@user, @lease) do  %>
+                      <button class="primary-button"><i class="fas fa-file-invoice"></i></button>
+                    <% end %>
+                  </td>
                 </tr>
             <% end %>
             <% everysixmonths[0..from_date - 2].each do |m| %>
               <tr class="true">
-                  <td><%= cl_image_tag @user.photo, class: 'avatar-payment-paid-card' %></td>
+                  <td><%= cl_image_tag @user.photo, class: 'avatar-payment-not-paid-card' %></td>
                   <td><%= @user.first_name[0] %>. <%= @user.last_name %></td>
                   <td><%= Date::MONTHNAMES[m] %>,  <%= Date.today.next_year.year %></td>
                   <td>$<span><%= @lease.rent %></span></td>
-                  <!-- <td><form>
-                    <input type="submit" value="invoice no">
-                  </form></td>
-                  <td class="invoice"></td> -->
+                  <td>
+                    <%= link_to user_lease_performainvoice_path(@user, @lease) do  %>
+                      <button class="primary-button"><i class="fas fa-file-invoice"></i></button>
+                    <% end %>
+                  </td>
                 </tr>
             <% end %>
                 <td colspan="2"></td>
@@ -372,6 +388,7 @@
   </div>
 
 <% elsif @lease.installments == 1 %>
+
   <div class="container">
     <div class="row">
       <div class="col-md-6 payment-table">
@@ -386,30 +403,30 @@
             <%# (@lease.duration * 12).times do  %>
             <% everyyear.drop(from_date - 1).each do |m| %>
                 <tr class="true">
-                  <% if '.invoice' === "invoice no"%>
+
                     <td><%= cl_image_tag @user.photo, class: 'avatar-payment-not-paid-card' %></td>
-                  <% else %>
-                    <td><%= cl_image_tag @user.photo, class: 'avatar-payment-paid-card' %></td>
-                  <% end %>
+
                   <td><%= @user.first_name[0] %>. <%= @user.last_name %></td>
                   <td><%= Date::MONTHNAMES[m] %>, <%= Date.today.year %></td>
                   <td>$<span><%= @lease.rent %></span></td>
-                  <td><form>
-                    <input type="submit" value="">
-                  </form></td>
-                  <td class="invoice"></td>
+                  <td>
+                    <%= link_to user_lease_performainvoice_path(@user, @lease) do  %>
+                      <button class="primary-button"><i class="fas fa-file-invoice"></i></button>
+                    <% end %>
+                  </td>
                 </tr>
             <% end %>
             <% everyyear[0..from_date - 2].each do |m| %>
               <tr class="true">
-                  <td><%= cl_image_tag @user.photo, class: 'avatar-payment-paid-card' %></td>
+                  <td><%= cl_image_tag @user.photo, class: 'avatar-payment-not-paid-card' %></td>
                   <td><%= @user.first_name[0] %>. <%= @user.last_name %></td>
                   <td><%= Date::MONTHNAMES[m] %>,  <%= Date.today.next_year.year %></td>
                   <td>$<span><%= @lease.rent %></span></td>
-                  <!-- <td><form>
-                    <input type="submit" value="invoice no">
-                  </form></td>
-                  <td class="invoice"></td> -->
+                  <td>
+                    <%= link_to user_lease_performainvoice_path(@user, @lease) do  %>
+                      <button class="primary-button"><i class="fas fa-file-invoice"></i></button>
+                    <% end %>
+                  </td>
                 </tr>
             <% end %>
                 <td colspan="2"></td>
@@ -445,19 +462,4 @@
 
 <% end %>
 
-
-
-<script>
-  const f = document.querySelector('form');
-
-f.addEventListener('submit', (ev) => {
-  let but = f.querySelector('input');
-  but.type = (but.type === 'search') ? 'submit' : 'search';
-  ev.preventDefault();
-});
-
-document.querySelector('invoice').addEventListener('click', (ev) => {
-  let field = ev.target;
-  field.contentEditable = field.contentEditable === true ? false: true;
-});
-</script>
+<%# raise %>

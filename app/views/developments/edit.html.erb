@@ -1,30 +1,39 @@
+
 <div class="container">
-  <h1>Edit Development</h1>
+  <div class="login-container">
 
-  <%= simple_form_for [@development] do |f| %>
-    <%= f.error_notification %>
-    <div class="form-inputs">
-      <%= f.input :name,
-                  hint: "leave it blank if you don't want to change it",
-                  required: false,
-                  input_html: { autocomplete: "New description" }   %>
-      <%= f.input :address,
-                  required: false %>
-      <%= f.input :swimming_pool,
-                  required: false  %>
-      <%= f.input :gym,
-                  required: false  %>
-      <%= f.input :sauna_and_steam,
-                  required: false  %>
-      <%= f.input :generator,
-                  required: false  %>
-      <%= f.input :photo,
-                  required: false,
-                  input_html: { autocomplete: "new-photo" } %>
-    </div>
+      <div class="form-edit">
+        <h1>Edit <%= @development.name %></h1>
 
-    <div class="form-actions">
-      <%= f.button :submit, "Edit Building" %>
-    </div>
-  <% end %>
+        <%= simple_form_for [@development] do |f| %>
+          <%= f.error_notification %>
+          <div class="form-inputs">
+            <%= f.input :name,
+                        hint: "leave it blank if you don't want to change it",
+                        required: false,
+                        input_html: { autocomplete: "New description" }   %>
+            <%= f.input :address,
+                        required: false %>
+            <%= f.input :swimming_pool,
+                        required: false  %>
+            <%= f.input :gym,
+                        required: false  %>
+            <%= f.input :sauna_and_steam,
+                        required: false  %>
+            <%= f.input :generator,
+                        required: false  %>
+          <div class="upload-btn">
+            <%= f.input :photo,
+                        required: false,
+                        input_html: { autocomplete: "new-photo"  } %>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <%= f.button :submit, "Edit Building", class: 'primary-button' %>
+          </div>
+        <% end %>
+      </div>
+
+  </div>
 </div>

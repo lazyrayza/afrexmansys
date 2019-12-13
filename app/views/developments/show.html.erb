@@ -65,21 +65,27 @@
           <% else %>
             <h4><i class="fas fa-dollar-sign"></i> <%= unit.leases.to_a.last.rent%>/pm  [<% if (unit.leases.to_a.last.rent - unit.price) > 1 %><u class="pos"> + <%= (unit.leases.to_a.last.rent - unit.price).to_i %></u> <% else %> <u class="neg"> <%= (unit.leases.to_a.last.rent - unit.price).to_i %></u> <% end %>]
             </h4>
+            <h4> <i class="fas fa-history"></i> <%= unit.leases.to_a.last.end_date%></h4>
           <% end %>
 
         </div>
 
         <div class="dev-unit-occupant">
-          <% if unit.leases.to_a.last == nil %>
-            <div class="empty">
-              <%= cl_image_tag 'https://res.cloudinary.com/durtng53m/image/upload/v1576134572/real-estate_1.png', class: 'avatar-unit-free ' %>
-            </div>
-          <% elsif unit.leases.to_a.last != nil %>
+          <% if unit.leases.to_a.last != nil %>
+            <% if unit.leases.to_a.last.duration < 12 %>
+              <div class="short-term">
+                <h4><i class="fab fa-stripe-s" data-toggle="tooltip" title="Short Term"></i></h4>
+              </div>
+            <% end %>
             <%= link_to user_path(unit.leases.to_a.last.tenant) do %>
               <div class="occupied">
                 <%= cl_image_tag unit.leases.to_a.last.tenant.photo, class: 'avatar-tenant-occupied '  %>
               </div>
             <% end %>
+          <% elsif unit.leases.to_a.last == nil %>
+            <div class="empty">
+              <%= cl_image_tag 'https://res.cloudinary.com/durtng53m/image/upload/v1576134572/real-estate_1.png', class: 'avatar-unit-free ' %>
+            </div>
           <% end %>
         </div>
       </div>

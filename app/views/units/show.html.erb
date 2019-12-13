@@ -40,7 +40,7 @@
           <p><b class="blue-word">Start Date:</b> <%= @unit.leases.last.start_date %></p>
           <p><b class="blue-word">End Date:</b> <%= @unit.leases.last.end_date %></p>
           <p><b class="blue-word">Tenant</b> <%= @unit.leases.last.tenant.full_name %></p>
-          <p><b class="blue-word">Duration:</b> <%= @unit.leases.last.duration %> <% if @unit.leases.last.duration == 1 %>year <% else %>years <% end %></p>
+          <p><b class="blue-word">Duration:</b> <%= @unit.leases.last.duration %> <% if @unit.leases.last.duration == 1 %>month <% else %>months <% end %></p>
           <p><b class="blue-word">Security Deposit: </b> <%= @unit.leases.last.deposit %>USD</p>
           <p><b class="blue-word">Rent: </b><%= @unit.leases.last.rent %>/pm</p><p><b class="blue-word">Installments: </b><%= @unit.leases.last.installments %></p>
         <% else %>

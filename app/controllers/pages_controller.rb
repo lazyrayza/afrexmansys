@@ -18,6 +18,11 @@ class PagesController < ApplicationController
     @lease = Lease.where(tenant_id: @user.id).to_a.first
 
   end
+  def paymenthistory
+    @user = User.find(params[:user_id])
+    @lease = Lease.where(tenant_id: @user.id).to_a.first
+
+  end
 
   def insights
     @user = current_user

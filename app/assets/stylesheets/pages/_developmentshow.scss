@@ -34,16 +34,21 @@
         color: #55a9b2;
       }
       h4{
-        font-size: 24px;
+        font-size: 20px;
         color: #494949;
        }
        i {
          color: #55a9b2;
+         margin: 1px;
        }
     }
     .dev-unit-occupant{
       width: 35%;
       padding: 5%;
+      .short-term{
+        display: flex;
+        justify-content: space-around;
+      }
       .occupied{
         transition: 0.3s;
         &:hover, &:focus {
