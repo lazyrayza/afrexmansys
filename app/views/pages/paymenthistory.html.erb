@@ -19,60 +19,25 @@
    <% month_date = Date.new(d.year, d.next_month.beginning_of_month.month, 1) %>
    <% monthly << month_date if monthly.exclude?(month_date) && month_date < end_date - 1.month %>
   <% end %>
-  <%= monthly %>
+  <% monthly %>
   <!-- need to create array of indexes in accordance to installments * length -->
-<h1><% monthly.values_at(0, 3, 6, 9) %></h1>
+<% monthly.values_at(0, 3, 6, 9) %>
 
 
-duration: <%= @duration = @lease.duration/12 %>
+<% @duration = @lease.duration/12 %>
 <% @monthlyy * (@lease.duration / 12) %>
-installments:<%= @lease.installments * @duration %> <% n = 12 / @lease.installments %>
+<% @lease.installments * @duration %> <% n = 12 / @lease.installments %>
 <%  list = (n).step(monthly.size - 1, n).map { |i| monthly[i] } %>
-<%= @final = [monthly[0]] + list  %>
+<% @final = [monthly[0]] + list  %>
 
 
 
 
 
-<!-- predefined instalment arrays * duration/12 -->
-<!-- option 2 -->
-<% number_of_months = (end_date.year * 12 + end_date.month) - (start_date.year * 12 + start_date.month) %>
 
-
-
-<% array_month = (1 .. number_of_months).to_a%>
-
-<% if @lease.duration == 12 %>
-
-  <% @array = [@lease.start_date.month] %>
-  <% monthly.each { |m| @array.push( m + @lease.start_date.month )} %>
-
-  <% @array = @array.each do |nm| %>
-    <%  if nm > 12  %>
-      <%  nm - 12 %>
-    <% end %>
-  <% end %>
-
-  <% @lease.start_date.month + 1 %>
-<% end %>
-
-<% @array %>
-<%# @array.each {|n| n.month} %>
 
 
 <!-- option 1 -->
-<h4><% @lease.start_date %></h4>
-<h4><% @lease.end_date %></h4>
-
-<% nonsense = (@lease.start_date...@lease.end_date).map {|m| m.month } %>
-  <% months = nonsense.uniq { |m| m} %>
-  <% if @lease.duration/12 >= 1 %>
-    <% @final_months =  months * (@lease.duration / 12) %>
-  <% else %>
-  <% @final_months = months %>
-  <% end %>
-
-  <% @final_months %>
 
   <!-- if full length longer than set period, than check for month start date and account for duration cut to the start and end to check for balanced payment table -->
 
@@ -84,8 +49,7 @@ installments:<%= @lease.installments * @duration %> <% n = 12 / @lease.installme
         <table class="table table-responsive table-hover">
           <thead class="title">
             <tr>
-              <td class="text-center" colspan="1"><i class="fa fa-bars menu-open"></i></td>
-              <td class="text-center" colspan="3">Payment</td>
+              <td class="text-center" colspan="3">Payment</td><td class="text-center" colspan="3"></td>
             </tr>
           </thead>
           <tbody class="payment-table-content">
@@ -94,12 +58,15 @@ installments:<%= @lease.installments * @duration %> <% n = 12 / @lease.installme
                 <tr class="true">
                     <td><%= cl_image_tag @user.photo, class: 'avatar-payment-not-paid-card' %></td>
                   <td><%= @user.first_name[0] %>. <%= @user.last_name %></td>
-                  <td><%= m %></td>
-                  <td>$<span><%= @lease.rent %></span></td>
+                  <td><%= @lease.start_date.strftime("%d/") %><%= m.strftime("%B/%Y")  %></td>
+                  <td>$<span><%= @lease.rent * (12 /@lease.installments) %></span></td>
                   <td>
                     <%= link_to user_lease_performainvoice_path(@user, @lease) do  %>
                       <button class="primary-button"><i class="fas fa-file-invoice"></i></button>
                     <% end %>
+                  </td>
+                  <td>
+                    <button class="primary-button" ><i class="fas fa-receipt"></i></button>
                   </td>
                 </tr>
             <% end %>
@@ -109,7 +76,7 @@ installments:<%= @lease.installments * @duration %> <% n = 12 / @lease.installme
                </tr>
                 <td colspan="2"></td>
                 <td>Total</td>
-                <td><b><u>$<%= @lease.rent * (@lease.duration * 12) %></b></u></td>
+                <td><b><u>$<%= @lease.rent * (@lease.duration) %></b></u></td>
               </tr>
             </tfooter>
           </tbody>
@@ -133,8 +100,6 @@ installments:<%= @lease.installments * @duration %> <% n = 12 / @lease.installme
 
     </div>
   </div>
-
-
 
 
 <%# raise %>

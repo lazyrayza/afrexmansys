@@ -78,6 +78,36 @@
      i {
        color: #55a9b2;
      }
+    #notice-btn{
+      color: white;
+      background-color: #489099;
+      border-radius: 50%;
+      border: 3px solid white;
+      height: 45px;
+      width: 45px;
+      padding: 1%;
+      display: flex;
+      margin: auto;
+      box-sizing: border-box;
+      i{
+        font-size: 24px;
+      }
+      p {
+        margin-left: 5%;
+        opacity: 0;
+      }
+      &:hover {
+        width: 200px;
+        border-radius: 25px;
+        transition: 0.3s;
+        box-sizing: border-box;
+        p{
+        font-size: 20px;
+        opacity: 100;
+        font-weight: bold;
+        }
+      }
+    }
   }
   // dev-open-class
 

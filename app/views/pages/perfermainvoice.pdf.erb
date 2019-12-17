@@ -1,10 +1,10 @@
 
 
- <u><b>PROFORMA INVOICE</b></u><br>
+ PROFORMA INVOICE
 
 
-<b>TIN NO: 106-401 039</b><br>
-<b>VRN NO: 40-004274-W</b><br>
+TIN NO: 106-401 039
+VRN NO: 40-004274-W
 
                                                                                                                     No: XXX
                                                                                                                             Date: XXXXXXX
@@ -16,15 +16,15 @@ DAR ES SALAAM.
 TO CHARGE YOU RENT ON YOUR APARTMENT NO: H-14 AT PALM RESIDENCY, LOCATED AT PLOT 45/46, CHIMARA ROAD, DAR ES SALAAM.
 
 
-
-<table class="performa-table" style="width:100%">
+<table style="width:100%">
   <tr>
     <th>ITEM</th>
     <th>Period</th>
     <th>Rate/ Month</th>
     <th>Amount ($)</th>
-
-
+    <% url = "https://www.xe.com/currencyconverter/convert/?Amount=1&From=USD&To=TZS" %>
+    <% tzs_searialized = open(url).read %>
+    <h1> <%= amount = JSON.parse(tzs_serialized) %></h1>
     <th><%# "#{user['name']} - #{user['bio']}" %></th>
   </tr>
   <tr>
@@ -67,9 +67,3 @@ BRANCH               : EXIM TOWER, GHANA STREET,                SWIFT           
                                   P.O.BOX 96, DAR ES SALAAM.               CURRENCY        : US DOLLARS
                                  TANZANIA                                                  ACCOUNT NO  : 0010049918
 
-
-
-
-
-
-<%= link_to "DOWNLOAD PDF", user_lease_performainvoice_path(@user, @lease, format: :pdf) %>

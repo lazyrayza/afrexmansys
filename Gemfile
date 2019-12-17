@@ -27,7 +27,8 @@ gem 'groupdate'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 gem 'pg_search'
-
+gem 'nokogiri'
+gem 'mechanize'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
