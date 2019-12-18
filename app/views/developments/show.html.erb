@@ -1,4 +1,15 @@
 <div class="dev-page">
+  <div id="mySidenav" class="sidenav">
+    <%= link_to new_development_unit_path(@development) do %>
+       <button type="submit" class="secondary-button" id="about">New Unit</button>
+    <% end %>
+    <%= link_to notice_board_path(@development) do %>
+      <button type="submit" class="secondary-button" id="blog">Notice Board</button>
+    <% end %>
+    <%= link_to edit_development_path(@development) do %>
+      <button type="submit" class="secondary-button" id="projects">Edit Development</button>
+    <% end %>
+  </div>
   <div class="development-show-card">
 
     <div class="development-show-card-picture">
@@ -27,7 +38,7 @@
               <p><i class="fas fa-swimmer"></i></i> Swimming Pool</p>
             <% end %>
       </div>
-    <div class="development-action-btns">
+    <!-- <div class="development-action-btns">
       <%= link_to new_development_unit_path(@development) do %>
        <button type="submit" class="secondary-button">New Unit</button>
       <% end %>
@@ -37,7 +48,7 @@
       <%= link_to edit_development_path(@development) do %>
        <button type="submit" class="secondary-button">Edit Development</button>
       <% end %>
-    </div>
+    </div> -->
     </div>
 
   </div>

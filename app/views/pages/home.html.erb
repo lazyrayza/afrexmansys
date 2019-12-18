@@ -29,6 +29,11 @@
           <button type="submit" class="primary-button">Start Your Journey</button>
         <% end %>
       <% end %>
+      <% if user_signed_in? && current_user.tenant == true %>
+        <%= link_to profile_path(current_user) do %>
+          <button type="submit" class="primary-button">Your Profile</button>
+        <% end %>
+      <% end %>
     </div>
 
   </div>

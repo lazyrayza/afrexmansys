@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :developments, except: [:show]
   resources :developments, only: [:show] do
     # get "/devcharts", to: "pages#devcharts"
+    get "/devcharts", to: "pages#devcharts"
     resources :units, only: [:show, :new, :create] do
       resources :leases, only: [:show, :new, :create]
     end
@@ -38,6 +39,5 @@ Rails.application.routes.draw do
   get "/profile", to: "pages#profile"
   get "/insights", to: "pages#insights"
   get "/admininsights", to: "pages#admininsights"
-  get "/devcharts", to: "pages#devcharts"
 
 end
