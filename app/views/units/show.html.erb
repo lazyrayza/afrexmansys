@@ -1,27 +1,70 @@
+<div class="unit-main">
+  <div class="unit-profile">
 
-  <h2>Number: <%= @unit.unit_number %></h2>
-  <h2>Floor: <%= @unit.floor %></h2>
-  <h2>Size: <%= @unit.size %>m2</h2>
-  <h2>Bedrooms: <%= @unit.bedrooms %></h2>
-  <h2>Bathrooms: <%= @unit.bathrooms %></h2>
-  <h2>Price: <%= @unit.price %></h2>
-  <h2>description: <%= @unit.description %></h2>
+    <div class="unit-dev-picture" style="background-image: url(
+      <% if @unit.leases.to_a.last != nil %>
+        <%= cl_image_path(@unit.development.photo) %>
+        <% else %>
+        https://images.pexels.com/photos/2987769/pexels-photo-2987769.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260
+      <% end %>);">
+    </div>
+    <div class="unit-info">
+      <% if @unit.apartment == false %>
+          <p><i class="fas fa-sort-numeric-up"></i> <%= @unit.unit_number %></p>
+        <% else %>
+          <p><i class="far fa-building"></i></i> <%= @unit.unit_number %></p>
+        <% end %>
+      <p><i class="fas fa-ruler-combined"></i> <%= @unit.size.to_i %>m2</p>
+      <p><i class="fas fa-bed"></i> <%= @unit.bedrooms %></p>
+      <p><i class="fas fa-shower"></i><%= @unit.bathrooms %></p>
+      <% if @unit.leases.to_a.last == nil %>
+        <h4><i class="fas fa-dollar-sign"></i> <%= @unit.price %>/pm
+        </h4>
+      <% else %>
+        <h4><i class="fas fa-dollar-sign"></i> <%= @unit.leases.to_a.last.rent.to_i%>/pm  [<% if (@unit.leases.to_a.last.rent - @unit.price) > 1 %><u class="pos"> + <%= (@unit.leases.to_a.last.rent - @unit.price).to_i %></u> <% else %> <u class="neg"> <%= (@unit.leases.to_a.last.rent - @unit.price).to_i %></u> <% end %>]
+        </h4>
+      <% end %>
+    </div>
+  </div>
 
 
 
+  <div class="unit-lease">
+    <div class="unit-lease-title">
+      <h1>Lease for <%= @unit.development.name %> unit <%= @unit.unit_number %></h1>
+    </div>
 
-    <% if @unit.leases.to_a.last != nil %>
-      <p>Start Date: <%= @unit.leases.last.start_date %></p>
-      <p>End Date: <%= @unit.leases.last.end_date %></p>
-      <p>Tenant <%= @unit.leases.last.tenant.id %>: <%= @unit.leases.last.tenant.full_name %></p>
-      <p>Duration: <%= @unit.leases.last.duration %> <% if @unit.leases.last.duration == 1 %>year <% else %>years <% end %></p>
-      <p>Security Deposit: <%= @unit.leases.last.deposit %>USD</p>
-      <%= @unit.leases.last.unit_id %>
-    <% else %>
-      <%=  link_to "New Lease" , new_development_unit_lease_path(@development, @unit) %>
-    <% end %>
+    <div class="unit-lease-main">
+      <div class="unit-lease-info">
+        <% if @unit.leases.to_a.last != nil %>
+          <p><b class="blue-word">Start Date:</b> <%= @unit.leases.last.start_date %></p>
+          <p><b class="blue-word">End Date:</b> <%= @unit.leases.last.end_date %></p>
+          <p><b class="blue-word">Tenant</b> <%= @unit.leases.last.tenant.full_name %></p>
+          <p><b class="blue-word">Duration:</b> <%= @unit.leases.last.duration %> <% if @unit.leases.last.duration == 1 %>month <% else %>months <% end %></p>
+          <p><b class="blue-word">Security Deposit: </b> <%= @unit.leases.last.deposit %>USD</p>
+          <p><b class="blue-word">Rent: </b><%= @unit.leases.last.rent %>/pm</p><p><b class="blue-word">Installments: </b><%= @unit.leases.last.installments %></p>
+        <% else %>
 
-<%=  link_to "Lease" , development_unit_lease_path(@development, @unit, @unit) %>
+          <%=  link_to new_development_unit_lease_path(@development, @unit) do %>
+              <button type="submit" class="secondary-button"> New Lease </button>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="unit-lease-avatar">
+        <% if @unit.leases.to_a.last != nil %>
+        <%= cl_image_tag @unit.leases.to_a.last.tenant.photo, class: 'avatar-tenant-large', crop: :fill %>
+        <!-- <%# elsif @unit.leases.to_a.last.tenant.gender == false && @unit.leases.to_a.last.tenant.photo == false %>
+          <img src="https://image.flaticon.com/icons/svg/701/701995.svg" alt="">
+        <%# else %>
+          <img src="https://image.flaticon.com/icons/svg/702/702018.svg" alt=""> -->
+        <% end %>
+      </div>
+    </div>
+
+  <%#  link_to "Lease" , development_unit_lease_path(@development, @unit, @unit) %>
+
+  </div>
+</div>
 
 <%# raise %>
 <!-- // Now displaying correct lease, but not showing new lease link for units without lease! Need to rethink logic for lease display // -->

@@ -1,21 +1,243 @@
-<div class="home-banner"></div>
-<div class="temp-btnz">
-  <%= link_to developments_path do %>
-    <button type="submit" class="primary-button">Developments</button>
-  <% end %>
-  <%= link_to complaints_path do %>
-    <button type="submit" class="primary-button">Complaints</button>
-  <% end %>
-  <%= link_to departments_path do %>
-    <button type="submit" class="primary-button">Departments</button>
-  <% end %>
-  <%= link_to stores_path do %>
-    <button type="submit" class="primary-button">Stores</button>
-  <% end %>
-  <%= link_to users_path do %>
-    <button type="submit" class="primary-button">Users</button>
-  <% end %>
+<div class="top-banner">
+
+  <div class="top-first">
+
+    <div class="top-right">
+
+      <div class="top-right-img">
+
+        <%= cl_image_tag("roundlogo.png", width: 400, height: 400, crop: :fill) %>
+
+      </div>
+
+    </div>
+
+    <% if !user_signed_in? %>
+      <div class="top-left">
+
+        <div class="hero-text"><h1 class="main is-size-1-tablet has-margin-bottom-35">Where real estate meets effeciency.</h1><h2 class="subtitle text-rotator">Afrex is Africa's first proptech platform. Our high performance SaaS is shaping the future of <span id="home-typed-text"></span></h2></div>
+
+      </div>
+    <% end %>
+  </div>
+
+  <div class="top-second">
+
+    <div class="login-btn">
+      <% if !user_signed_in? %>
+        <%= link_to new_user_session_path do %>
+          <button type="submit" class="primary-button">Start Your Journey</button>
+        <% end %>
+      <% end %>
+      <% if user_signed_in? && current_user.tenant == true %>
+        <%= link_to profile_path(current_user) do %>
+          <button type="submit" class="primary-button">Your Profile</button>
+        <% end %>
+      <% end %>
+    </div>
+
+  </div>
 </div>
+
+<% if !user_signed_in? %>
+  <div class="middle">
+    <div class="homepage-content" style=" background: #F5F5F5">
+      <div class="max-width">
+        <div class="card-container">
+          <div id="card-dxp" class="card">
+            <a href="#">
+              <div id="card-content-dxp" class="card-content">
+      <!--           dxp-icon -->
+                <svg width="152" height="152" viewBox="0 0 152 152" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M7.95755 11.2392C19.6127 -5.10632 52.0194 -2.83215 69.502 12.9448C102.477 42.651 59.6947 115.851 19.6127 86.5707C18.6174 85.86 17.6225 85.1494 16.6276 84.2965C3.97757 73.3522 -6.25627 57.8594 4.54608 18.3459C5.25673 15.6454 6.53589 13.3712 7.95755 11.2392Z" transform="translate(44.9053 28.8799)" fill="#489099"/>
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M27.0227 3.19277C60.7085 -10.5943 102.923 22.5231 70.0894 59.3361C62.4142 67.8642 50.4749 75.3973 38.6776 78.5243C30.1497 80.7984 21.6216 80.6563 14.9413 76.8186C-1.11998 67.8641 -5.09978 36.0259 7.26599 18.9697C12.9513 11.2944 19.7739 6.17758 27.0227 3.19277Z" transform="translate(25.8398 36.9268)" fill="#6ECAD6"/>
+                  <path d="M51.0242 59.3361C83.8573 22.5231 41.6433 -10.5943 7.95728 3.19277C6.53594 5.3248 5.25672 7.59895 4.54605 10.2995C-6.25621 49.813 3.97751 65.3057 16.6275 76.2501C17.6225 77.1029 18.6174 77.8136 19.6123 78.5243C31.4095 75.3973 43.3489 67.8642 51.0242 59.3361Z" transform="translate(44.9053 36.9268)" fill="#6ECAD6"/>
+                </svg>
+      <!--           dxp-icon-end -->
+                <h3>Residential Property</h3>
+                <div class="cta-link-container">
+                  <p class="cta-link">Short, Medium & long term rental<svg class="cta-icon" height="10" width="8"><use xlink:href="#caret"></use></svg></p>
+                </div>
+              </div>
+      <!--           dxp-curve -->
+                <svg id="dxp-curves" viewbox="0 0 336 154" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path id="dxp-more-blue" d="M 0,154 H 336 V 154 V 154 C 274,154 247,154 183,154 C 110,154 73,154 0,154 V 154 Z" fill="#489099"/>
+                  <path id="dxp-primary-blue" d="M 0,154 H 336 V 154 C 279,154 256,154 198,154 C 118,154 61,154 0,154 V 154 Z" fill="#6ECAD6"/>
+              </svg>
+            </a>
+          </div>
+          <div id="card-commerce" class="card">
+            <a href="#">
+              <div class="card-content">
+                <svg width="152" height="152" viewBox="0 0 152 152" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M46.356 2.01169L74.2381 25.9106C77.6311 29.0086 78.0737 34.3194 74.9757 37.7125L42.2254 75.7737C40.7872 77.4995 38.7882 78.4542 36.7068 78.6377C36.3802 78.6944 36.0066 78.7242 35.5868 78.7242L10.6553 78.4291C7.55727 78.4291 4.45926 75.7737 4.01669 72.6757L0.205068 49.1001C-0.207905 46.4048 -0.14492 43.2965 1.80383 40.958L34.5542 2.89684C37.5046 -0.643731 42.8155 -0.938797 46.356 2.01169Z" transform="translate(15.4082 37.9551)" fill="#6ECAD6"/>
+                  <path d="M30.6914 76.5697L2.95687 52.6708C-0.58369 49.7203 -1.02627 44.4094 2.07172 40.8689L34.822 2.80767C36.7294 0.518867 39.2553 -0.0891669 42.3874 0.0101435L66.5397 0.152226C69.6377 0.152226 72.7357 2.80765 73.1782 5.90565L77.1614 30.5422C77.215 30.9176 77.2406 31.2606 77.2397 31.5697C77.3684 33.6874 76.7031 35.872 75.2436 37.6233L42.4933 75.6845C39.5428 79.2251 34.232 79.5201 30.6914 76.5697Z" transform="translate(59.5449 36.5693)" fill="#489099"/>
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M20.6916 0L30.1018 8.06543C33.4943 11.1641 33.9367 16.4746 30.8391 19.8682L12.2619 41.458L2.95723 33.4404C-0.583788 30.4902 -1.02617 25.1787 2.07149 21.6387L20.6916 0Z" transform="translate(59.5449 55.7998)" fill="#489099"/>
+                </svg>
+                <h3>Serviced apartments</h3>
+                <div class="cta-link-container">
+                <p class="cta-link">Attract more profitable guests <svg class="cta-icon" height="10" width="8"><use xlink:href="#caret"></use></svg></p>
+                </div>
+              </div>
+      <!--           commerce-curve -->
+                <svg id="commerce-curves" viewbox="0 0 336 162" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path id="commerce-more-blue" d="M 0,162 H 336 V 162 C 266,162 222,162 148,162 C 87,162 89,162 0,162 V 0 Z" fill="#489099"/>
+                  <path id="commerce-primary-blue" d="M 0,162 H 336 V 162 C 288,162 257,162 180,162 C 103,162 81,162 0,162 V 162 Z" fill="#6ECAD6"/>
+              </svg>
+            </a>
+          </div>
+          <div id="card-analytics-cloud" class="card">
+            <a href="#">
+              <div class="card-content">
+                <svg width="152" height="152" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill="#fff" d="M0 0h152v152H0z"/>
+                  <path d="M95.25 25.84c2.765 0 5.07 2.156 5.07 4.743v90.834c0 2.587-2.305 4.743-5.07 4.743H62.83c-2.765 0-5.07-2.156-5.07-4.743V30.583c0-2.587 2.305-4.743 5.07-4.743h32.42z" fill="#6ECAD6"/>
+                  <path d="M64.85 77.52c2.765 0 5.07 2.251 5.07 4.954v38.731c0 2.703-2.305 4.955-5.07 4.955H32.43c-2.765 0-5.07-2.252-5.07-4.955V82.474c0-2.703 2.305-4.954 5.07-4.954h32.42zM125.65 50.16c2.765 0 5.07 2.168 5.07 4.768v66.464c0 2.6-2.304 4.768-5.07 4.768H93.23c-2.765 0-5.07-2.167-5.07-4.768V54.928c0-2.6 2.305-4.768 5.07-4.768h32.42z" fill="#489099"/>
+                  <path d="M57.916 77.522h6.86s5.144-.3 5.144 5.55v38.999s0 4.05-6.08 4.05c0 0-5.145.75-6.08-4.35V77.522h.156zM93.305 50.163s-5.145-.29-5.145 5.343V122.223s0 3.9 6.08 3.9c0 0 5.145.722 6.08-4.188V50.163h-7.015z" fill="#489099"/>
+                </svg>
+                <h3 class="a-c-span">Commercial Property</h3>
+                <div class="cta-link-container">
+                  <p class="cta-link">Unlock scale and profitability<svg class="cta-icon" height="10" width="8"><use xlink:href="#caret"></use></svg></p>
+                </div>
+              </div>
+      <!--           analytics-cloud-curve -->
+                <svg id="analytics-cloud-curves" viewbox="0 0 336 149" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path id="analytics-cloud-more-blue" d="M 0,336 H 336 V 149 C 242,149 272,149 187,149 C 102,149 37,149 0,149 V 0 Z" fill="#489099"/>
+                  <path id="analytics-cloud-primary-blue" d="M 0,336 H 336 V 149 C 267,149 227,149 153,149 C 90,149 62,149 0,149 V 0 Z" fill="#6ECAD6"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="home-bottom">
+    <div class="bottom-left">
+      <div class="bottom-icons">
+        <i class="fab fa-apple fa-3x"></i>
+        <i class="fab fa-android fa-3x"></i>
+        <i class="fas fa-desktop fa-3x"></i>
+        <i class="fas fa-laptop fa-3x"></i>
+      </div>
+      <div class="bottom-info">
+        <h1>Revolutionising Property Portfolio Management</h1>
+        <p>Bring together the key features  property management into one single place, Afrex property management... Unlocking operational efficency with itteligient automation whilst attracting more profitable guests from unique distribution channels. Discover a comprehensive SaaS toolkit designed to unlock scale and profitability, whilst accelerating your growth through industry partnerships.</p>
+        <div class="info-img">
+          <img src="https://res.cloudinary.com/dnqrlagsz/image/upload/v1552405536/appstore_2.png" alt="">
+          <img src="https://res.cloudinary.com/dnqrlagsz/image/upload/v1552405407/googleplay_1.png" alt="">
+        </div>
+      </div>
+    </div>
+      <div class="bottom-img">
+        <%= image_tag "devices.png" %>
+      </div>
+  </div>
+
+<% elsif user_signed_in? && current_user.employee == true || current_user.manager == true || current_user.admin == true %>
+  <div class="homejourney">
+
+      <main>
+        <h1>Journey</h1>
+        <div class="item item--top">
+          <%= link_to new_users_admin_path do %>
+            <div class="item__number" id="start-journey">1</div>
+          <% end %>
+          <div class="item__topic">
+            <div class="item__topic__title">Create Tenant</div>
+            <div class="item__topic__author"> <span>by </span><span>Admin</span></div>
+          </div>
+        </div>
+        <div class="item item--bottom item--left">
+          <div class="item__number">2</div>
+          <div class="item__topic">
+            <div class="item__topic__title">Find Home</div>
+            <div class="item__topic__author"> <span>by </span><span>Admin</span></div>
+          </div>
+        </div>
+        <div class="item item--top">
+          <div class="item__number">3</div>
+          <div class="item__topic">
+            <div class="item__topic__title">Create Lease</div>
+            <div class="item__topic__author"> <span>by </span><span>Admin</span></div>
+          </div>
+        </div>
+        <div class="item item--bottom item--left">
+          <div class="item__number">4</div>
+          <div class="item__topic">
+            <div class="item__topic__title">Download Lease & Send</div>
+            <div class="item__topic__author"> <span>by </span><span>Admin</span></div>
+          </div>
+        </div>
+        <div class="item item--top">
+          <div class="item__number">5</div>
+          <div class="item__topic">
+            <div class="item__topic__title">Scan & Upload Signed Lease Agreement</div>
+            <div class="item__topic__author"> <span>by </span><span>Admin</span></div>
+          </div>
+        </div>
+        <div class="item item--bottom">
+          <div class="item__number">6</div>
+          <div class="item__topic">
+            <div class="item__topic__title">Send Invoice For Rent Payment</div>
+            <div class="item__topic__author"> <span>by </span><span>Admin</span></div>
+          </div>
+        </div>
+        <div class="item item--top">
+          <div class="item__number">7</div>
+          <div class="item__topic">
+            <div class="item__topic__title">Tenant Signs Inventory On Handover</div>
+            <div class="item__topic__author"> <span>by </span><span>Handover Team</span></div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+  <div class="sections">
+    <div class="sections-title">
+      <h1>Sections</h1>
+    </div>
+
+    <div class="sections-btns">
+      <div class="section-btn">
+        <div class="section-btn-title">
+          <h2>Development</h2>
+        </div>
+          <%= link_to developments_path do %>
+          <div class="section-btn-svg">
+            <svg class="svg" height="480pt" viewBox="0 -4 480 480" width="480pt" xmlns="http://www.w3.org/2000/svg"><path d="m80 0h320v32h-320zm0 0" fill="#c0c2c4"/><path d="m64 32h352v432h-352zm0 0" fill="#d1d4d6"/><path d="m168 384h144v80h-144zm0 0" fill="#b1b3b5"/><path d="m152 376h176v16h-176zm0 0" fill="#dee1e3"/><path d="m200 416h80v48h-80zm0 0" fill="#4398d1"/><path d="m224 464h56v-48h-8zm0 0" fill="#378cc4"/><path d="m232 416h16v48h-16zm0 0" fill="#3181bd"/><path d="m48 24h384v16h-384zm0 0" fill="#d1d4d6"/><path d="m0 456h480v16h-480zm0 0" fill="#dee1e3"/><path d="m32 416h16v40h-16zm0 0" fill="#a3603e"/><path d="m432 416h16v40h-16zm0 0" fill="#a3603e"/><g fill="#4398d1"><path d="m224 320h32v32h-32zm0 0"/><path d="m160 320h32v32h-32zm0 0"/><path d="m96 320h32v32h-32zm0 0"/><path d="m352 320h32v32h-32zm0 0"/><path d="m288 320h32v32h-32zm0 0"/><path d="m224 256h32v32h-32zm0 0"/><path d="m160 256h32v32h-32zm0 0"/><path d="m96 256h32v32h-32zm0 0"/><path d="m352 256h32v32h-32zm0 0"/><path d="m288 256h32v32h-32zm0 0"/><path d="m224 192h32v32h-32zm0 0"/><path d="m160 192h32v32h-32zm0 0"/><path d="m96 192h32v32h-32zm0 0"/><path d="m352 192h32v32h-32zm0 0"/><path d="m288 192h32v32h-32zm0 0"/><path d="m224 128h32v32h-32zm0 0"/><path d="m160 128h32v32h-32zm0 0"/><path d="m96 128h32v32h-32zm0 0"/><path d="m352 128h32v32h-32zm0 0"/><path d="m288 128h32v32h-32zm0 0"/><path d="m224 64h32v32h-32zm0 0"/><path d="m160 64h32v32h-32zm0 0"/><path d="m96 64h32v32h-32zm0 0"/><path d="m352 64h32v32h-32zm0 0"/><path d="m288 64h32v32h-32zm0 0"/><path d="m96 384h32v48h-32zm0 0"/><path d="m352 384h32v48h-32zm0 0"/></g><path d="m62.921875 351.105469c2.800781-9.019531.050781-18.839844-7.023437-25.097657-7.070313-6.253906-17.15625-7.78125-25.765626-3.902343-8.605468 3.882812-14.136718 12.453125-14.132812 21.894531 0 2.445312.378906 4.871094 1.121094 7.199219 2.5625 7.503906 1.390625 15.777343-3.152344 22.273437-8.050781 11.261719-7.949219 26.421875.253906 37.574219 8.207032 11.148437 22.648438 15.761719 35.796875 11.425781 13.144531-4.332031 22.015625-16.628906 21.980469-30.472656.011719-6.667969-2.09375-13.164062-6.007812-18.558594-4.519532-6.535156-5.660157-14.828125-3.070313-22.335937zm0 0" fill="#88b337"/><path d="m462.921875 351.105469c2.800781-9.019531.050781-18.839844-7.023437-25.097657-7.070313-6.253906-17.15625-7.78125-25.765626-3.902343-8.605468 3.882812-14.136718 12.453125-14.132812 21.894531 0 2.445312.378906 4.871094 1.121094 7.199219 2.5625 7.503906 1.390625 15.777343-3.152344 22.273437-9.507812 13.277344-7.488281 31.582032 4.679688 42.472656 12.167968 10.890626 30.585937 10.867188 42.730468-.046874 12.144532-10.914063 14.121094-29.226563 4.589844-42.484376-4.507812-6.527343-5.636719-14.8125-3.046875-22.308593zm0 0" fill="#88b337"/><path d="m64 40h352v16h-352zm0 0" fill="#c0c2c4"/></svg>
+
+          </div>
+          <% end %>
+      </div>
+
+      <div class="section-btn">
+        <div class="section-btn-title">
+          <h2>Users</h2>
+        </div>
+        <%= link_to users_path do %>
+          <div class="section-btn-svg">
+            <svg class="svg" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><path d="m88 280h64v72h-64z" fill="#ffa912"/><path d="m190.942 354.431-46.942-10.431v-64h-48v64l-46.942 10.431a32 32 0 0 0 -25.058 31.238v102.331h192v-102.331a32 32 0 0 0 -25.058-31.238z" fill="#fec9a3"/><path d="m144 329.526v-49.526h-48v49.526a47.723 47.723 0 0 0 48 0z" fill="#feb784"/><path d="m168 248v24a48 48 0 0 1 -96 0v-24a48 48 0 0 1 96 0z" fill="#fec9a3"/><path d="m168 248v24a48 48 0 0 1 -39.93 47.32 57.633 57.633 0 0 0 14.46-38.27v-42.1a57.633 57.633 0 0 0 -14.46-38.27 48.013 48.013 0 0 1 39.93 47.32z" fill="#fec093"/><path d="m190.942 354.431-41.758-9.279-29.184 94.848-29.184-94.848-41.758 9.279a32 32 0 0 0 -25.058 31.238v102.331h192v-102.331a32 32 0 0 0 -25.058-31.238z" fill="#425b82"/><path d="m80 488h-16v-12.406c-18.66-17.684-21.363-44.211-6.078-64.418l12.758 9.648c-10.864 14.367-8.223 32.879 6.425 45.016a8 8 0 0 1 2.895 6.16z" fill="#3c5174"/><path d="m176 488h-16v-16a8 8 0 0 1 2.9-6.16c14.648-12.137 17.289-30.649 6.425-45.016l12.758-9.648c15.285 20.207 12.582 46.734-6.078 64.418z" fill="#3c5174"/><path d="m90.833 345.333-26.833 30.667 24 16-8 16 40 32z" fill="#49648e"/><path d="m149.167 345.333 26.833 30.667-24 16 8 16-40 32z" fill="#49648e"/><path d="m184 240v80a31.991 31.991 0 0 1 -32 32v-128l-32-16-32 16v128a32 32 0 0 1 -32-32v-80a64 64 0 0 1 56-63.51 65.551 65.551 0 0 1 16 0 64.017 64.017 0 0 1 56 63.51z" fill="#ffb531"/><path d="m128 176.49v35.51l-8-4-8 4v-35.51a65.551 65.551 0 0 1 16 0z" fill="#f7a116"/><path d="m408 344v-64h-64v64l-39.761 9.94a32 32 0 0 0 -24.239 31.045v103.015h192v-103.015a32 32 0 0 0 -24.239-31.045z" fill="#fec9a3"/><path d="m408 344-32 16-32-16-39.761 9.94a32 32 0 0 0 -24.239 31.045v103.015h192v-103.015a32 32 0 0 0 -24.239-31.045z" fill="#c7c7c5"/><path d="m408 323.706v-43.706h-64v43.7a47.792 47.792 0 0 0 64 0z" fill="#feb784"/><path d="m447.761 353.94-39.761-9.94-32 128-32-128-39.761 9.94a32 32 0 0 0 -24.239 31.045v103.015h192v-103.015a32 32 0 0 0 -24.239-31.045z" fill="#425b82"/><path d="m424 248v24a47.99 47.99 0 0 1 -46.51 47.97c-.49.02-.99.03-1.49.03a48 48 0 0 1 -48-48v-24a48 48 0 0 1 96 0z" fill="#fec9a3"/><path d="m312 408h16v80h-16z" fill="#3c5174"/><path d="m424 408h16v80h-16z" fill="#3c5174"/><path d="m424 248v24a47.99 47.99 0 0 1 -46.51 47.97 62.37 62.37 0 0 0 19.35-45.23v-45.48a62.335 62.335 0 0 0 -6.09-26.95 48.047 48.047 0 0 1 33.25 45.69z" fill="#fec093"/><path d="m424 224a32 32 0 0 0 -32-32h-32a32 32 0 0 0 -32 32v18l6.4-3.6c6.991-3.932 13.338-16.875 17.6-22.4a43.266 43.266 0 0 0 48 0c4.392 7.731 9.357 22.586 17.6 27.886l6.4 4.114v-20.572a23.335 23.335 0 0 0 -.4-3.428z" fill="#f98500"/><path d="m408 344 24 32-24 16 8 16-40 64z" fill="#49648e"/><path d="m344 344-24 32 24 16-8 16 40 64z" fill="#49648e"/><path d="m376 360-32-16 11 44z" fill="#e0e0de"/><path d="m408 344-32 16 21 28z" fill="#e0e0de"/><g fill="#7a432a"><path d="m88 248h16v16h-16z"/><path d="m136 248h16v16h-16z"/><path d="m344 248h16v16h-16z"/><path d="m392 248h16v16h-16z"/></g><path d="m288 312v-64h-64v64l-54.276 10.855a32 32 0 0 0 -25.724 31.379v133.766h224v-133.766a32 32 0 0 0 -25.724-31.379z" fill="#fec9a3"/><path d="m288 293.92v-45.92h-64v45.92a55.834 55.834 0 0 0 64 0z" fill="#feb784"/><path d="m288 312-32 32-32-32-54.276 10.855a32 32 0 0 0 -25.724 31.379v133.766h224v-133.766a32 32 0 0 0 -25.724-31.379z" fill="#e0e0de"/><path d="m256 344-32-40-20.8 12.16 28.8 51.84z" fill="#ebebe9"/><path d="m256 344 32-40 20.8 12.16-28.8 51.84z" fill="#ebebe9"/><path d="m346.649 324.136c-55.585 93.281-152.549 133.386-202.649 151.253v12.611h224v-133.767a31.946 31.946 0 0 0 -21.351-30.097z" fill="#d6d6d4"/><path d="m240 360v128h32v-128l-16-16z" fill="#348fd9"/><path d="m312 192v40a56 56 0 0 1 -56 56 56.732 56.732 0 0 1 -7.42-.49 56.011 56.011 0 0 1 -48.58-55.51v-40a56 56 0 0 1 56-56 55.993 55.993 0 0 1 56 56z" fill="#fec9a3"/><path d="m312 192v40a56 56 0 0 1 -56 56 56.732 56.732 0 0 1 -7.42-.49 71.668 71.668 0 0 0 28.68-57.4v-52.22a71.416 71.416 0 0 0 -13.07-41.29 56 56 0 0 1 47.81 55.4z" fill="#fec093"/><path d="m206.4 187.2-6.4 4.8v-24a32 32 0 0 1 32-32 64 64 0 0 1 -25.6 51.2z" fill="#95573a"/><path d="m305.6 186.514 6.4 5.486v-27.429c0-20.2-14.327-36.571-32-36.571 0 23.022 9.484 44.7 25.6 58.514z" fill="#95573a"/><path d="m200 120h72a40 40 0 0 1 40 40 0 0 0 0 1 0 0h-88a24 24 0 0 1 -24-24v-16a0 0 0 0 1 0 0z" fill="#8f4d2e"/><path d="m224 200h16v16h-16z" fill="#7a432a"/><path d="m272 200h16v16h-16z" fill="#7a432a"/><path d="m184 376h16v112h-16z" fill="#bfbfbd"/><path d="m312 376h16v112h-16z" fill="#bfbfbd"/><path d="m256 344-16 16v16l16-16 16 16v-16z" fill="#3086cd"/></svg>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="section-btn">
+        <div class="section-btn-title">
+          <h2>Complaints</h2>
+        </div>
+        <%= link_to complaints_path do %>
+          <div class="section-btn-svg">
+            <svg class="svg" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><g id="Flat"><rect fill="#f35244" height="416" rx="24" width="320" x="48" y="72"/><path d="m80 104h256v352h-256z" fill="#4eb9c7"/><path d="m336 104v320h-192l-64-64v-256z" fill="#60d1e0"/><path d="m336 104v320h-192l-64-64v-13.47l246.64-242.53z" fill="#5ac6d4"/><path d="m80 360h64v64z" fill="#b7e7eb"/><g fill="#3fb5c4"><circle cx="208" cy="168" r="24"/><path d="m168 208h120v16h-120z"/><path d="m120 208h32v16h-32z"/><path d="m120 240h136v16h-136z"/><path d="m120 304h120v16h-120z"/><path d="m168 336h128v16h-128z"/><path d="m120 272h128v16h-128z"/><path d="m296 400h-24a8 8 0 0 1 -7.821-6.316c-.366.635-.711 1.274-1.03 1.9a8 8 0 0 1 -15.149-3.584 26.884 26.884 0 0 0 -1.062-7.144c-2.276 1.933-5.654 6.5-7.789 10.733l-14.3-7.167c2.391-4.79 11.14-20.422 23.151-20.422a13.614 13.614 0 0 1 11.2 5.946c3.6-3.375 7.93-5.946 12.8-5.946a11.124 11.124 0 0 1 9.734 5.2c1.927 3.117 2.1 6.993 1.449 10.8h12.817zm-47.643-16.039"/></g><path d="m240 64v-8a32 32 0 0 0 -32-32 32 32 0 0 0 -32 32v8l-35.969 4.5a32 32 0 0 0 -28.031 31.749v19.751h192v-19.751a32 32 0 0 0 -28.031-31.749z" fill="#ffb531"/><path d="m200 48h16v16h-16z" fill="#ed8c0c"/><path d="m457.373 150.627-145.373 145.373-32-32 145.373-145.373a22.627 22.627 0 0 1 16-6.627 22.628 22.628 0 0 1 22.627 22.627 22.627 22.627 0 0 1 -6.627 16z" fill="#4d5e78"/><path d="m421.657 245.657-11.314-11.314 42.343-42.343a11.313 11.313 0 0 0 0-16l-42.343-42.343 11.314-11.314 42.343 42.343a27.314 27.314 0 0 1 0 38.628z" fill="#d6d6d4"/><path d="m280 264-16 48 48-16z" fill="#d6d6d4"/><path d="m367.999 177.373h16.001v45.255h-16.001z" fill="#d6d6d4" transform="matrix(.707 -.707 .707 .707 -31.294 324.451)"/></g></svg>
+          </div>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+
+
+<% end %>
 
 
 <%# cl_image_tag("san_francisco.jpg",

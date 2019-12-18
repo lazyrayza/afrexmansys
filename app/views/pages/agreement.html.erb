@@ -16,7 +16,11 @@
         <p class="big"><b>MARINA TOWERS LIMITED</b></p>
 
         <p class="big"><b>AND</b></p>
-        <p class="big"><b><%= @lease.tenant.full_name %></b></p>
+        <% if @lease.tenantpaying == true %>
+          <p class="big"><b><%= @lease.tenant.full_name %></b></p>
+        <% else %>
+          <p class="big"><b><%= @lease.tenant.company %></b></p>
+        <% end %>
         <p class="big"><b>_____________________________________</b></p>
 
         <p class="big"><b>FOR LEASE OF APARTMENT NO. <%= @lease.unit.unit_number %></b></p>

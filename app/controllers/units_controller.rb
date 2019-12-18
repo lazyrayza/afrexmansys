@@ -43,7 +43,7 @@ private
   # end
 
   def find_units
-    @unit ||= Unit.find(params[:development_id])
+    @unit ||= Unit.find(params[:id])
   end
 
 

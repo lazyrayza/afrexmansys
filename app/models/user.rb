@@ -22,4 +22,12 @@ class User < ApplicationRecord
   def not_employee
     User.where(:employee == false)
   end
+
+
+  include PgSearch
+  pg_search_scope :search_for_tenant,
+                  against: [:first_name, :last_name, :contact_number, :email],
+                  using: {
+                    tsearch: { prefix: true }
+                  }
 end

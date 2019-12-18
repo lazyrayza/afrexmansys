@@ -1,23 +1,164 @@
-<div class="complaints-main">
-  <div class="complaint-info">
-    <ul> <u>Made by:</u>  <%= link_to @complaint.tenant.full_name, user_path(@complaint.tenant) %></ul>
-    <ul> <u>Unit:</u> <%= @unit = Lease.find_by(tenant_id: @complaint.tenant.id).unit_id %></ul>
-    <ul><u>Development:</u> <%# Unit.find_by(unit_id: @unit) %></ul>
-    <ul> <u>Description:</u> <%= @complaint.description  %></ul>
-    <ul><u>Photo:</u> <%= cl_image_tag @complaint.photo, height: 300, width: 400, crop: :fill %></ul>
-    <ul><u>Resolved:</u> <%= @complaint.resolved  %></ul>
-    <%= link_to edit_complaint_path(@complaint) do %>
-    <button type="submit" class="primary-button">Edit</button>
-  <% end %>
+<div class="complaint-show-card-container">
+
+  <div class="complaint-show-card">
+
+    <div class="complaint-show-card-header">
+      <h2>COMPLAINT CARD NO. <%= @number.index(@complaint) +1 %></h2>
+    </div>
+
+    <div class="complaint-show-card-info">
+
+      <div class="complaint-show-card-info-top">
+
+        <div class="complaint-show-card-info-first">
+
+          <div class="info-first-left">
+            <div class="info-tenant-picture">
+              <%= cl_image_tag @complaint.tenant.photo, class: 'avatar-complaint-show-card', crop: :fill%>
+            </div>
+
+            <div class="info-tentant-info">
+              <h4><%= @complaint.tenant.first_name[0] %>. <%= @complaint.tenant.last_name %></h4>
+              <h4><%= @unit = Lease.find_by(tenant_id: @complaint.tenant.id).unit.development.name %>/ <%= @unit = Lease.find_by(tenant_id: @complaint.tenant.id).unit.id %></h4>
+              <h5><b>ISSUE: </b><%= @complaint.description %></h5>
+            </div>
+
+          </div>
+
+          <div class="info-complaint-date">
+            <h4> <%= @complaint.created_at.to_date %> </h4>
+            <h5> <%= (@complaint.created_at+ 3).strftime("%I:%M%p") %> </h5>
+          </div>
+
+        </div>
+
+        <div class="complaint-show-card-info-second">
+
+        </div>
+
+      </div>
+      <div class="complaint-show-card-info-bottom">
+        <div class="complaint-image">
+          <%= cl_image_tag @complaint.photo,class: 'complaint-show-card-image', crop: :fill  %>
+        </div>
+
+        <div class="complaint-show-card-comment">
+          <div class="comment-title">
+            <h2>Comment</h2>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="complaint-show-card-footer">
+
+      <div class="complaint-show-card-footer-left">
+
+        <%= cl_image_tag @complaint.employee.photo, class: 'avatar-employee-complaint-show-card', crop: :fill %>
+        <div class="complaint-show-card-employee-info">
+          <h3><%= @complaint.employee.first_name %></h3>
+          <h4><%= @complaint.employee.job_title %>/ ID.<%= @complaint.employee.id %></h4>
+        </div>
+
+      </div>
+
+      <div class="complaint-show-card-time-frame">
+        2 DAYS
+      </div>
+    </div>
   </div>
 
-  <%# if current_user.employee? %>
-    <div class="complaint-report">
-      <%= render "reports/show" %>
-    </div>
-  <%# end %>
 </div>
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="complaints-main">
+  <div class="complaint-info" id="my-complaint">
+    <% if current_user.employee == %>
+      <ul> <u>Made by:</u>  <%= link_to @complaint.tenant.full_name, user_path(@complaint.tenant) %></ul>
+      <% else %>
+      <ul> <u>Made by:</u>  <%= @complaint.tenant.full_name %></ul>
+    <% end %>
+    <ul> <u>Unit:</u> <%= @unit = Lease.find_by(tenant_id: @complaint.tenant.id).unit_id %></ul>
+    <ul><u>Development:</u> <%# Unit.find_by(unit_id: @unit) %></ul>
+    <ul> <u>Description:</u> <%= @complaint.description  %></ul>
+    <ul><u>Photo:</u> <%= cl_image_tag @complaint.photo, height: 300, width: 400, crop: :fill %></ul>
+    <ul><u>Assigned to:</u> <%= @complaint.employee.full_name  %></ul>
+    <%= link_to edit_complaint_path(@complaint) do %>
+    <% if @complaint.tenant == current_user %>
+      <button type="submit" class="primary-button">Edit</button>
+    <% elsif @complaint.reports.exists? == false && current_user.first_name == 'farhan' %>
+      <%= link_to new_complaint_report_path(@complaint) do %>
+        <button type="submit" class="primary-button">Create Report</button>
+      <% end %>
+    <% end %>
+  <% end %>
+  </div> -->
+
+  <% if @complaint.reports.exists? %>
+    <div class="complaint-report">
+      <%= render "reports/show" %>
+    </div>
+  <% end %>
+</div>
+
+
+<button id="foo">download img</button>
+
+<script>
+var node = document.getElementById('my-complaint');
+var btn = document.getElementById('foo');
+btn.onclick = function() {
+node.innerHTML = "I'm an image now."
+  domtoimage.toBlob(document.getElementById('my-complaint'))
+    .then(function(blob) {
+      window.saveAs(blob, 'my-complaint.png');
+    });
+}
+</script>
 <%# raise %>

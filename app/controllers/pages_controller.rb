@@ -18,11 +18,18 @@ class PagesController < ApplicationController
     @lease = Lease.where(tenant_id: @user.id).to_a.first
 
   end
+  def paymenthistory
+    @user = User.find(params[:user_id])
+    @lease = Lease.where(tenant_id: @user.id).to_a.first
+
+  end
 
   def insights
     @user = current_user
     @employees = User.where(employee: true).to_a
     @tenants = User.where(tenant: true).to_a
+
+    @leases = Lease.all
 
     if current_user.employee?
       @report = Report.where(employee_id: current_user)
@@ -35,11 +42,23 @@ class PagesController < ApplicationController
     #   end
     # end
   end
-  def agreement
-    @tenant = User.find(params[:user_id])
-    @lease = Lease.where(tenant_id: @tenant.id).to_a.first
 
+  def performainvoice
+    @lease = Lease.find(params[:lease_id])
+    @user = User.find(params[:user_id])
 
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "performainvoice",
+        template: 'pages/perfermainvoice',
+        page_size: 'A4',
+        orientation: "Portrait",
+        layout: "pdf.html",
+        zoom: 1,
+        dpi: 75
+      end
+    end
   end
 
   def admininsights
@@ -54,4 +73,5 @@ class PagesController < ApplicationController
   def devcharts
     @development = Development.find(params[:development_id])
   end
+
 end

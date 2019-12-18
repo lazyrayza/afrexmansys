@@ -1,8 +1,17 @@
 class UsersController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:create, :new], raise: false
   before_action :find_user, only: [:show, :update, :destroy, :edit]
   def index
+    if params[:query].present?
+      @tenants = User.search_for_tenant(params[:query])
+      respond_to do |format|
+        format.html { render users_path }
+        format.js
+      end
+    else
+      @tenants = User.where(tenant: true)
+    end
     @users = User.all
-    @tenants = User.where(tenant: true)
     @employees = User.where(employee: true)
     @managers = User.where(manager: true)
     @admins = User.where(admin: true)

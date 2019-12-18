@@ -2,13 +2,163 @@
   display: flex;
   flex-wrap: wrap;
   width: 100vw;
-  justify-content: space-around
+  justify-content: space-around;
+  #mySidenav button {
+  position: absolute; /* Position them relative to the browser window */
+   /* Position them outside of the screen */
+  transition: 0.3s; /* Add transition on hover */
+  padding: 15px; /* 15px padding */
+  min-width: 100px; /* Set a specific width */
+  text-decoration: none; /* Remove underline */
+  font-size: 20px; /* Increase font size */
+  color: white; /* White text color */
+  border-radius: 0 5px 5px 0; /* Rounded corners on the top right and bottom right side */
+  }
+
+  #mySidenav button:hover {
+    left: 0; /* On mouse-over, make the elements appear as they should */
+  }
+
+  /* The about link: 20px from the top with a green background */
+  #about {
+    top: 150px;
+    left: -105px;
+  }
+
+  #blog {
+    top: 250px;
+    left: -140px;
+  }
+
+  #projects {
+    top: 350px;
+    left: -185px;
+  }
+
+  #contact {
+    top: 200px;
+
+  }
+  .dev-card{
+    display: flex;
+    margin: 2%;
+    .dev-card-picture{
+    height: 35vh;
+    box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.5);
+    background: white;
+    width: 50%;
+    display: flex;
+    background-size: cover;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    .dev-card-title {
+      border-radius: 16px 0 0;
+      display: flex;
+      justify-content: space-around;
+      font-weight: 700;
+      padding: 16px 0;
+      color: #FFFFFF;
+      font-size: 24px;
+      background-color: #6ECAD6;
+      height: 20%;
+      width: 100%;
+    }
+    .mc-btn-action {
+      position: absolute;
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      border-radius: 50%;
+      border: 6px solid;
+      width: 54px;
+      height: 54px;
+      line-height: 44px;
+      text-align: center;
+      color: #55a9b2;
+      cursor: pointer;
+      // z-index: 1;
+      left: 46.4%;
+      i{
+        font-size: 1.8em;
+    padding-top: 7px;
+    color: #55a9b2;
+      }
+      }
+    }
+  }
+  .dev-card-info{
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.5);
+    background-color: white;
+    width: 40%;
+    visibility: visible;
+    display: flex;
+    flex-direction: column;
+    padding: 2%;
+    p{
+      font-size: 24px;
+      color: #494949;
+     }
+     i {
+       color: #55a9b2;
+     }
+  }
 }
-.dev-box{
-  height: 20%;
-  width: 20%;
-  padding: 4%;
-  margin: 4%;
-  border-radius: 3%;
-  box-shadow: 0 10px 30px rgba(0,0,0,.1);
+.dev-units{
+  display: flex;
+  flex-wrap: wrap;
+  width: 100vw;
+  justify-content: space-around;
+
+  .dev-unit{
+    min-height: 20%;
+    min-width: 30%;
+    // padding: 4%;
+    margin: 4%;
+    border-radius: 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.1);
+    display: flex;
+    justify-content: space-between;
+    .dev-unit-info{
+      width: 65%;
+      padding: 8%;
+      .pos{
+        color: #27ae60;
+        font-weight: bold;
+      }
+      .neg{
+        color: #ea6153;
+        font-weight: bold;
+      }
+      h1{
+        color: #55a9b2;
+      }
+      h4{
+        font-size: 20px;
+        color: #494949;
+       }
+       i {
+         color: #55a9b2;
+         margin: 1px;
+       }
+    }
+    .dev-unit-occupant{
+      width: 35%;
+      padding: 5%;
+      .short-term{
+        display: flex;
+        justify-content: space-around;
+      }
+      .occupied{
+        transition: 0.3s;
+        &:hover, &:focus {
+          transform: scale(1.2);
+          transition: 0.3s;
+        }
+      }
+      .empty{
+
+      }
+    }
+  }
 }

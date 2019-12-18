@@ -1,93 +1,105 @@
 <!-- Predefined Calculations -->
 <% from_date = @lease.start_date.month %>
 <% to_date = @lease.end_date.strftime("%B, %Y") %>
-<% months_no = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] %>
-<%= Date.today.day %>
-<div class="container">
-  <div class="row">
-    <div class="col-md-6 payment-table">
-      <table class="table table-responsive table-hover">
-        <thead class="title">
-          <tr>
-            <td class="text-center" colspan="1"><i class="fa fa-bars menu-open"></i></td>
-            <td class="text-center" colspan="3">Payment</td>
-          </tr>
-        </thead>
-        <tbody class="payment-table-content">
-          <%# (@lease.duration * 12).times do  %>
-          <% months_no.drop(from_date - 1).each do |m| %>
-              <tr class="true">
-                <% if '.invoice' === "invoice no"%>
-                  <td><%= cl_image_tag @user.photo, class: 'avatar-payment-not-paid-card' %></td>
-                <% else %>
-                  <td><%= cl_image_tag @user.photo, class: 'avatar-payment-paid-card' %></td>
-                <% end %>
-                <td><%= @user.first_name[0] %>. <%= @user.last_name %></td>
-                <td><%= Date::MONTHNAMES[m] %>, <%= Date.today.year %></td>
-                <td>$<span><%= @lease.rent %></span></td>
-                <td><form>
-                  <input type="submit" value="">
-                </form></td>
-                <td class="invoice"></td>
-              </tr>
-          <% end %>
-          <% months_no[0..from_date - 2].each do |m| %>
-            <tr class="true">
-                <td><%= cl_image_tag @user.photo, class: 'avatar-payment-paid-card' %></td>
-                <td><%= @user.first_name[0] %>. <%= @user.last_name %></td>
-                <td><%= Date::MONTHNAMES[m] %>,  <%= Date.today.next_year.year %></td>
-                <td>$<span><%= @lease.rent %></span></td>
-                <td><form>
-                  <input type="submit" value="invoice no">
-                </form></td>
-                <td class="invoice"></td>
-              </tr>
-          <% end %>
-              <td colspan="2"></td>
-              <td>Deposit</td>
-              <td>$<%= @lease.deposit %></td>
-             </tr>
-              <td colspan="2"></td>
-              <td>Total</td>
-              <td><b><u>$<%= @lease.rent * (@lease.duration * 12) %></b></u></td>
+<% @monthlyy = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] %>
+<% everytwomonthly = [1, 3, 5, 7, 9, 11 ] %>
+<% everythreemonths = [1, 4, 7, 10, 12] %>
+<% quarterly = [1, 4, 7, 10] %>
+<% everysixmonths = [1,6] %>
+<% everyyear = [1] %>
+
+<!-- final option before i shootmyself in the foot -->
+
+<% start_date = @lease.start_date %>
+<% end_date = @lease.end_date %>
+
+  <% monthly = [Date.new(start_date.year, start_date.beginning_of_month.month, 1)]
+ %>
+  <% (start_date..end_date).each do |d| %>
+   <% month_date = Date.new(d.year, d.next_month.beginning_of_month.month, 1) %>
+   <% monthly << month_date if monthly.exclude?(month_date) && month_date < end_date - 1.month %>
+  <% end %>
+  <% monthly %>
+  <!-- need to create array of indexes in accordance to installments * length -->
+<% monthly.values_at(0, 3, 6, 9) %>
+
+
+<% @duration = @lease.duration/12 %>
+<% @monthlyy * (@lease.duration / 12) %>
+<% @lease.installments * @duration %> <% n = 12 / @lease.installments %>
+<%  list = (n).step(monthly.size - 1, n).map { |i| monthly[i] } %>
+<% @final = [monthly[0]] + list  %>
+
+
+
+
+
+
+
+
+<!-- option 1 -->
+
+  <!-- if full length longer than set period, than check for month start date and account for duration cut to the start and end to check for balanced payment table -->
+
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 payment-table">
+        <table class="table table-responsive table-hover">
+          <thead class="title">
+            <tr>
+              <td class="text-center" colspan="3">Payment</td><td class="text-center" colspan="3"></td>
             </tr>
-          </tfooter>
-        </tbody>
-      </table>
+          </thead>
+          <tbody class="payment-table-content">
+            <%# (@lease.duration * 12).times do  %>
+            <% @final.each do |m| %>
+                <tr class="true">
+                    <td><%= cl_image_tag @user.photo, class: 'avatar-payment-not-paid-card' %></td>
+                  <td><%= @user.first_name[0] %>. <%= @user.last_name %></td>
+                  <td><%= @lease.start_date.strftime("%d/") %><%= m.strftime("%B/%Y")  %></td>
+                  <td>$<span><%= @lease.rent * (12 /@lease.installments) %></span></td>
+                  <td>
+                    <%= link_to user_lease_performainvoice_path(@user, @lease) do  %>
+                      <button class="primary-button"><i class="fas fa-file-invoice"></i></button>
+                    <% end %>
+                  </td>
+                  <td>
+                    <button class="primary-button" ><i class="fas fa-receipt"></i></button>
+                  </td>
+                </tr>
+            <% end %>
+                <td colspan="2"></td>
+                <td>Deposit</td>
+                <td>$<%= @lease.deposit %></td>
+               </tr>
+                <td colspan="2"></td>
+                <td>Total</td>
+                <td><b><u>$<%= @lease.rent * (@lease.duration) %></b></u></td>
+              </tr>
+            </tfooter>
+          </tbody>
+        </table>
+      </div>
+      <!-- <div class="col-md-6">
+        <table class="table table-responsive table-hover">
+          <thead class="title">
+            <tr>
+              <td class="text-center" colspan="1"><i class="fa fa-bars menu-open"></i></td>
+              <td class="text-center" colspan="3">Traces</td>
+            </tr>
+          </thead>
+          <tbody class="payment-table-content">
+            <tr>
+              <td class="text-center" colspan="4">No Traces provided</td>
+            </tr>
+          </tbody>
+        </table>
+      </div> -->
+
     </div>
-    <!-- <div class="col-md-6">
-      <table class="table table-responsive table-hover">
-        <thead class="title">
-          <tr>
-            <td class="text-center" colspan="1"><i class="fa fa-bars menu-open"></i></td>
-            <td class="text-center" colspan="3">Traces</td>
-          </tr>
-        </thead>
-        <tbody class="payment-table-content">
-          <tr>
-            <td class="text-center" colspan="4">No Traces provided</td>
-          </tr>
-        </tbody>
-      </table>
-    </div> -->
-
   </div>
-</div>
 
 
-
-
-<script>
-  const f = document.querySelector('form');
-
-f.addEventListener('submit', (ev) => {
-  let but = f.querySelector('input');
-  but.type = (but.type === 'search') ? 'submit' : 'search';
-  ev.preventDefault();
-});
-
-document.querySelector('invoice').addEventListener('click', (ev) => {
-  let field = ev.target;
-  field.contentEditable = field.contentEditable === true ? false: true;
-});
-</script>
+<%# raise %>

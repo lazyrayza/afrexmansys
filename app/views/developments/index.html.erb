@@ -8,13 +8,13 @@
           <div class="dev-card-picture", style="background-image: url(<%= cl_image_path(development.photo) %>);">
         <% end %>
           <div class="dev-card-title" onclick="openInfo"><%= development.name.capitalize %></div>
-          <button class="mc-btn-action" id="open-btn">
+          <button onclick="myFunction()" class="mc-btn-action" id="open-btn">
             <%= link_to development_path(development) do %>
-              <i class="fa fa-bars"></i>
+              <i class="fas fa-arrow-circle-right fa-2x"></i>
             <% end %>
           </button>
         </div>
-        <div class="dev-card-info" id="hidden">
+        <div class="dev-card-info" >
           <p><i class="fas fa-map-marked-alt"></i> <%= development.address %></p>
             <% available = 0 %>
             <% development.units.to_a.each do |unit|%>
@@ -29,11 +29,29 @@
             <% if development.swimming_pool == true %>
               <p><i class="fas fa-swimmer"></i></i> Swimming Pool</p>
             <% end %>
+            <%  %>
+            <%= link_to notice_board_path(development) do %>
+              <button id="notice-btn">
+                <i class="far fa-clipboard"></i><p class="small">Notice Board</p>
+              </button>
+            <% end %>
         </div>
       </div>
     <% end %>
   </div>
 </div>
+
+
+<!-- <script>
+function myFunction() {
+  var x = document.getElementById("hidden");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script> -->
 
 <!-- <script>
     for (const button of buttons) {

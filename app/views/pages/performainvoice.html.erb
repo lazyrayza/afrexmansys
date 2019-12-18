@@ -1,0 +1,76 @@
+
+
+ <u><b>PROFORMA INVOICE</b></u><br>
+
+
+<b>TIN NO: 106-401 039</b><br>
+<b>VRN NO: 40-004274-W</b><br>
+
+                                                                                                                    No: XXX
+                                                                                                                            Date: XXXXXXX
+HIGH COMMISSION OF INDIA,
+P.O Box ….,
+DAR ES SALAAM.
+
+
+TO CHARGE YOU RENT ON YOUR APARTMENT NO: H-14 AT PALM RESIDENCY, LOCATED AT PLOT 45/46, CHIMARA ROAD, DAR ES SALAAM.
+
+
+
+<table class="performa-table" style="width:100%">
+  <tr>
+    <th>ITEM</th>
+    <th>Period</th>
+    <th>Rate/ Month</th>
+    <th>Amount ($)</th>
+
+
+
+    <th><%# "#{user['name']} - #{user['bio']}" %></th>
+  </tr>
+  <tr>
+    <td>Jill</td>
+    <td>Smith</td>
+    <td>50</td>
+  </tr>
+  <tr>
+    <td>Eve</td>
+    <td>Jackson</td>
+    <td>94</td>
+  </tr>
+  <tr>
+    <td>John</td>
+    <td>Doe</td>
+    <td>80</td>
+  </tr>
+</table>
+
+
+ITEM                                             Period Rate/ Month Amount ($)  TZS.2,320.00
+RENT  12.11.2019 TO 11.05.2020 (6  MONTHS)  USD.2,800.00  USD.16,800.00 TZS.38,976,000.00
+
+  Total   USD.16,800.00 TZS.38,976,000.00
+
+  ADD: VAT (0%)   USD.0.00  TZS.0.00
+  Grand Total   USD.16,800.00 TZS.38,976,000.00
+
+(TOTAL AMOUNT TZS: THIRTY EIGHT MILLION NINE HUNDRED SEVENTY SIX THOUSAND ONLY)
+
+ PALM RESIDENCY LTD.
+
+
+_____________________________
+    Authorized Signatory
+
+BENEFICIARY       : THE PALM RESIDENCY LIMITED                CURRENCY       : TSHS
+BANKERS NAME: EXIM BANK(TANZANIA) LTD                      ACCOUNT NO  : 0010049917
+BRANCH               : EXIM TOWER, GHANA STREET,                SWIFT                : EXTNTZTZ
+                                  P.O.BOX 96, DAR ES SALAAM.               CURRENCY        : US DOLLARS
+                                 TANZANIA                                                  ACCOUNT NO  : 0010049918
+
+
+
+
+
+
+<%= link_to "DOWNLOAD PDF", user_lease_performainvoice_path(@user, @lease, format: :pdf) %>

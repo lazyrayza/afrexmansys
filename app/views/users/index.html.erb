@@ -1,3 +1,19 @@
+<!-- Search -->
+<div class="container">
+  <div class="search-field">
+    <%= form_tag users_path, method: :get, remote: true, id: "search-form" do %>
+      <%= text_field_tag :query,
+        params[:query],
+        class: "form-control",
+        placeholder: "Search for specific tenant",
+        id: "input"
+      %>
+      <%= submit_tag "Search", id: "submit", class: "primary-button" %>
+    <% end %>
+  </div>
+</div>
+  <!-- End Search -->
+
 <!-- Tenants cards -->
 <h1>Tenants</h1>
 <div class="user-cards">
