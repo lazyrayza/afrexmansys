@@ -7,10 +7,15 @@
         <% else %>
           <div class="dev-card-picture", style="background-image: url(<%= cl_image_path(development.photo) %>);">
         <% end %>
-          <div class="dev-card-title" onclick="openInfo"><%= development.name.capitalize %></div>
-          <button onclick="myFunction()" class="mc-btn-action" id="open-btn">
+          <div class="dev-card-title" ><%= development.name.capitalize %></div>
+          <button class="mc-btn-action" >
             <%= link_to development_path(development) do %>
               <i class="fas fa-arrow-circle-right fa-2x"></i>
+            <% end %>
+          </button>
+          <button class="mc-btn-action1" >
+            <%= link_to notice_board_path(development) do %>
+              <i class="far fa-clipboard fa-2x"></i>
             <% end %>
           </button>
         </div>
@@ -28,12 +33,6 @@
             <% end %>
             <% if development.swimming_pool == true %>
               <p><i class="fas fa-swimmer"></i></i> Swimming Pool</p>
-            <% end %>
-            <%  %>
-            <%= link_to notice_board_path(development) do %>
-              <button id="notice-btn">
-                <i class="far fa-clipboard"></i><p class="small">Notice Board</p>
-              </button>
             <% end %>
         </div>
       </div>

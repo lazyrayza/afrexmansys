@@ -215,8 +215,10 @@
     <p><b>CELL NO   : </b></p>
     <p><b>EMAIL ADD   : <%= @lease.tenant.email %></b></p>
     <p><b>OCCUPANT NAME : </b></p>
+    <%= link_to user_lease_path(@lease, format: :pdf) do %>
+    <button class="primary-button">DOWNLOAD PDF</button>
+    <% end %>
     </div>
   </div>
 </div>
-<%= link_to "DOWNLOAD PDF", user_lease_path(@lease, format: :pdf) %>
 

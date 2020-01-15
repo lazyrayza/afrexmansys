@@ -16,7 +16,7 @@
           <%= f.input :deposit  %>
           <%= f.input :notes %>
           <%= f.input :tenant_id,
-                      collection: @tenants, :label_method => :full_name, :value_method => :id, :label => "Tenant", :include_blank => false,
+                      collection: @available_tenants, :label_method => :full_name, :value_method => :id, :label => "Tenant", :include_blank => false,
                       as: :radio_buttons %>
           <%# f.collection_check_boxes(:tenant_id, User.where(tenant: true), :id, :first_name) %>
           <%= f.button :submit, class: 'primary-button' %>

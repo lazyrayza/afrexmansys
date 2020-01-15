@@ -35,7 +35,25 @@
 
 
 
+<% start_date = @lease.start_date %>
+<% end_date = @lease.end_date %>
 
+  <% monthly = [Date.new(start_date.year, start_date.beginning_of_month.month, 1)]
+ %>
+  <% (start_date..end_date).each do |d| %>
+   <% month_date = Date.new(d.year, d.next_month.beginning_of_month.month, 1) %>
+   <% monthly << month_date if monthly.exclude?(month_date) && month_date < end_date - 1.month %>
+  <% end %>
+  <%= monthly %>
+  <!-- need to create array of indexes in accordance to installments * length -->
+<h1><% monthly.values_at(0, 3, 6, 9) %></h1>
+
+
+duration: <%= @duration = @lease.duration/12 %>
+<% @monthlyy * (@lease.duration / 12) %>
+installments:<%= @lease.installments * @duration %> <% n = 12 / @lease.installments %>
+<%  list = (n).step(monthly.size - 1, n).map { |i| monthly[i] } %>
+<%=  [monthly[0]] + list  %>
 
 <!-- option 1 -->
 

@@ -55,9 +55,29 @@
       left: 46.4%;
       i{
         font-size: 1.8em;
-    padding-top: 7px;
-    color: #55a9b2;
+        padding-top: 7px;
+        color: #55a9b2;
+        }
       }
+      .mc-btn-action1 {
+      position: absolute;
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      border-radius: 50%;
+      border: 6px solid;
+      width: 54px;
+      height: 54px;
+      line-height: 44px;
+      text-align: center;
+      color: #55a9b2;
+      cursor: pointer;
+      // z-index: 1;
+
+      i{
+        font-size: 1.8em;
+        padding-top: 7px;
+        color: #55a9b2;
+        }
       }
     }
   }

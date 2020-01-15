@@ -25,9 +25,12 @@ class LeasesController < ApplicationController
   def new
     @development = Development.find(params[:development_id])
     @unit = Unit.find(params[:unit_id])
+    @leases = Lease.all
     @lease = Lease.new
     @tenants = User.where(tenant: true)
+    @taken_tenants = @leases.to_a.map {|lease| lease.tenant }
 
+    @available_tenants = @tenants - @taken_tenants
   end
 
   def update

@@ -260,6 +260,7 @@ PLATFORMS
 DEPENDENCIES
   autoprefixer-rails
   bootsnap
+  bundler
   carrierwave (~> 1.2)
   chartkick
   cloudinary (~> 1.9.1)

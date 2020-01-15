@@ -11,7 +11,7 @@ gem 'redis', '3.0.0'
 gem 'emoji_flag'
 gem 'humanize'
 gem 'geocoder'
-
+gem 'bundler'
 
 gem 'autoprefixer-rails'
 gem 'font-awesome-sass', '~> 5.6.1'
